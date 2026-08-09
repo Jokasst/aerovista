@@ -1,0 +1,1577 @@
+/* ==========================================================================
+   DESIGN TOKENS — бери точные значения из Figma (панель справа у объекта)
+   ========================================================================== */
+
+:root {
+  /* Цвета — замени HEX на те, что скопируешь из Figma */
+  --color-bg: #EFEFEF;
+  --color-dark: #0A1931;
+  --color-white: #FDFCF8;
+  --color-accent: #6290c5;     /* акцентный, как бордовый у Qatar */
+  --color-text-muted: #6b6b6f;
+
+  /* Шрифт */
+  --font-main: 'Roboto', sans-serif;
+
+  /* Отступы — переиспользуемая шкала, не придумывай новые значения на ходу */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 64px;
+  --space-2xl: 96px;
+
+  /* Радиусы */
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 30px;
+  --radius-pill: 999px;
+
+  /* Контейнер */
+  --container-width: 1200px;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--color-bg);
+  color: var(--color-dark);
+}
+
+.container {
+  max-width: var(--container-width);
+  margin-inline: auto;
+  padding-inline: var(--space-md);
+}
+
+/* ==========================================================================
+   КНОПКИ — переиспользуемые классы, не дублируй стили в каждой секции
+   ========================================================================== */
+
+.btn {
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 15px;
+  display: inline-block;
+}
+
+.btn--outline {
+  border: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+}
+
+.btn--filled {
+  background: var(--color-accent);
+  color: var(--color-white);
+}
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+
+.header {
+  color: var(--color-white);
+  background: transparent;
+  border-bottom: none;
+  position: absolute;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.logo {
+  height: 90px;
+  width: auto;
+  position: absolute;
+  margin-top: 19px;
+}
+
+.nav {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  margin-left: 350px;
+  margin-top: 7px;
+  gap: 50px;
+  transition: all 0.3s ease;
+}
+
+.nav__link_explore:hover{
+  color: var(--color-accent);
+  transform: scale(1.05);
+}
+
+.nav__link_book:hover{
+  color: var(--color-accent);
+  transform: scale(1.05);
+}
+
+.nav__link_experience:hover{
+  color: var(--color-accent);
+  transform: scale(1.05);
+}
+
+.nav__link_club:hover{
+  color: var(--color-accent);
+  transform: scale(1.05);
+}
+
+.search-button {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-white);
+  transition: all 0.3s ease;
+}
+
+.search-button:hover {
+  color: var(--color-accent);
+  transform: scale(1.05);
+}
+
+.search-button__icon {
+  width: 20px;
+  height: 20px;
+}
+
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-white);
+  transition: all 0.3s ease;
+}
+
+.lang-switcher:hover{
+  color: var(--color-accent);
+  transform: scale(1.05);
+}
+
+.lang-switcher__icon {
+  width: 20px;
+  height: 20px;
+}
+
+.login-button {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-white);
+  transition: all 0.3s ease;
+}
+
+.login-button:hover {
+  color: var(--color-accent);
+  transform: scale(1.05);
+}
+
+.login-button__icon {
+  width: 20px;
+  height: 20px;
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  font-size: 14px;
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 4px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--color-white);
+  transition: all 0.2s ease;
+}
+
+.help-text {
+  font-weight: bold;
+  color: var(--color-white);
+}
+
+.search-button .icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+
+.hero {
+  background-image: url('images/hero-bg.png'); /* заменишь на фото */
+  background-size: cover;
+  min-height: 600px;
+  color: var(--color-white);
+  padding-block: var(--space-2xl) var(--space-xl);
+  padding-top: 120px; /* чтобы текст не прилипал к хедеру */
+  /* background-image добавишь позже, когда экспортируешь фото из Figma */
+}
+
+.btn--filled {
+  background: var(--color-white);
+  color: var(--color-dark);
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: var(--space-sm) var(--space-md);
+  font-weight: 600;
+  padding: 12px 30px;
+  margin-top: 30px;
+  transition: all 0.3s ease;
+}
+
+.btn--filled:hover {
+  background: var(--color-dark);
+  color: var(--color-white);
+  transform: scale(1.05);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.hero__title {
+  font-family: Poppins, sans-serif;
+  font-size: 64px;
+  font-weight: 500;
+  margin-bottom: var(--space-md);
+  max-width: auto;
+}
+
+.search-card {
+  background: var(--color-white);
+  border-radius: 30px;
+  color: var(--color-dark);
+  margin-top: -140px;
+  isolation: isolate;
+  position: relative;
+  z-index: 20;
+}
+
+.search-card__tabs {
+  display: flex;
+  gap: var(--space-lg);
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.search-card__tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(10, 25, 49, 0.45);
+}
+
+.search-card__tab-icon {
+  width: 14px;
+  flex-shrink: 0;
+}
+
+#dateFieldGroup {
+  gap: 70px;
+}
+
+.search-card__tab--active {
+  color: rgba(10, 25, 49, 0.9);
+  font-weight: 600;
+  border-bottom: 2px solid var(--color-dark);
+}
+
+.search-card__form {
+  padding: 0;
+  /* сюда — grid из инпутов From / To / Departure / Return */
+}
+
+.search-card__multicity {
+  display: none;
+  align-items: center;
+  gap: var(--space-md);
+  padding-left: var(--space-lg);
+}
+
+.search-card__multicity--visible {
+  display: flex;
+}
+
+.search-card__add-city {
+  background: transparent;
+  border: 1px dashed rgba(10, 25, 49, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-dark);
+  cursor: pointer;
+}
+
+.search-card__date-trigger {
+  background: transparent;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  color: rgba(10, 25, 49, 0.8);
+  cursor: pointer;
+  text-align: left;
+}
+
+.calendar-popup {
+  position: absolute;
+  top: calc(100% + 12px);
+  width: 300px;
+  background: var(--color-white);
+  border-radius: var(--radius-sm);
+  box-shadow: 0px 12px 32px rgba(10, 25, 49, 0.15);
+  padding: var(--space-md);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  z-index: 30;
+}
+
+.calendar-popup--open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.calendar-popup__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-sm);
+  font-weight: 600;
+}
+
+.calendar-popup__header button {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: var(--color-dark);
+}
+
+.calendar-popup__weekdays, .calendar-popup__days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  text-align: center;
+}
+
+.calendar-popup__weekdays span {
+  font-size: 11px;
+  color: rgba(10, 25, 49, 0.5);
+  padding-bottom: 6px;
+}
+
+.calendar-popup__day {
+  padding: 8px 0;
+  border-radius: 50%;
+  font-size: 13px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: var(--color-dark);
+}
+
+.calendar-popup__day:hover {
+  background: rgba(10, 25, 49, 0.08);
+}
+
+.calendar-popup__day--selected {
+  background: var(--color-dark);
+  color: var(--color-white);
+}
+
+.calendar-popup__day--empty {
+  visibility: hidden;
+}
+
+.search-card__fields {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-lg);
+  position: relative;
+}
+
+.search-card__group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding-right: var(--space-lg);
+  border-right: 1px solid #e5e5e8;
+}
+
+.search-card__group--last {
+  position:relative;
+  padding-right: var(--space-lg);
+  margin-left: 50px;
+}
+
+.search-field--floating {
+  position: relative;
+}
+
+.search-field--floating input {
+  padding-top: 14px;
+}
+
+.search-field--floating label {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: var(--color-text-muted);
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+.search-field--floating input:focus + label, .search-field--floating input:not(:placeholder-shown) + label {
+  top: 0;
+  transform: translateY(0);
+  font-size: 10px;
+}
+
+.search-card__passengers-trigger {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  background: transparent;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  color: rgba(10, 25, 49, 0.8);
+  cursor: pointer;
+  text-align: left;
+  left: 0;
+}
+
+.passengers-panel {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 300px;
+  background: var(--color-white);
+  border-radius: var(--radius-sm);
+  box-shadow: 0px 12px 32px rgba(10, 25, 49, 0.15);
+  padding: var(--space-md);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  z-index: 30;
+}
+
+.airport-suggestions {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 340px;
+  max-height: 360px;
+  overflow-y: auto;
+  background: var(--color-white);
+  border-radius: var(--radius-sm);
+  box-shadow: 0px 16px 40px rgba(10, 25, 49, 0.18);
+  padding: var(--space-sm) 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  z-index: 40;
+}
+
+.airport-suggestions--open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.airport-suggestions__group-label {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  padding: 8px var(--space-md) 4px;
+}
+
+.airport-suggestion {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px var(--space-md);
+  cursor: pointer;
+  transition: background 0.15s ease;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.airport-suggestion:last-child {
+  border-bottom: none;
+}
+
+.airport-suggestion:hover, .airport-suggestion--highlighted {
+  background: rgba(10, 25, 49, 0.05);
+}
+
+.airport-suggestion__icon {
+  width: 16px;
+  height: 12px;
+  color: var(--color-dark);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.airport-suggestion__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.airport-suggestion__top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.airport-suggestion__city {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-dark);
+}
+
+.airport-suggestion__airport {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.airport-suggestion__code {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-dark);
+  flex-shrink: 0;
+}
+
+.passengers-panel--open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.passengers-panel__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 10px;
+}
+
+.passengers-panel__hint {
+  display: block;
+  font-size: 12px;
+  color: rgba(10, 25, 49, 0.5);
+}
+
+.passengers-panel__counter {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.passengers-panel__btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(10, 25, 49, 0.3);
+  background: transparent;
+  font-size: 16px;
+  cursor: pointer;
+  color: var(--color-dark);
+}
+
+.passengers-panel__btn:hover {
+  background: rgba(10, 25, 49, 0.06);
+}
+
+.passengers-panel__divider {
+  height: 1px;
+  background: #e5e5e8;
+  margin-block: 12px;
+}
+
+.passengers-panel__class {
+  flex: 1;
+  padding: 10px 9px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(10, 25, 49, 0.3);
+  background: transparent;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--color-dark);
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.passengers-panel__class--active {
+  background: var(--color-dark);
+  color: var(--color-white);
+  border-color: var(--color-dark);
+}
+
+.passengers-panel__done {
+  width: 100%;
+  text-align: center;
+  background: var(--color-dark);
+  color: var(--color-white);
+  border: 1px solid var(--color-dark);
+  padding: 12px 0;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.passengers-panel__done:hover {
+  background: transparent;
+  color: var(--color-dark);
+  border-color: var(--color-dark);
+}
+
+.search-card__chevron {
+  color: rgba(10, 25, 49, 0.5);
+  flex-shrink: 0;
+}
+
+.search-field label{
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 10px;
+  letter-spacing: -0.4px;
+  color: rgba(10, 25, 49, 0.7);
+  margin-bottom: 4px;
+}
+
+.search-field input{
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: -0.48px;
+  color: rgba(10, 25, 49, 0.8);
+  border: none;
+  background: transparent;
+  width: 100%;
+}
+
+.search-card__swap {
+  color: var(--color-dark);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-card__footer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
+  border-top: 1px solid #e5e5e8;
+}
+
+.search-card__promo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  bottom: 13px;;
+  margin-left: auto;
+  margin-top: 30px;
+  font-size: 14px;
+  color: var(--color-dark);
+}
+
+.search-card__promo-success {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2e7d32; 
+}
+
+.search-card__promo-success--visible {
+  display: flex;
+}
+
+.search-card__promo-success svg {
+  flex-shrink: 0;
+}
+
+.search-card__checkbox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  border: round;
+}
+
+.search-card__submit {
+  background: var(--color-dark);
+  color: var(--color-white);
+  padding: 10px 24px;
+  border-radius: var(--radius-pill);
+  border: none;
+  transform: translateZ(0);
+  will-change: transform;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  height: 48px;
+  align-items: center;
+}
+
+.search-card__submit:hover {
+  transform: scale(1.05);
+  background: none;
+  border: var(--color-dark) 1px solid;
+  color: var(--color-dark);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.search-card__trip-type {
+  display: flex;
+  gap: var(--space-lg);
+  padding: var(--space-lg) var(--space-lg) 0;
+}
+
+.search-card__promo-input {
+  display: none;
+  border: 1px solid rgba(10, 25, 49, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 14px;
+  font-family: var(--font-main);
+  color: var(--color-dark);
+  outline: none;
+  transition: border-color 0.2s ease;
+  margin-left: auto;
+  height: 48px;
+  box-sizing: border-box;
+}
+
+.search-card__promo-input--visible {
+  display: block;
+}
+
+.search-card__promo-input:focus {
+  border-color: var(--color-dark);
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.radio input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-dark);
+}
+
+/* ==========================================================================
+   PROMO CARDS (Explore Vienna и т.д.)
+   ========================================================================== */
+
+.promo-cards {
+  padding-block: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.promo-cards__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-sm);
+}
+
+.promo-card {
+  position: relative;
+  aspect-ratio: 287 / 492;
+  border-radius: var(--radius-sm);
+  background-color: #ccc;
+  background-size: cover;
+  background-position: center;
+  color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--space-md);
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 0.3s ease;
+}
+
+.promo-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.65) 100%);
+  z-index: -1;
+}
+
+.promo-card:hover {
+  transform: translateY(-4px);
+}
+
+.promo-card h3 {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 6px;
+  line-height: 1;
+  gap: 0;
+}
+
+.promo-card a {
+  font-size: 20px;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 400;
+  color: rgba(253, 252, 248, 0.75);
+}
+
+.promo-card__arrow {
+  width: 13px;
+  height: 10px;
+  flex-shrink: 0;
+  position: relative;
+  left: 6px;
+  top: 2.5px;
+}
+
+/* ==========================================================================
+   DESTINATIONS (Places we think, you'll love)
+   ========================================================================== */
+
+.destinations {
+  padding-block: var(--space-xl);
+}
+
+.destinations h2 {
+  font-size: 36px;
+  font-weight: 500;
+  margin-bottom: var(--space-lg);
+}
+
+.destinations__filters {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-lg);
+}
+
+.destinations__from {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--color-dark);
+}
+
+.destinations__from label {
+  font-size: 14px;
+  color: rgba(10, 25, 49, 0.6);
+}
+
+.destinations__from span {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.destinations__toggle {
+  display: flex;
+  gap: var(--space-sm);
+  margin-left: auto;
+}
+
+.destinations__from-input {
+  font-size: 18px;
+  font-weight: 600;
+  font-family: var(--font-main);
+  color: var(--color-dark);
+  border: none;
+  background: transparent;
+  outline: none;
+  width: 140px;
+}
+
+.destinations__from-input:focus {
+  color: var(--color-accent);
+}
+
+.destinations__edit-icon {
+  cursor: pointer;
+}
+
+.destinations__toggle-btn {
+  padding: 10px 24px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 14px;
+  border: 1px solid var(--color-dark);
+  color: var(--color-dark);
+  background: transparent;
+  transition: all 0.2s ease;
+}
+
+.destinations__toggle-btn--active {
+  background: var(--color-dark);
+  color: var(--color-white);
+}
+
+.destinations__class {
+  position: relative;
+  border: 1px solid rgba(10, 25, 49, 0.3);
+  border-radius: 5px;
+  padding: 8px 20px;
+  background: var(--color-white);
+}
+
+.destinations__class-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  width: 100%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-main);
+  color: var(--color-dark);
+}
+
+.destinations__class-trigger span {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.destinations__class-chevron {
+  color: rgba(10, 25, 49, 0.5);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.destinations__class-trigger[aria-expanded="true"] .destinations__class-chevron {
+  transform:rotate(180deg);
+}
+
+.destinations__class-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 180px;
+  background: var(--color-white);
+  border-radius: var(--radius-sm);
+  box-shadow: 0px 12px 32px rgba(10, 25, 49, 0.15);
+  padding: 8px;
+  list-style: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  z-index: 20;
+}
+
+.destinations__class-menu--open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.destinations__class-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  color: var(--color-dark);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.destinations__class-option:hover {
+  background: rgba(10, 25, 49, 0.06);
+}
+
+.destinations__class-check {
+  width: 16px;
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.destinations__class span {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.destinations__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 280px;
+  gap: var(--space-sm);
+}
+
+.destinations__grid > :nth-child(1) { grid-column: span 2; } /* Almaty — широкая */
+.destinations__grid > :nth-child(2) { grid-column: span 1; } /* Kyiv */
+.destinations__grid > :nth-child(3) { grid-column: span 1; } /* Vienna */
+
+.destinations__grid > :nth-child(4) { grid-column: span 2; } /* London — широкая */
+.destinations__grid > :nth-child(5) { grid-column: span 2; } /* Batumi — широкая */
+
+.destinations__grid > :nth-child(6) { grid-column: span 1; } /* New York */
+.destinations__grid > :nth-child(7) { grid-column: span 1; } /* Dubai */
+.destinations__grid > :nth-child(8) { grid-column: span 2; }
+
+.destination-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-sm);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  color: var(--color-white);
+  font-weight: bold;
+}
+
+.destination-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 25, 49, 0);
+  transition: background 0.35s ease;
+}
+
+/* При наведении на карточку — подложка темнеет */
+.destination-card:hover .destination-card__overlay {
+  background: rgba(10, 25, 49, 0.55);
+}
+
+/* Кнопки изначально сдвинуты вниз и прозрачны */
+.destination-card__book,
+.destination-card__discover {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+/* При наведении — кнопки "всплывают" на место */
+.destination-card:hover .destination-card__book,
+.destination-card:hover .destination-card__discover {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Небольшая задержка у второй кнопки — эффект последовательного появления */
+.destination-card__discover {
+  transition-delay: 0.05s;
+  text-decoration: underline;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-white)
+}
+
+/* Инфо снизу — постоянно видимое (название, даты, цена) */
+.destination-card__info {
+  position: absolute;
+  bottom: var(--space-sm);
+  left: var(--space-sm);
+  right: var(--space-sm);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  transition: transform 0.35s ease;
+  z-index: 1; /* поверх фото, но за overlay при наведении можно скрыть */
+}
+
+.destination-card__left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 30px;
+}
+
+.destination-card:hover .destination-card__info {
+  transform: translateY(-95px);
+}
+
+.destination-card__dates {
+  font-size: 13px;
+  font-weight: 400;
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
+.destination-card__price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.destination-card__class {
+  font-size: 13px;
+  font-weight: 400;
+  opacity: 0.85;
+}
+
+.destination-card__flight {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.destination-card--single .destination-card__info {
+  flex-direction: column;
+  align-items: flex-start;
+  gap:0;
+}
+
+.destination-card--single .destination-card__left {
+  gap: 0;
+}
+
+.destination-card--single .destination-card__price {
+  gap: 2px;
+}
+
+.destination-card--single h3 {
+  line-height: 1.1;
+}
+
+.destination-card--single .destination-card__dates {
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.destination-card__actions {
+  position: absolute;
+  left: var(--space-sm);
+  right: var(--space-sm);
+  bottom: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  z-index: 1;
+}
+
+.destination-card:hover .destination-card__actions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.destination-card__book {
+  background: var(--color-white);
+  color: var(--color-dark);
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 10px 65px;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.destinations__edit-icon {
+  width: 16px;
+  height: 16px;
+  color: rgba(10, 25, 49, 0.8);
+  align-self: center;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   FEATURE TABS (Vienna Duty Free)
+   ========================================================================== */
+
+.feature-tabs__nav {
+  gap: var(--space-lg);
+  background: var(--color-dark);
+  color: var(--color-white);
+  font-size: 15px;
+}
+
+.feature-tabs__nav-inner {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+  padding: var(--space-md) var(--space-md);
+  font-size: 15px;
+}
+
+.feature-tabs__link {
+  color: var(--color-text-muted);
+  padding-bottom: 8px;
+  opacity: 0.6;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.feature-tabs__link--active {
+  color: var(--color-white);
+}
+
+.feature-tabs__link--active,
+.feature-tabs__link:hover {
+  opacity: 1;
+  border-bottom-color: var(--color-white);
+}
+
+.feature-tabs__banner {
+  min-height: 400px;
+  height: 38vw;
+  max-height: 544px;
+  background-color: #333;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+}
+
+.feature-tabs__content {
+  margin-left: auto;
+  max-width: 460px;
+  background: rgba(10, 25, 49, 0.92);
+  color: var(--color-white);
+  padding: var(--space-lg);
+  margin-right: var(--space-2xl);
+  border-radius: var(--radius-sm);
+}
+
+.feature-tabs__content h2 {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+  margin-left: auto;
+}
+
+.feature-tabs__content p {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: var(--space-lg);
+}
+
+.btn--outline {
+  color: var(--color-white);
+  background: transparent;
+  transition: all 0.2s ease;
+  margin-left: 220px;
+}
+
+.btn--outline:hover {
+  transform: scale(1.05);
+  background-color: var(--color-white);
+  color: var(--color-dark);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* ==========================================================================
+   PACKAGES
+   ========================================================================== */
+
+.packages {
+  padding-block: var(--space-xl);
+}
+
+.packages h2 {
+  font-size: 36px;
+  font-weight: 500;
+  margin-bottom: var(--space-xs);
+}
+
+.packages > .container > p {
+  color: rgba(10, 25, 49, 0.7);
+  margin-bottom: var(--space-lg);
+}
+
+.packages__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.package-card {
+  position: relative;
+  aspect-ratio: 369 / 331;
+  border-radius: var(--radius-sm);
+  background-color: #ccc;
+  background-size: cover;
+  background-position: center;
+  color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.package-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.6) 100%);
+  z-index: -1;
+}
+
+.package-card h3 {
+  font-size: 22px;
+  font-weight: 600;
+  max-width: 260px;
+}
+
+.package-card--featured .btn--filled {
+  background: var(--color-dark);
+  color: var(--color-white);
+}
+
+.package-card--featured .btn--filled:hover {
+  background: var(--color-white);
+  color: var(--color-dark);
+}
+
+/* ==========================================================================
+   NEWSLETTER
+   ========================================================================== */
+
+.newsletter {
+  padding-block: var(--space-xl);
+}
+
+.newsletter__card {
+  position: relative;
+  background-color: #000;
+  background-size: cover;
+  background-position: center;
+  color: var(--color-white);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.newsletter__card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.75) 55%, rgba(0,0,0,0.97) 75%);
+  z-index: -1;
+}
+
+.newsletter__card h2 {
+  font-size: 34px;
+  font-weight: 500;
+  margin-bottom: var(--space-xs);
+}
+
+.newsletter__content {
+  max-width: 500px;
+  margin-left: auto;
+}
+
+.newsletter__inputs {
+  display: flex;
+  background: var(--color-white);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-block: var(--space-md);
+}
+
+.newsletter__inputs input {
+  flex: 1;
+  border: none;
+  padding: var(--space-sm);
+  color: var(--color-dark);
+}
+
+.newsletter__inputs input:first-child {
+  border-right: 1px solid #e5e5e8;
+}
+
+.newsletter__checkbox {
+  display: flex;
+  gap: var(--space-xs);
+  font-size: 13px;
+  color: #ccc;
+  margin-bottom: var(--space-md);
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+.footer {
+  background: var(--color-dark);
+  color: var(--color-white);
+  padding-top: var(--space-xl);
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) auto;
+  gap: var(--space-md);
+}
+
+.footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  font-size: 15px;
+  color: rgba(255,255,255,0.75);
+}
+
+.footer__col h4 {
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--color-white);
+  margin-bottom: var(--space-xs);
+}
+
+.footer__col a:hover {
+  color: var(--color-white);
+}
+
+.footer__socials {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+  max-width: 130px;
+}
+
+.footer__social {
+  display: flex;
+  transition: transform 0.2s ease;
+}
+
+.footer__social:hover {
+  transform: scale(1.1);
+}
+
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #2a2a45;
+  margin-top: var(--space-lg);
+  padding-block: var(--space-md);
+  font-size: 13px;
+  color: #aaa;
+}
+
+.footer__legal-links {
+  display: flex;
+  gap: var(--space-md);
+}
+
+/* ==========================================================================
+   АДАПТИВ — брейкпоинты добавим, когда дойдём до мобильной версии
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .search-card__fields {
+    flex-wrap: wrap;
+  }
+
+  .feature-tabs__content {
+    margin-right: var(--space-md);
+    margin-left: var(--space-md);
+  }
+
+  .nav {
+    display: none;
+    position: absolute;
+    top: 72px;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-md);
+    margin-left: 0;
+    padding: var(--space-md);
+    background: var(--color-dark);
+  }
+
+  .nav--open {
+    display: flex;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .help-text,
+  .lang-switcher__text,
+  .login-button__text {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .promo-cards__grid,
+  .packages__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .destinations__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dest-card--almaty,
+  .dest-card--london,
+  .dest-card--batumi,
+  .dest-card--kopenhagen {
+    grid-column: span 2;
+  }
+
+  .footer__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

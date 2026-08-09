@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AeroVista — Fly further, travel better</title>
+
+  <!-- Шрифт: Inter, как обсуждали -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="header">
+    <div class="container header__inner">
+      <img src="images/icon-logo.png" alt="AeroVista Logo" class="logo">
+
+      <nav class="nav" id="nav">
+        <a href="#" class="nav__link_explore">Explore</a>
+        <a href="#" class="nav__link_book">Book</a>
+        <a href="#" class="nav__link_experience">Experience</a>
+        <a href="#" class="nav__link_club">Club</a>
+      </nav>
+
+      <div class="header__actions">
+        <span class="help-text">Help</span>
+        <button class="search-button" aria-label="Search">
+          <svg width="18" height="18" viewBox="0 0 18 18" class="icon" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.1303 17.8499C17.596 18.313 18.3149 17.5982 17.8491 17.1451L14.0525 13.3597C15.3846 11.8946 16.1209 9.98898 16.1179 8.01381C16.1179 3.59414 12.5035 0 8.05894 0C3.61438 0 0 3.59414 0 8.01381C0 12.4335 3.61438 16.0276 8.05894 16.0276C10.0636 16.0276 11.9163 15.2927 13.3337 14.0745L17.1303 17.8499ZM1.01142 8.01381C1.01142 4.14785 4.18032 1.00676 8.05793 1.00676C11.9457 1.00676 15.1044 4.14785 15.1044 8.01381C15.1044 11.8798 11.9457 15.0209 8.05793 15.0209C4.18032 15.0209 1.01142 11.8798 1.01142 8.01381Z" fill="currentColor"/>
+          </svg>
+        </button>
+        <button class="lang-switcher">
+          <svg width="20" height="20" viewBox="0 0 20 20" class="icon" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18.1562 6.1557H16.1562C15.6258 6.1557 15.1171 6.36641 14.742 6.74149C14.367 7.11656 14.1562 7.62527 14.1562 8.1557C14.1562 8.68613 13.9455 9.19484 13.5705 9.56991C13.1954 9.94499 12.6867 10.1557 12.1562 10.1557C11.6258 10.1557 11.1171 9.94499 10.742 9.56991C10.367 9.19484 10.1562 8.68613 10.1562 8.1557V7.1557C10.1562 6.62527 9.94554 6.11656 9.57046 5.74149C9.19539 5.36641 8.68668 5.1557 8.15625 5.1557H7.15625C6.62582 5.1557 6.11711 4.94499 5.74204 4.56991C5.36696 4.19484 5.15625 3.68613 5.15625 3.1557V2.6557M1.15625 10.1557H4.15625C4.68668 10.1557 5.19539 10.3664 5.57046 10.7415C5.94554 11.1166 6.15625 11.6253 6.15625 12.1557V12.6557C6.15625 13.0535 6.31429 13.4351 6.59559 13.7164C6.87689 13.9977 7.25843 14.1557 7.65625 14.1557C8.05407 14.1557 8.43561 14.3137 8.71691 14.595C8.99821 14.8763 9.15625 15.2579 9.15625 15.6557V18.9057M13.1562 18.6557V15.1557C13.1562 14.6253 13.367 14.1166 13.742 13.7415C14.1171 13.3664 14.6258 13.1557 15.1562 13.1557H18.6562" stroke="currentColor" stroke-width="2.3114" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M1.84133 13.5999C1.38904 12.5079 1.15625 11.3376 1.15625 10.1557C1.15625 8.9738 1.38904 7.80348 1.84133 6.71155C2.29363 5.61962 2.95656 4.62747 3.79229 3.79174C4.62802 2.95601 5.62017 2.29308 6.7121 1.84079C7.80403 1.38849 8.97435 1.1557 10.1562 1.1557C11.3381 1.1557 12.5085 1.38849 13.6004 1.84079C14.6923 2.29308 15.6845 2.95601 16.5202 3.79174C17.3559 4.62747 18.0189 5.61962 18.4712 6.71155C18.9235 7.80348 19.1562 8.9738 19.1562 10.1557C19.1562 11.3376 18.9235 12.5079 18.4712 13.5999C18.0189 14.6918 17.3559 15.6839 16.5202 16.5197C15.6845 17.3554 14.6923 18.0183 13.6004 18.4706C12.5085 18.9229 11.3381 19.1557 10.1562 19.1557C8.97435 19.1557 7.80403 18.9229 6.7121 18.4706C5.62017 18.0183 4.62802 17.3554 3.79229 16.5197C2.95656 15.6839 2.29363 14.6918 1.84133 13.5999Z" stroke="currentColor" stroke-width="2.3114" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="lang-switcher__text">EN</span>
+        </button>
+        <a href="#" class="header__link header__link--login">
+          <button class="login-button">
+            <svg width="20" height="20" viewBox="0 0 20 20" class="icon" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 20V17.7778H17.7778V2.22222H10V0H17.7778C18.3889 0 18.9122 0.217778 19.3478 0.653333C19.7833 1.08889 20.0007 1.61185 20 2.22222V17.7778C20 18.3889 19.7826 18.9122 19.3478 19.3478C18.913 19.7833 18.3896 20.0007 17.7778 20H10ZM7.77778 15.5556L6.25 13.9444L9.08333 11.1111H0V8.88889H9.08333L6.25 6.05555L7.77778 4.44444L13.3333 10L7.77778 15.5556Z" fill="currentColor"/>
+            </svg>
+            <span class="login-button__text">Login | Sign up</span>
+          </button>
+        </a>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero__title">Fly further, travel better</h1>
+      <button class="btn btn--filled">Start planning</button>
+    </div>
+  </section>
+
+      <!-- Форма поиска рейсов -->
+  <div class="container">     
+    <div class="search-card">
+      <div class="search-card__tabs">
+        <button class="search-card__tab search-card__tab--active">
+          <svg class="search-card__tab-icon" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.5799 4.40039C12.4661 4.40039 12.0847 4.40314 11.9773 4.40864L9.80427 4.4554C9.79298 4.45597 9.78171 4.45395 9.77172 4.44958C9.76174 4.44522 9.75342 4.43866 9.74769 4.43065L5.4091 0.0979087C5.38278 0.0692945 5.34921 0.045719 5.31071 0.0288137C5.2722 0.0119083 5.22969 0.002077 5.18611 0H4.28578L6.72996 4.4279C6.73579 4.43803 6.73831 4.44924 6.73727 4.46042C6.73623 4.47159 6.73168 4.48236 6.72404 4.49165C6.71641 4.50094 6.70597 4.50845 6.69374 4.51342C6.68151 4.5184 6.66791 4.52067 6.65429 4.52003L2.57987 4.56953C2.53747 4.57059 2.49537 4.56342 2.45697 4.5486C2.41858 4.53379 2.38497 4.51175 2.35889 4.48427L1.12006 3.24666C1.01961 3.13941 0.831443 3.08165 0.667716 3.08165H0.0362466C-0.00694516 3.08165 -0.000583587 3.11493 0.0111351 3.14848L0.675417 5.11271C0.72563 5.2179 0.72563 5.33479 0.675417 5.43998L0.0104654 7.39816C-0.00928891 7.45179 -0.00694516 7.48067 0.0697285 7.48067H0.669725C0.942268 7.48067 0.979433 7.45151 1.11872 7.3074L2.38099 6.05054C2.4073 6.02327 2.44095 6.00139 2.47929 5.9866C2.51763 5.9718 2.55962 5.96451 2.60197 5.96528L6.64257 6.03954C6.65728 6.03981 6.67169 6.04303 6.68454 6.04892C6.69739 6.05481 6.7083 6.06318 6.71632 6.07332C6.72434 6.08345 6.72922 6.09505 6.73055 6.10708C6.73187 6.11912 6.7296 6.13124 6.72393 6.1424L4.28578 10.5609H5.17773C5.22123 10.5589 5.26367 10.5491 5.30211 10.5322C5.34055 10.5153 5.37408 10.4918 5.40039 10.4633L9.74802 6.13305C9.76108 6.11655 9.81498 6.10829 9.83809 6.10829L11.9776 6.15505C12.0881 6.16055 12.4661 6.1633 12.5803 6.1633C14.0625 6.1633 15 5.82859 15 5.28047C15 4.73235 14.0665 4.40039 12.5799 4.40039Z" fill="currentColor"/>
+          </svg>
+          <span>Book a flight</span>
+        </button>
+
+        <button class="search-card__tab">
+          <svg class="search-card__tab-icon" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 7.39266H10.5V8.62477H12M12 4.92844H10.5V6.16055H12M13.5 9.85688H7.5V8.62477H9V7.39266H7.5V6.16055H9V4.92844H7.5V3.69633H13.5M6 2.46422H4.5V1.23211H6M6 4.92844H4.5V3.69633H6M6 7.39266H4.5V6.16055H6M6 9.85688H4.5V8.62477H6M3 2.46422H1.5V1.23211H3M3 4.92844H1.5V3.69633H3M3 7.39266H1.5V6.16055H3M3 9.85688H1.5V8.62477H3M7.5 2.46422V0H0V11.089H15V2.46422H7.5Z" fill="currentColor"/>
+          </svg>
+          <span>Stopover / Packages</span>
+        </button>
+
+        <button class="search-card__tab">
+          <svg class="search-card__tab-icon" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.33398 0.722229V3.09518M10.1118 0.722229V3.09518" stroke="currentColor" stroke-width="1.44444" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12.2782 1.90869H2.1671C1.36936 1.90869 0.722656 2.43989 0.722656 3.09517V11.4005C0.722656 12.0558 1.36936 12.587 2.1671 12.587H12.2782C13.076 12.587 13.7227 12.0558 13.7227 11.4005V3.09517C13.7227 2.43989 13.076 1.90869 12.2782 1.90869Z" stroke="currentColor" stroke-width="1.44444" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M0.722656 5.46812H13.7227" stroke="currentColor" stroke-width="1.44444" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Manage / Check-in</span>
+        </button>
+
+        <button class="search-card__tab">
+          <svg class="search-card__tab-icon" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.5 11.7C9.0913 11.7 10.6174 11.1521 11.7426 10.177C12.8679 9.20177 13.5 7.87913 13.5 6.5C13.5 5.12087 12.8679 3.79823 11.7426 2.82304C10.6174 1.84786 9.0913 1.3 7.5 1.3C5.9087 1.3 4.38258 1.84786 3.25736 2.82304C2.13214 3.79823 1.5 5.12087 1.5 6.5C1.5 7.87913 2.13214 9.20177 3.25736 10.177C4.38258 11.1521 5.9087 11.7 7.5 11.7ZM7.5 0C8.48491 0 9.46018 0.168127 10.3701 0.494783C11.2801 0.821439 12.1069 1.30023 12.8033 1.90381C13.4997 2.50739 14.0522 3.22394 14.4291 4.01256C14.806 4.80117 15 5.64641 15 6.5C15 8.22391 14.2098 9.87721 12.8033 11.0962C11.3968 12.3152 9.48912 13 7.5 13C3.3525 13 0 10.075 0 6.5C0 4.77609 0.790176 3.12279 2.1967 1.90381C3.60322 0.684819 5.51088 0 7.5 0ZM7.875 3.25V6.6625L11.25 8.398L10.6875 9.1975L6.75 7.15V3.25H7.875Z" fill="currentColor"/>
+          </svg>
+          <span>Flight status</span>
+        </button>
+      </div>
+
+      <div class="search-card__form">
+        <div class="search-card__trip-type">
+          <label class="radio">
+            <input type="radio" name="trip-type" checked>
+            <span>Return</span>
+          </label>
+          <label class="radio">
+            <input type="radio" name="trip-type">
+            <span>One way</span>
+          </label>
+          <label class="radio">
+            <input type="radio" name="trip-type">
+            <span>Multi-city</span>
+          </label>
+        </div>
+        <div class="search-card__fields">
+          <div class="search-card__group">
+            <div class="search-field search-field--floating">
+              <input type="text" id="fromInput" placeholder=" " autocomplete="off">
+              <label for="fromInput">From</label>
+              <div class="airport-suggestions" id="fromSuggestions"></div>
+            </div>
+
+            <button class="search-card__swap" aria-label="Swap From and To">
+              <svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 3.5H12M12 3.5L8.5 0M12 3.5L8.5 7M15 8.5H3M3 8.5L6.5 5M3 8.5L6.5 12" stroke="currentColor" stroke-width="1.2"/>
+              </svg>
+            </button>
+
+            <div class="search-field search-field--floating">
+              <input type="text" id="toInput" placeholder=" " autocomplete="off">
+              <label for="toInput">To</label>
+              <div class="airport-suggestions" id="toSuggestions"></div>
+            </div>
+          </div>
+
+          <div class="search-card__group" id="dateFieldGroup">
+            <div class="search-field">
+              <label>Departure</label>
+              <button class="search-card__date-trigger" id="departureTrigger">16 March 2026</button>
+            </div>
+
+            <div class="search-field" id="returnField">
+              <label>Return</label>
+              <button class="search-card__date-trigger" id="returnTrigger">25 May 2026</button>
+            </div>
+          </div>
+
+          <div class="calendar-popup" id="calendarPopup">
+            <div class="calendar-popup__header">
+              <button type="button" id="calendarPrev">‹</button>
+              <span id="calendarMonthLabel">March 2026</span>
+              <button type="button" id="calendarNext">›</button>
+            </div>
+            <div class="calendar-popup__weekdays">
+              <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
+            </div>
+            <div class="calendar-popup__days" id="calendarDays"></div>
+          </div>
+
+          <div class="search-card__multicity" id="multicityFields">
+            <div class="search-field">
+              <label>Add another city</label>
+              <input type="text" placeholder="e.g. Dubai DXB">
+            </div>
+            <button type="button" class="search-card__add-city" id="addCityBtn">+ Add city</button>
+          </div>
+
+          <div class="search-card__group search-card__group--last">
+            <div class="search-field">
+              <label>Passangers / Class</label>
+              <button class="search-card__passengers-trigger" id="passengersTrigger">
+                <span id="passengersValue">1 Passenger / First class</span>
+                <svg class="search-card__chevron" width="13" height="6" viewBox="0 0 13 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 1L6.5 5L12 1" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+
+            <div class="passengers-panel" id="passengersPanel">
+              <div class="passengers-panel__row">
+                <div>
+                  <strong>Adults</strong>
+                  <span class="passengers-panel__hint">12+ years</span>
+                </div>
+                <div class="passengers-panel__counter">
+                  <button type="button" class="passengers-panel__btn" data-action="decrease" data-target="adults">-</button>
+                  <span id="adultsCount">1</span>
+                  <button type="button" class="passengers-panel__btn" data-action="increase" data-target="adults">+</button>
+                </div>
+              </div>
+
+              <div class="passengers-panel__row">
+                <div>
+                  <strong>Children</strong>
+                  <span class="passengers-panel__hint">2-11 years</span>
+                </div>
+                <div class="passengers-panel__counter">
+                  <button type="button" class="passengers-panel__btn" data-action="decrease" data-target="children">-</button>
+                  <span id="childrenCount">0</span>
+                  <button type="button" class="passengers-panel__btn" data-action="increase" data-target="children">+</button>
+                </div>
+              </div>
+
+            <div class="passengers-panel__divider"></div>
+
+            <div class="passengers-panel__classes">
+              <button type="button" class="passengers-panel__class" data-class="Economy">Economy</button>
+              <button type="button" class="passengers-panel__class" data-class="Business">Business</button>
+              <button type="button" class="passengers-panel__class passengers-panel__class--active" data-class="First class">First class</button>
+            </div>
+
+            <button type="button" class="btn btn--filled passengers-panel__done" id="passengersDone">Done</button>
+          </div>
+        </div>
+        </div>
+
+        <div class="search-card__footer">
+          <label class="search-card__checkbox">
+            <input type="checkbox">
+            <span>Book using Avios</span>
+          </label>
+
+          <button type="button" class="search-card__promo" id="promoToggle">
+            <svg width="12" height="11" viewBox="0 0 12 11" class="icon-plus" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 5.92308V5.07692H5.53846V0H6.46154V5.07692H12V5.92308H6.46154V11H5.53846V5.92308H0Z" fill="currentColor"/>
+            </svg>
+            <span>Add promo code</span>
+          </button>
+
+          <input type="text" class="search-card__promo-input" id="promoInput" placeholder="Enter promo code">
+
+          <div class="search-card__promo-success" id="promoSuccess">
+            <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 6L6 11L15 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Promo code applied</span>
+          </div>
+
+          <button class="search-card__submit">Search flights</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ============ 4 КАРТОЧКИ (Explore Vienna и т.д.) ============ -->
+  <section class="promo-cards">
+    <div class="container promo-cards__grid">
+      <article class="promo-card" style="background-image: url('images/Vienna(explore).png')">
+        <h3>Explore Vienna</h3>
+        <a href="https://www.visitingvienna.com/sights/my-top-10-places/">
+          Find out more
+          <svg class="promo-card__arrow" width="13" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.1158e-07 4.54933L11.2465 4.54933L6.42655 0.568666L7.03249 -2.14262e-07L13 4.92844L7.03249 9.85688L6.42655 9.28821L11.2465 5.30755L6.71231e-07 5.30755L7.1158e-07 4.54933Z" fill="currentColor"/>
+          </svg>
+        </a>
+      </article>
+      <article class="promo-card" style="background-image: url('images/exp-freedom.png')">
+        <h3>Experience freedom</h3>
+        <a href="#">
+          Find out more
+          <svg class="promo-card__arrow" width="13" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.1158e-07 4.54933L11.2465 4.54933L6.42655 0.568666L7.03249 -2.14262e-07L13 4.92844L7.03249 9.85688L6.42655 9.28821L11.2465 5.30755L6.71231e-07 5.30755L7.1158e-07 4.54933Z" fill="currentColor"/>
+          </svg>
+        </a>
+      </article>
+      <article class="promo-card" style="background-image: url('images/best-service.png')">
+        <h3>Get the best service</h3>
+        <a href="#">
+          Find out more
+          <svg class="promo-card__arrow" width="13" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.1158e-07 4.54933L11.2465 4.54933L6.42655 0.568666L7.03249 -2.14262e-07L13 4.92844L7.03249 9.85688L6.42655 9.28821L11.2465 5.30755L6.71231e-07 5.30755L7.1158e-07 4.54933Z" fill="currentColor"/>
+          </svg>
+        </a>
+      </article>
+      <article class="promo-card" style="background-image: url('images/upgrade-now.png')">
+        <h3>Upgrade now</h3>
+        <a href="#">
+          Find out more
+          <svg class="promo-card__arrow" width="13" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.1158e-07 4.54933L11.2465 4.54933L6.42655 0.568666L7.03249 -2.14262e-07L13 4.92844L7.03249 9.85688L6.42655 9.28821L11.2465 5.30755L6.71231e-07 5.30755L7.1158e-07 4.54933Z" fill="currentColor"/>
+          </svg>
+        </a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ PLACES WE THINK YOU'LL LOVE ============ -->
+  <section class="destinations">
+    <div class="container">
+      <h2>Places we think, you'll love</h2>
+
+      <div class="destinations__filters">
+        <div class="destinations__from">
+          <label>From</label>
+          <input type="text" class="destinations__from-input" value="Vienna VIE">
+          <svg class="destinations__edit-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15.9128 0.547092C15.1833 -0.182364 13.9854 -0.182364 13.2559 0.547092L1.24141 12.5606C1.12432 12.6777 1.04327 12.8218 1.00724 12.9749L0.0255483 16.8833C-0.0465026 17.1895 0.0345546 17.5137 0.259714 17.7388C0.430835 17.9099 0.665 18 0.899166 18C0.971217 18 1.04327 18 1.11532 17.973L5.02408 16.9914C5.18619 16.9553 5.3303 16.8743 5.43837 16.7572L17.4529 4.74371C18.1824 4.01426 18.1824 2.81651 17.4529 2.08705L15.9038 0.538086L15.9128 0.547092ZM4.3486 15.3163L2.13304 15.8657L2.68243 13.6503L11.6528 4.69869L13.3099 6.35572L4.3486 15.3163ZM16.192 3.47392L14.5888 5.07692L12.9317 3.41989L14.5348 1.81689C14.5348 1.81689 14.6159 1.78987 14.6429 1.81689L16.192 3.36585C16.192 3.36585 16.219 3.4469 16.192 3.47392Z" fill="currentColor"/>
+          </svg>
+        </div>
+
+        <div class="destinations__toggle">
+          <button class="destinations__toggle-btn destinations__toggle-btn--active">Return</button>
+          <button class="destinations__toggle-btn">One way</button>
+        </div>
+
+        <div class="destinations__class">
+          <label>Class</label>
+          <button class="destinations__class-trigger" id="classDropdownTrigger" aria-expanded="false">
+            <span id="classDropdownValue">Economy</span>
+            <svg class="destinations__class-chevron" width="13" height="6" viewBox="0 0 13 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.91 -1.04412e-05L12.97 0.871501L7.193 5.61841C7.10043 5.69493 6.99036 5.75565 6.86911 5.79709C6.74786 5.83853 6.61783 5.85986 6.4865 5.85986C6.35517 5.85986 6.22514 5.83853 6.10389 5.79709C5.98264 5.75565 5.87257 5.69493 5.78 5.61841L-2.65457e-07 0.871502L1.06 0.000811062L6.485 4.45612L11.91 -1.04412e-05Z" fill="currentColor"/>
+            </svg>
+          </button>
+
+          <ul class="destinations__class-menu" id="classDropdownMenu">
+            <li class="destinations__class-option destinations__class-option--selected" data-value="Economy">
+              <span class="destinations__class-check">✓</span> Economy
+            </li>
+            <li class="destinations__class-option" data-value="Business">
+              <span class="destinations__class-check"></span> Business
+            </li>
+            <li class="destinations__class-option" data-value="First class">
+              <span class="destinations__class-check"></span> First class
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="destinations__grid">
+        <article class="destination-card" style="background-image: url('images/almaty-places.png')">
+          <div class="destination-card__overlay"></div>
+
+          <div class="destination-card__info">
+            <div class="destination-card__left">
+              <h3>Almaty</h3>
+              <span class="destination-card__dates" data-dates="05 Aug 2026 – 07 Aug 2026">05 Aug 2026 – 07 Aug 2026</span>
+            </div>
+            <div class="destination-card__price">
+              <span class="destination-card__class">Economy</span>
+              <span class="destination-card__flight">AVI 2070</span>
+            </div>
+          </div>
+
+          <div class="destination-card__actions">
+          <button class="btn btn--filled destination-card__book">Book now</button>
+            <a href="" class="destination-card__discover">Discover</a>
+          </div>
+        </article>
+
+        <article class="destination-card destination-card--single" style="background-image: url('images/kyiv.png')">
+          <div class="destination-card__overlay"></div>
+
+          <div class="destination-card__info">
+            <div class="destination-card__left">
+              <h3>Kyiv</h3>
+              <span class="destination-card__dates" data-dates="08 Aug 2026 – 11 Aug 2026">08 Aug 2026 – 11 Aug 2026</span>
+            </div>
+            <div class="destination-card__price">
+              <span class="destination-card__class">Economy</span>
+              <span class="destination-card__flight">AVI 1670</span>
+            </div>
+          </div>
+
+          <div class="destination-card__actions">
+            <button class="btn btn--filled destination-card__book">Book now</button>
+            <a href="#" class="destination-card__discover">Discover</a>
+          </div>
+        </article>
+
+        <article class="destination-card destination-card--single" style="background-image: url('images/vienna.png')">
+          <div class="destination-card__overlay"></div>
+
+          <div class="destination-card__info">
+            <div class="destination-card__left">
+              <h3>Vienna</h3>
+              <span class="destination-card__dates" data-dates="05 Aug 2026 – 08 Aug 2026">05 Aug 2026 – 08 Aug 2026</span>
+            </div>
+            <div class="destination-card__price">
+              <span class="destination-card__class">Economy</span>
+              <span class="destination-card__flight">AVI 3540</span>
+            </div>
+          </div>
+
+          <div class="destination-card__actions">
+            <button class="btn btn--filled destination-card__book">Book now</button>
+            <a href="#" class="destination-card__discover">Discover</a>
+          </div>
+        </article>
+
+        <article class="destination-card" style="background-image: url('images/london.png')">
+          <div class="destination-card__overlay"></div>
+
+          <div class="destination-card__info">
+            <div class="destination-card__left">
+              <h3>London</h3>
+              <span class="destination-card__dates" data-dates="17 Oct 2026 – 01 Nov 2026">17 Oct 2026 – 01 Nov 2026</span>
+            </div>
+            <div class="destination-card__price">
+              <span class="destination-card__class">Economy</span>
+              <span class="destination-card__flight">AVI 3720</span>
+            </div>
+          </div>
+
+          <div class="destination-card__actions">
+            <button class="btn btn--filled destination-card__book">Book now</button>
+            <a href="#" class="destination-card__discover">Discover</a>
+          </div>
+        </article>
+
+        <article class="destination-card" style="background-image: url('images/batumi.png')">
+          <div class="destination-card__overlay"></div>
+
+          <div class="destination-card__info">
+            <div class="destination-card__left">
+              <h3>Batumi</h3>
+              <span class="destination-card__dates" data-dates="05 Aug 2026 – 09 Aug 2026">05 Aug 2026 – 09 Aug 2026</span>
+            </div>
+            <div class="destination-card__price">
+              <span class="destination-card__class">Economy</span>
+              <span class="destination-card__flight">AVI 2050</span>
+            </div>
+          </div>
+
+          <div class="destination-card__actions">
+            <button class="btn btn--filled destination-card__book">Book now</button>
+            <a href="#" class="destination-card__discover">Discover</a>
+          </div>
+        </article>
+
+        <article class="destination-card destination-card--single" style="background-image: url('images/new-york.png')">
+          <div class="destination-card__overlay"></div>
+
+          <div class="destination-card__info">
+            <div class="destination-card__left">
+              <h3>New York</h3>
+              <span class="destination-card__dates" data-dates="28 Sep 2026 – 01 Sep 2026">28 Sep 2026 – 01 Sep 2026</span>
+            </div>
+            <div class="destination-card__price">
+              <span class="destination-card__class">Economy</span>
+              <span class="destination-card__flight">AVI 3630</span>
+            </div>
+          </div>
+
+          <div class="destination-card__actions">
+            <button class="btn btn--filled destination-card__book">Book now</button>
+            <a href="#" class="destination-card__discover">Discover</a>
+          </div>
+        </article>
+
+        <article class="destination-card destination-card--single" style="background-image: url('images/dubai.png')">
+          <div class="destination-card__overlay"></div>
+
+          <div class="destination-card__info">
+            <div class="destination-card__left">
+              <h3>Dubai</h3>
+              <span class="destination-card__dates" data-dates="29 Oct 2026 – 01 Nov 2026">29 Oct 2026 – 01 Nov 2026</span>
+            </div>
+            <div class="destination-card__price">
+              <span class="destination-card__class">Economy</span>
+              <span class="destination-card__flight">AVI 3570</span>
+            </div>
+          </div>
+
+          <div class="destination-card__actions">
+            <button class="btn btn--filled destination-card__book">Book now</button>
+            <a href="#" class="destination-card__discover">Discover</a>
+          </div>
+        </article>
+
+        <article class="destination-card" style="background-image: url('images/kopenhagen.png')">
+          <div class="destination-card__overlay"></div>
+
+          <div class="destination-card__info">
+            <div class="destination-card__left">
+              <h3>Kopenhagen</h3>
+              <span class="destination-card__dates" data-dates="05 Aug 2026 – 08 Aug 2026">05 Aug 2026 – 08 Aug 2026</span>
+            </div>
+            <div class="destination-card__price">
+              <span class="destination-card__class">Economy</span>
+              <span class="destination-card__flight">AVI 4340</span>
+            </div>
+          </div>
+
+          <div class="destination-card__actions">
+            <button class="btn btn--filled destination-card__book">Book now</button>
+            <a href="#" class="destination-card__discover">Discover</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VIENNA DUTY FREE ============ -->
+  <section class="feature-tabs">
+  <div class="feature-tabs__nav">
+    <div class="container feature-tabs__nav-inner">
+      <button class="feature-tabs__link feature-tabs__link--active">Vienna Duty Free</button>
+      <button class="feature-tabs__link">Starlink Wi-Fi</button>
+      <button class="feature-tabs__link">Bsuite</button>
+    </div>
+  </div>
+
+  <div class="feature-tabs__banner" style="background-image: url('images/vienna-duty-free.png')">
+    <div class="feature-tabs__content">
+      <h2>Shop. Earn. Repeat.</h2>
+      <p>Step into Vienna Duty Free and enjoy premium shopping, fine dining, and rewards that follow you home.</p>
+      <button class="btn btn--outline">Start Earning</button>
+    </div>
+  </div>
+</section>
+  <!-- ============ TRAVEL PACKAGE ============ -->
+  <section class="packages">
+    <div class="container">
+      <h2>Looking for a travel package?</h2>
+      <p>Save more and earn extra miles when you book flight + hotel together</p>
+      <div class="packages__grid">
+        <article class="package-card" style="background-image: url('images/stopover-almaty.png')">
+          <h3>Stopover in Almaty</h3>
+        </article>
+        <article class="package-card package-card--featured" style="background-image: url('images/signature-collection.png')">
+          <h3>The Signature Collection</h3>
+          <button class="btn btn--filled">Explore packages</button>
+        </article>
+        <article class="package-card" style="background-image: url('images/winter-escapes.png')">
+          <h3>Up to 30% off winter escapes</h3>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NEWSLETTER ============ -->
+  <section class="newsletter">
+    <div class="container newsletter__card" style="background-image: url('images/newsletter-bg.jpg')">
+      <div class="newsletter__content">
+        <h2>Never miss a deal</h2>
+        <p>Subscribe and be the first to know about exclusive fares and offers.</p>
+
+        <form class="newsletter__form">
+          <div class="newsletter__inputs">
+            <input type="email" placeholder="Email Address" required>
+            <input type="text" placeholder="Preferred departure city">
+          </div>
+
+          <label class="newsletter__checkbox">
+            <input type="checkbox">
+            <span>I'd like to receive offers and news from AeroVista. I understand the Privacy Notice and can unsubscribe anytime.</span>
+          </label>
+
+          <button type="submit" class="btn btn--outline">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__col">
+        <h4>AeroVista</h4>
+        <a href="#">About Us</a>
+        <a href="#">Careers</a>
+        <a href="#">Press releases</a>
+        <a href="#">Sustainability</a>
+      </div>
+      <div class="footer__col">
+        <h4>Explore</h4>
+        <a href="#">Destinations</a>
+        <a href="#">Fleet</a>
+        <a href="#">Loyalty programme</a>
+      </div>
+      <div class="footer__col">
+        <h4>Support</h4>
+        <a href="#">Contact us</a>
+        <a href="#">FAQs</a>
+        <a href="#">Travel alerts</a>
+        <a href="#">Booking help</a>
+      </div>
+      <div class="footer__col">
+        <h4>Legal</h4>
+        <a href="#">Cookie policy</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms of use</a>
+      </div>
+      <div class="footer__col">
+        <h4>Let's stay connected</h4>
+        <div class="footer__socials">
+          <a href="#" aria-label="Facebook" class="footer__social">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="10" fill="#fff"/><path d="M12.6 10.3H11V15H9V10.3H7.8V8.6H9V7.4C9 6.1 9.6 5 11.3 5H12.8V6.7H11.9C11.2 6.7 11 7 11 7.5V8.6H12.8L12.6 10.3Z" fill="#0A1931"/></svg>
+          </a>
+          <a href="#" aria-label="X (Twitter)" class="footer__social">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4L16 16M16 4L4 16" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+          </a>
+          <a href="#" aria-label="LinkedIn" class="footer__social">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="20" rx="4" fill="#fff"/><path d="M6.5 8.5H4.5V15H6.5V8.5Z" fill="#0A1931"/><circle cx="5.5" cy="5.8" r="1.2" fill="#0A1931"/><path d="M9 8.5H10.9V9.4C11.2 8.8 12 8.3 13.1 8.3C15.1 8.3 15.5 9.6 15.5 11.3V15H13.5V11.7C13.5 10.9 13.5 9.9 12.4 9.9C11.3 9.9 11.1 10.7 11.1 11.6V15H9V8.5Z" fill="#0A1931"/></svg>
+          </a>
+          <a href="#" aria-label="YouTube" class="footer__social">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect y="4" width="20" height="12" rx="4" fill="#fff"/><path d="M8.5 7.8V12.2L12.5 10L8.5 7.8Z" fill="#0A1931"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram" class="footer__social">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="20" rx="6" fill="#fff"/><circle cx="10" cy="10" r="3.2" stroke="#0A1931" stroke-width="1.4"/><circle cx="14.3" cy="5.7" r="1" fill="#0A1931"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer__bottom">
+      <div class="footer__legal-links">
+        <a href="#">Privacy</a>
+        <a href="#">Legal</a>
+        <a href="#">Accessibility</a>
+        <a href="#">Sitemap</a>
+        <a href="#">Cookie Consent</a>
+      </div>
+      <span>AeroVista. All rights reserved</span>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
