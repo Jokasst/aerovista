@@ -2581,6 +2581,10 @@ button.search-card__static-value {
     margin-left: 0;
     padding: var(--space-md);
     background: var(--color-dark);
+    /* Ссылки наследуют color от .header, который темнеет после скролла
+       (.header--scrolled) — на тёмном фоне выпадающего меню текст становится
+       невидимым. Фиксируем белый цвет явно, вне зависимости от скролла. */
+    color: var(--color-white);
   }
 
   .nav--open {
