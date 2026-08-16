@@ -2619,3 +2619,213 @@ button.search-card__static-value {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* ==========================================================================
+   ТЕЛЕФОНЫ (≤640px) — карточка поиска изначально версталась только под
+   десктоп (поля/вкладки в один ряд, календарь на 2 месяца), поэтому здесь
+   почти всё собирается в один столбец, а верхние/саб-вкладки, которые не
+   помещаются по ширине, скроллятся горизонтально вместо переноса — так
+   работающий "живой" индикатор (translateX) не пришлось переделывать под грид.
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  /* Страховка: если где-то всё же останется непредусмотренный элемент шире
+     экрана, он не потянет за собой горизонтальный скролл всей страницы */
+  html, body {
+    overflow-x: hidden;
+  }
+
+  .hero {
+    min-height: auto;
+    padding-top: 100px;
+  }
+
+  .hero__title {
+    font-size: 34px;
+  }
+
+  .search-card {
+    margin-top: -80px;
+    border-radius: 20px;
+  }
+
+  /* Верхние вкладки (Book a flight / Stopover / Manage / Flight status) —
+     горизонтальный скролл вместо переноса на 2 строки */
+  .search-card__tabs {
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: var(--space-sm);
+  }
+
+  .search-card__tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .search-card__tab {
+    flex-shrink: 0;
+    padding: 10px 14px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  /* Саб-вкладки (Vienna stopover / Manage booking / By route и т.д.) —
+     тот же приём */
+  .search-card__subtabs {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: var(--space-lg);
+  }
+
+  .search-card__subtabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .search-card__subtab {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  /* Текст, который на десктопе намеренно в одну строку (по просьбе
+     пользователя), на телефоне обратно оборачивается — иначе вылезает
+     за пределы экрана */
+  .search-card__intro,
+  .stopover-options__question {
+    white-space: normal;
+  }
+
+  /* Поля поиска — один столбец вместо ряда групп, вертикальные разделители
+     между группами становятся горизонтальными */
+  .search-card__fields {
+    flex-direction: column;
+    align-items: stretch;
+    margin: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .search-card__group,
+  .search-card__group--last {
+    width: 100%;
+    flex: none !important;
+    border-right: none !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    padding-block: var(--space-sm);
+    border-bottom: 1px solid #e5e5e8;
+  }
+
+  .search-card__fields > .search-card__group:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .search-card__fields > .search-card__group:first-child {
+    padding-top: 0;
+  }
+
+  /* Группы, где вручную сдвинута черта между двумя полями (Passengers/Room
+     + Class в Stopover/Flights+Hotel) — на телефоне тоже в столбец */
+  [data-subpanel="vienna"] .search-card__group--last,
+  [data-subpanel="flights-hotel"] .search-card__fields:not(.search-card__fields--hotel) .search-card__group--last {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-sm);
+  }
+
+  [data-subpanel="vienna"] .search-card__group--last .search-field:first-child,
+  [data-subpanel="flights-hotel"] .search-card__fields:not(.search-card__fields--hotel) .search-card__group--last .search-field:first-child {
+    border-right: none !important;
+    padding-right: 0 !important;
+    border-bottom: 1px solid #e5e5e8;
+    padding-bottom: var(--space-sm);
+  }
+
+  .search-card__trip-type {
+    flex-wrap: wrap;
+    row-gap: var(--space-md);
+  }
+
+  /* Multi-city: строка рейса тоже в столбец */
+  .multicity-leg {
+    position: relative;
+    flex-wrap: wrap;
+    row-gap: var(--space-sm);
+    padding-right: 40px;
+  }
+
+  .multicity-leg__date {
+    width: 100%;
+    border-left: none;
+    padding-left: 0;
+    padding-top: var(--space-sm);
+    border-top: 1px solid #e5e5e8;
+  }
+
+  .multicity-leg__remove {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+  }
+
+  /* Stopover: два вопроса под полями — в столбец */
+  .stopover-options {
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  /* Manage / Check-in и Flight status: поле + кнопка тоже в столбец,
+     кнопка на всю ширину */
+  .search-card__manage-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-card__manage-row .search-card__submit {
+    width: 100%;
+  }
+
+  /* Календарь — один месяц вместо двух, иначе не влезает по ширине */
+  .calendar-popup {
+    width: calc(100vw - 48px);
+    max-width: 320px;
+  }
+
+  .calendar-popup__month:last-of-type {
+    display: none;
+  }
+
+  /* Выпадающие панели (Passengers/Room, Class, дата) не должны вылезать
+     за экран, если поле-триггер стоит близко к правому краю карточки */
+  .passengers-panel,
+  .destinations__class-menu {
+    max-width: calc(100vw - 48px);
+  }
+
+  /* Блок From / Return-One way / Class над карточками направлений */
+  .destinations__filters {
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+
+  .destinations__toggle {
+    margin-left: 0;
+  }
+
+  /* Футер: нижняя строка с копирайтом и юридическими ссылками */
+  .footer__bottom {
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  /* Newsletter: два поля в форме — в столбец */
+  .newsletter__inputs {
+    flex-direction: column;
+  }
+
+  .newsletter__inputs input:first-child {
+    border-right: none;
+    border-bottom: 1px solid #e5e5e8;
+  }
+}

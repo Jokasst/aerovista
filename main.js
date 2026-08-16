@@ -561,6 +561,8 @@ document.querySelectorAll('.search-card__tabs').forEach((tabs) => {
     tabs.querySelectorAll('.search-card__tab').forEach((t) => t.classList.remove('search-card__tab--active'));
     btn.classList.add('search-card__tab--active');
     updateTabIndicator(tabs);
+    // На телефоне вкладки скроллятся горизонтально — подводим выбранную в кадр
+    btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
 
     // Показываем панель, привязанную к вкладке (data-panel), остальные скрываем.
     // Book a flight / Stopover / Manage / Status — независимые блоки контента.
@@ -618,6 +620,7 @@ document.querySelectorAll('.search-card__subtabs').forEach((subtabs) => {
     subtabs.querySelectorAll('.search-card__subtab').forEach((t) => t.classList.remove('search-card__subtab--active'));
     btn.classList.add('search-card__subtab--active');
     updateSubtabIndicator(subtabs);
+    btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
 
     const panel = subtabs.closest('.search-card__panel');
     panel.querySelectorAll(':scope > .search-card__subpanel').forEach((sp) => {
