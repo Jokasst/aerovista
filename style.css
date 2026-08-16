@@ -9,6 +9,8 @@
   --color-white: #FDFCF8;
   --color-accent: #6290c5;     /* акцентный, как бордовый у Qatar */
   --color-text-muted: #6b6b6f;
+  --color-error: #d13438;
+  --color-success: #1e7d3c;
 
   /* Шрифт */
   --font-main: 'Roboto', sans-serif;
@@ -29,6 +31,19 @@
 
   /* Контейнер */
   --container-width: 1200px;
+
+  /* Апрелевские (Apple-style) кривые и длительности — форма важнее длительности */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);       /* критически задемпфировано, без переброса */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* лёгкий перелёт — только для "материализации" */
+  --duration-instant: 100ms;
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-medium: 300ms;
+  --duration-slow: 350ms;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -74,36 +89,86 @@ body {
   color: var(--color-white);
   background: transparent;
   border-bottom: none;
-  position: absolute;
+  position: fixed;
   align-items: center;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 10;
+  z-index: 50;
+  transition: background-color var(--duration-medium) var(--ease-out),
+              backdrop-filter var(--duration-medium) var(--ease-out),
+              box-shadow var(--duration-medium) var(--ease-out),
+              color var(--duration-medium) var(--ease-out);
+}
+
+/* Материализуется в полупрозрачную панель, когда контент уходит под неё при скролле */
+.header--scrolled {
+  background: rgba(253, 252, 248, 0.75);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  color: var(--color-dark);
+  box-shadow: 0 1px 0 rgba(10, 25, 49, 0.06);
+}
+
+.header--scrolled .help-text,
+.header--scrolled .search-button,
+.header--scrolled .lang-switcher__trigger,
+.header--scrolled .login-button {
+  color: var(--color-dark);
+}
+
+.header--scrolled .nav-toggle span {
+  background: var(--color-dark);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .header--scrolled {
+    background: var(--color-white);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }
 
 .header__inner {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  justify-content: space-between;
+  column-gap: var(--space-md);
   height: 72px;
 }
 
 .logo {
-  height: 90px;
-  width: auto;
-  position: absolute;
-  margin-top: 19px;
+  font-family: Poppins, sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  color: inherit;
+  white-space: nowrap;
+  transition: color var(--duration-base) var(--ease-out), transform var(--duration-instant) var(--ease-out);
+}
+
+.logo:hover {
+  color: var(--color-accent);
+}
+
+.logo:active {
+  transform: scale(0.96);
+  transition-duration: var(--duration-instant);
 }
 
 .nav {
   font-weight: bold;
   display: flex;
   align-items: center;
-  margin-left: 350px;
-  margin-top: 7px;
-  gap: 50px;
-  transition: all 0.3s ease;
+  justify-content: center;
+  min-width: 0;
+  gap: 32px;
+  transition: all var(--duration-medium) var(--ease-out);
+}
+
+.nav a {
+  white-space: nowrap;
 }
 
 .nav__link_explore:hover{
@@ -132,7 +197,7 @@ body {
   align-items: center;
   gap: 8px;
   color: var(--color-white);
-  transition: all 0.3s ease;
+  transition: all var(--duration-medium) var(--ease-out);
 }
 
 .search-button:hover {
@@ -146,14 +211,20 @@ body {
 }
 
 .lang-switcher {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.lang-switcher__trigger {
   display: flex;
   align-items: center;
   gap: 8px;
   color: var(--color-white);
-  transition: all 0.3s ease;
+  transition: all var(--duration-medium) var(--ease-out);
 }
 
-.lang-switcher:hover{
+.lang-switcher__trigger:hover {
   color: var(--color-accent);
   transform: scale(1.05);
 }
@@ -163,13 +234,59 @@ body {
   height: 20px;
 }
 
+.lang-switcher__menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  min-width: 160px;
+  background: var(--color-white);
+  border-radius: var(--radius-sm);
+  box-shadow: 0px 12px 32px rgba(10, 25, 49, 0.15);
+  padding: 8px;
+  list-style: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity var(--duration-base) var(--ease-spring), transform var(--duration-base) var(--ease-spring), visibility var(--duration-base) var(--ease-spring);
+  z-index: 60;
+}
+
+.lang-switcher__menu--open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.lang-switcher__option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  color: var(--color-dark);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out);
+  white-space: nowrap;
+}
+
+.lang-switcher__option:hover {
+  background: rgba(10, 25, 49, 0.06);
+}
+
+.lang-switcher__check {
+  width: 16px;
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
 .login-button {
   font-weight: bold;
   display: flex;
   align-items: center;
   gap: 8px;
   color: var(--color-white);
-  transition: all 0.3s ease;
+  transition: all var(--duration-medium) var(--ease-out);
 }
 
 .login-button:hover {
@@ -185,8 +302,10 @@ body {
 .header__actions {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: var(--space-md);
   font-size: 14px;
+  white-space: nowrap;
 }
 
 .nav-toggle {
@@ -201,7 +320,7 @@ body {
   width: 22px;
   height: 2px;
   background: var(--color-white);
-  transition: all 0.2s ease;
+  transition: all var(--duration-base) var(--ease-out);
 }
 
 .help-text {
@@ -237,7 +356,7 @@ body {
   font-weight: 600;
   padding: 12px 30px;
   margin-top: 30px;
-  transition: all 0.3s ease;
+  transition: all var(--duration-medium) var(--ease-out);
 }
 
 .btn--filled:hover {
@@ -249,10 +368,12 @@ body {
 
 .hero__title {
   font-family: Poppins, sans-serif;
-  font-size: 64px;
+  font-size: clamp(40px, 5.5vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
   font-weight: 500;
   margin-bottom: var(--space-md);
-  max-width: auto;
+  max-width: 720px;
 }
 
 .search-card {
@@ -260,24 +381,63 @@ body {
   border-radius: 30px;
   color: var(--color-dark);
   margin-top: -140px;
+  margin-inline: auto;
+  max-width: 1080px;
   isolation: isolate;
   position: relative;
   z-index: 20;
+  box-shadow: 0px 24px 60px rgba(10, 25, 49, 0.18);
 }
 
 .search-card__tabs {
+  position: relative;
+  /* Свой стекинг-контекст: иначе z-index:-1 индикатора всплывает до
+     ближайшего isolation:isolate (.search-card) и рисуется ПОД
+     собственным полупрозрачным фоном этого блока, а не только под
+     кнопками — из-за чего белая пилюля выглядела серой и тусклой. */
+  z-index: 0;
   display: flex;
-  gap: var(--space-lg);
-  padding: var(--space-sm) var(--space-md);
-  border-bottom: 1px solid #eee;
-  font-size: 14px;
+  justify-content: center;
+  gap: calc(var(--space-2xl) - 64px);
+  padding: 4px;
+  background: rgba(10, 25, 49, 0.05);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  overflow: hidden;
+  font-size: 15px;
+}
+
+/* "Живой" плавающий индикатор активной вкладки — скользит и меняет
+   ширину под текущую вкладку вместо мгновенной подмены фона. Лежит
+   позади кнопок (z-index: -1 в контексте .search-card__tabs), поэтому
+   клики по вкладкам работают как обычно. */
+.search-card__tab-indicator {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  height: calc(100% - 8px);
+  border-radius: calc(var(--radius-lg) - 4px);
+  /* Чистый белый, а не --color-white (#FDFCF8) — тот почти не отличается
+     от полупрозрачно-серого фона .search-card__tabs и "тонет" в нём. */
+  background: #ffffff;
+  box-shadow: 0px 4px 14px rgba(10, 25, 49, 0.16);
+  z-index: -1;
+  transition: transform var(--duration-medium) var(--ease-spring),
+              width var(--duration-medium) var(--ease-spring);
 }
 
 .search-card__tab {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
-  color: rgba(10, 25, 49, 0.45);
+  padding: 10px 40px;
+  border-radius: calc(var(--radius-lg) - 4px);
+  color: rgba(10, 25, 49, 0.55);
+  font-weight: 500;
+  white-space: nowrap;
+  transform: scale(0.92);
+  transition: color var(--duration-base) var(--ease-out),
+              transform var(--duration-medium) var(--ease-spring);
 }
 
 .search-card__tab-icon {
@@ -290,9 +450,9 @@ body {
 }
 
 .search-card__tab--active {
-  color: rgba(10, 25, 49, 0.9);
+  color: var(--color-dark);
   font-weight: 600;
-  border-bottom: 2px solid var(--color-dark);
+  transform: scale(1);
 }
 
 .search-card__form {
@@ -302,24 +462,72 @@ body {
 
 .search-card__multicity {
   display: none;
-  align-items: center;
+  flex-direction: column;
   gap: var(--space-md);
-  padding-left: var(--space-lg);
+  padding: 0 var(--space-lg) var(--space-lg);
 }
 
 .search-card__multicity--visible {
   display: flex;
 }
 
-.search-card__add-city {
+.multicity-leg {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid rgba(10, 25, 49, 0.16);
+  border-radius: var(--radius-md);
+}
+
+.multicity-leg .search-field {
+  position: relative;
+}
+
+.multicity-leg__field {
+  flex: 1;
+  min-width: 0;
+}
+
+.multicity-leg__date {
+  flex-shrink: 0;
+  padding-left: var(--space-md);
+  border-left: 1px solid #e5e5e8;
+}
+
+.multicity-leg__remove {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(10, 25, 49, 0.3);
   background: transparent;
-  border: 1px dashed rgba(10, 25, 49, 0.3);
-  border-radius: var(--radius-sm);
-  padding: 8px 16px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--color-dark);
+  color: rgba(10, 25, 49, 0.6);
+  font-size: 16px;
+  line-height: 1;
   cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out);
+}
+
+.multicity-leg__remove:hover {
+  background: rgba(10, 25, 49, 0.06);
+  color: var(--color-dark);
+}
+
+.search-card__add-city {
+  align-self: flex-start;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-accent);
+  cursor: pointer;
+}
+
+.search-card__add-city:hover {
+  color: var(--color-dark);
 }
 
 .search-card__date-trigger {
@@ -327,24 +535,26 @@ body {
   border: none;
   font-family: 'Inter', sans-serif;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 15px;
   color: rgba(10, 25, 49, 0.8);
   cursor: pointer;
   text-align: left;
+  white-space: nowrap;
 }
 
 .calendar-popup {
   position: absolute;
   top: calc(100% + 12px);
-  width: 300px;
+  width: 680px;
+  max-width: calc(100vw - 32px);
   background: var(--color-white);
   border-radius: var(--radius-sm);
   box-shadow: 0px 12px 32px rgba(10, 25, 49, 0.15);
-  padding: var(--space-md);
+  padding: var(--space-md) var(--space-lg) var(--space-md);
   opacity: 0;
   visibility: hidden;
   transform: translateY(-8px);
-  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  transition: opacity var(--duration-base) var(--ease-spring), transform var(--duration-base) var(--ease-spring), visibility var(--duration-base) var(--ease-spring);
   z-index: 30;
 }
 
@@ -354,27 +564,45 @@ body {
   transform: translateY(0);
 }
 
-.calendar-popup__header {
+.calendar-popup__body {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: var(--space-sm);
-  font-weight: 600;
+  align-items: flex-start;
+  gap: var(--space-lg);
 }
 
-.calendar-popup__header button {
+.calendar-popup__nav {
+  flex-shrink: 0;
   background: transparent;
   border: none;
-  font-size: 18px;
+  font-size: 20px;
+  line-height: 1;
   cursor: pointer;
   color: var(--color-dark);
+  align-self: center;
+  padding: var(--space-xs);
 }
 
-.calendar-popup__weekdays, .calendar-popup__days {
+.calendar-popup__nav:hover {
+  color: var(--color-accent);
+}
+
+.calendar-popup__month {
+  flex: 1;
+  min-width: 0;
+}
+
+.calendar-popup__month-title {
+  text-align: center;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: var(--space-sm);
+}
+
+.calendar-popup__weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
   text-align: center;
+  margin-bottom: 4px;
 }
 
 .calendar-popup__weekdays span {
@@ -383,14 +611,30 @@ body {
   padding-bottom: 6px;
 }
 
+.calendar-popup__weeks {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.calendar-popup__week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+}
+
 .calendar-popup__day {
   padding: 8px 0;
+  margin: 0 auto;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   font-size: 13px;
   cursor: pointer;
   background: transparent;
   border: none;
   color: var(--color-dark);
+  transition: background var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
 }
 
 .calendar-popup__day:hover {
@@ -402,15 +646,95 @@ body {
   color: var(--color-white);
 }
 
+/* Диапазон Departure → Return: подсвечены только дни строго между ними,
+   без выделения всей строки таблицы. Средние дни — сплошная светлая
+   полоса без зазоров (ширина 100% ячейки), крайние — тёмный кружок
+   со скруглением только с внешней стороны, чтобы полоса выглядела цельной. */
+.calendar-popup__day--range-middle {
+  width: 100%;
+  margin: 0;
+  border-radius: 0;
+  background: rgba(98, 144, 197, 0.18);
+}
+
+.calendar-popup__day--range-middle:hover {
+  background: rgba(98, 144, 197, 0.32);
+}
+
+.calendar-popup__day--range-start {
+  width: 100%;
+  margin: 0;
+  border-radius: 50% 0 0 50%;
+  background: var(--color-dark);
+  color: var(--color-white);
+}
+
+.calendar-popup__day--range-end {
+  width: 100%;
+  margin: 0;
+  border-radius: 0 50% 50% 0;
+  background: var(--color-dark);
+  color: var(--color-white);
+}
+
+.calendar-popup__day--disabled {
+  color: rgba(10, 25, 49, 0.28);
+  cursor: not-allowed;
+}
+
+.calendar-popup__day--disabled:hover {
+  background: transparent;
+}
+
 .calendar-popup__day--empty {
   visibility: hidden;
+}
+
+.calendar-popup__footer {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid #ecebe6;
+}
+
+.calendar-popup__clear {
+  background: transparent;
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1;
+  padding: 12px 4px;
+  color: rgba(10, 25, 49, 0.6);
+  cursor: pointer;
+}
+
+.calendar-popup__clear:hover {
+  color: var(--color-dark);
+}
+
+.calendar-popup__apply {
+  padding: 12px 28px;
+  background: var(--color-dark);
+  color: var(--color-white);
+  border: 1px solid var(--color-dark);
+}
+
+.calendar-popup__apply:hover {
+  background: var(--color-white);
+  color: var(--color-dark);
 }
 
 .search-card__fields {
   display: flex;
   align-items: center;
   gap: var(--space-lg);
-  padding: var(--space-lg);
+  padding: var(--space-sm) var(--space-md);
+  margin: var(--space-lg);
+  border: 1px solid rgba(10, 25, 49, 0.16);
+  border-radius: var(--radius-md);
   position: relative;
 }
 
@@ -425,7 +749,7 @@ body {
 .search-card__group--last {
   position:relative;
   padding-right: var(--space-lg);
-  margin-left: 50px;
+  margin-left: var(--space-md);
 }
 
 .search-field--floating {
@@ -444,7 +768,7 @@ body {
   font-size: 12px;
   color: var(--color-text-muted);
   pointer-events: none;
-  transition: all 0.2s ease;
+  transition: all var(--duration-base) var(--ease-out);
 }
 
 .search-field--floating input:focus + label, .search-field--floating input:not(:placeholder-shown) + label {
@@ -461,10 +785,11 @@ body {
   border: none;
   font-family: 'Inter', sans-serif;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 15px;
   color: rgba(10, 25, 49, 0.8);
   cursor: pointer;
   text-align: left;
+  white-space: nowrap;
   left: 0;
 }
 
@@ -480,7 +805,7 @@ body {
   opacity: 0;
   visibility: hidden;
   transform: translateY(-8px);
-  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  transition: opacity var(--duration-base) var(--ease-spring), transform var(--duration-base) var(--ease-spring), visibility var(--duration-base) var(--ease-spring);
   z-index: 30;
 }
 
@@ -498,7 +823,7 @@ body {
   opacity: 0;
   visibility: hidden;
   transform: translateY(-8px);
-  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  transition: opacity var(--duration-base) var(--ease-spring), transform var(--duration-base) var(--ease-spring), visibility var(--duration-base) var(--ease-spring);
   z-index: 40;
 }
 
@@ -520,7 +845,7 @@ body {
   gap: 14px;
   padding: 12px var(--space-md);
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition: background var(--duration-fast) var(--ease-out);
   border-bottom: 1px solid #f0f0f0;
 }
 
@@ -533,11 +858,11 @@ body {
 }
 
 .airport-suggestion__icon {
-  width: 16px;
-  height: 12px;
+  width: 15px;
+  height: 15px;
   color: var(--color-dark);
   flex-shrink: 0;
-  margin-top: 3px;
+  margin-top: 2px;
 }
 
 .airport-suggestion__body {
@@ -617,8 +942,15 @@ body {
   margin-block: 12px;
 }
 
+.passengers-panel__classes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 .passengers-panel__class {
-  flex: 1;
+  flex: 1 1 auto;
+  min-width: max-content;
   padding: 10px 9px;
   border-radius: var(--radius-pill);
   border: 1px solid rgba(10, 25, 49, 0.3);
@@ -627,7 +959,7 @@ body {
   font-weight: 600;
   cursor: pointer;
   color: var(--color-dark);
-  transition: all 0.15s ease;
+  transition: all var(--duration-fast) var(--ease-out);
   white-space: nowrap;
 }
 
@@ -647,7 +979,7 @@ body {
   border-radius: var(--radius-pill);
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all var(--duration-base) var(--ease-out);
 }
 
 .passengers-panel__done:hover {
@@ -665,20 +997,22 @@ body {
   display: block;
   font-family: 'Inter', sans-serif;
   font-weight: 500;
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: -0.4px;
   color: rgba(10, 25, 49, 0.7);
   margin-bottom: 4px;
+  white-space: nowrap;
 }
 
 .search-field input{
   font-family: 'Inter', sans-serif;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 15px;
   letter-spacing: -0.48px;
   color: rgba(10, 25, 49, 0.8);
   border: none;
   background: transparent;
+  white-space: nowrap;
   width: 100%;
 }
 
@@ -745,7 +1079,7 @@ body {
   transform: translateZ(0);
   will-change: transform;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: all var(--duration-medium) var(--ease-out);
   position: relative;
   height: 48px;
   align-items: center;
@@ -774,7 +1108,7 @@ body {
   font-family: var(--font-main);
   color: var(--color-dark);
   outline: none;
-  transition: border-color 0.2s ease;
+  transition: border-color var(--duration-base) var(--ease-out);
   margin-left: auto;
   height: 48px;
   box-sizing: border-box;
@@ -796,10 +1130,322 @@ body {
   cursor: pointer;
 }
 
+/* Своя отрисовка радиокнопки вместо нативной — чтобы у внутренней точки была
+   "живая" анимация появления (чуть больше нормы и обратно), а не мгновенная
+   подмена, как у браузерного accent-color */
 .radio input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  box-sizing: border-box;
   width: 18px;
   height: 18px;
-  accent-color: var(--color-dark);
+  margin: 0;
+  border: 1.5px solid rgba(10, 25, 49, 0.3);
+  border-radius: 50%;
+  background: var(--color-white);
+  box-shadow: inset 0 0 0 0px var(--color-dark);
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-medium) var(--ease-spring);
+}
+
+.radio input[type="radio"]:checked {
+  border-color: var(--color-dark);
+  box-shadow: inset 0 0 0 5px var(--color-dark);
+}
+
+/* ==========================================================================
+   ПАНЕЛИ ВКЛАДОК ФОРМЫ ПОИСКА (Book a flight / Stopover / Manage / Status)
+   ========================================================================== */
+
+.search-card__panel {
+  display: none;
+}
+
+.search-card__panel--active {
+  display: block;
+}
+
+.search-card__placeholder {
+  padding: var(--space-2xl) var(--space-lg);
+  text-align: center;
+  color: rgba(10, 25, 49, 0.4);
+  font-size: 15px;
+}
+
+/* Саб-вкладки внутри панели (Vienna stopover / Flights + Hotel / Hotels) —
+   подчёркивание снизу, без заливки фона, в отличие от главных вкладок-пилюль */
+.search-card__subtabs {
+  position: relative;
+  display: flex;
+  gap: calc(var(--space-xl) - 32px);
+  padding: 0 var(--space-lg);
+  border-bottom: 1px solid rgba(10, 25, 49, 0.14);
+}
+
+/* Плавающая подчёркивающая линия активной саб-вкладки — тот же приём, что
+   и у .search-card__tab-indicator сверху: одна плавающая полоска скользит
+   между вкладками вместо мгновенной подмены border-bottom на новой кнопке */
+.search-card__subtab-indicator {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--color-dark);
+  border-radius: 1px;
+  transition: transform var(--duration-medium) var(--ease-spring),
+              width var(--duration-medium) var(--ease-spring);
+}
+
+.search-card__subtab {
+  padding: var(--space-md) 16px var(--space-xs);
+  margin-inline: -16px;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(10, 25, 49, 0.5);
+  transition: color var(--duration-base) var(--ease-out);
+}
+
+.search-card__subtab:hover {
+  color: var(--color-dark);
+}
+
+.search-card__subtab--active {
+  color: var(--color-dark);
+  font-weight: 600;
+}
+
+.search-card__subpanel {
+  display: none;
+}
+
+.search-card__subpanel--active {
+  display: block;
+}
+
+.search-card__intro {
+  padding: var(--space-lg) var(--space-lg) 0;
+  color: rgba(10, 25, 49, 0.7);
+  font-size: 15px;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+/* Статичная (не кликабельная) версия стрелки-обмена — просто иконка между From/To */
+.search-card__swap-icon {
+  color: rgba(10, 25, 49, 0.4);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Значения полей, которые пока не открывают собственный дропдаун
+   (Passengers / Room, Class в Stopover) — визуально как input, но кликабельно:
+   открывает свою панель/меню (см. ниже) */
+.search-card__static-value {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: -0.48px;
+  color: rgba(10, 25, 49, 0.8);
+  white-space: nowrap;
+}
+
+button.search-card__static-value {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.search-card__static-value--chevron {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+/* Поля-триггеры дропдаунов (Passengers/Room, Class) в Stopover-подвкладках
+   нуждаются в position:relative, чтобы их панель/меню открывались прямо под
+   ними, а не под всей группой полей */
+[data-subpanel="vienna"] .search-card__group--last .search-field,
+[data-subpanel="flights-hotel"] .search-card__group--last .search-field,
+[data-subpanel="hotels"] .search-card__group--last .search-field {
+  position: relative;
+}
+
+#stopoverPassengersPanel,
+#flightsHotelPassengersPanel,
+#hotelsPassengersPanel {
+  left: 0;
+  right: auto;
+}
+
+#stopoverClassMenu,
+#flightsHotelClassMenu {
+  z-index: 30;
+}
+
+/* Блок из двух вопросов под полями: "когда добавить остановку" + "сколько дней" */
+.stopover-options {
+  display: flex;
+  gap: var(--space-2xl);
+  padding: var(--space-md) var(--space-lg) 0;
+}
+
+.stopover-options__col {
+  flex: 1;
+}
+
+.stopover-options__question {
+  font-size: 14px;
+  color: rgba(10, 25, 49, 0.7);
+  margin-bottom: var(--space-md);
+  white-space: nowrap;
+}
+
+/* .search-card__trip-type переиспользован из Book a flight, но там его отступ
+   рассчитан на позицию сразу под вкладками — здесь он не нужен */
+.stopover-options__col .search-card__trip-type {
+  padding: 0;
+}
+
+.stopover-stepper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* В Stopover-подвкладках разделитель над футером не нужен — убираем его,
+   не трогая общий .search-card__footer, который переиспользуется в Book a flight */
+[data-subpanel="vienna"] .search-card__footer,
+[data-subpanel="flights-hotel"] .search-card__footer,
+[data-subpanel="hotels"] .search-card__footer {
+  border-top: none;
+}
+
+/* Flights + Hotel: футер там всего с одной кнопкой Search — прижимаем её вправо */
+.search-card__footer--end {
+  justify-content: flex-end;
+}
+
+/* В полях "Vienna stopover" и "Flights + Hotel" последняя группа содержит
+   Passengers/Room и Class — разделительную черту нужно поставить между ними,
+   а не в самом конце блока, и придвинуть саму группу ближе к этой черте
+   (было слишком много отступа) */
+[data-subpanel="vienna"] .search-card__group--last,
+[data-subpanel="flights-hotel"] .search-card__fields:not(.search-card__fields--hotel) .search-card__group--last {
+  border-right: none;
+  padding-right: 0;
+  margin-left: var(--space-xs);
+}
+
+[data-subpanel="vienna"] .search-card__group--last .search-field:first-child,
+[data-subpanel="flights-hotel"] .search-card__fields:not(.search-card__fields--hotel) .search-card__group--last .search-field:first-child {
+  padding-right: var(--space-lg);
+  border-right: 1px solid #e5e5e8;
+}
+
+/* Flights + Hotel: строка "Hotel destination / Check-in / Check-out" — поле
+   направления должно растягиваться, а завершающая группа Check-in/Check-out
+   не нуждается в хвостовой черте после Check-out */
+.search-card__group--hotel-destination {
+  flex: 1;
+}
+
+.search-card__hotel-destination-input {
+  font-size: 15px;
+}
+
+[data-subpanel="flights-hotel"] .search-card__fields--hotel .search-card__group--last,
+[data-subpanel="hotels"] .search-card__fields--hotel .search-card__group--last {
+  border-right: none;
+  padding-right: 0;
+  margin-left: var(--space-xs);
+}
+
+/* Manage / Check-in: поле ввода + кнопка стоят в один ряд, а не в футере
+   с чертой сверху — кнопка снаружи блока полей, оба flex-элемента ряда.
+   Отступ такой же, как у остальных блоков полей (space-lg со всех сторон) —
+   доп. отступ снизу от карточки задаётся ниже через padding-bottom
+   на .search-card__subpanel, а не margin, потому что margin-bottom этого
+   последнего элемента схлопывается с нижним краем .search-card и уходит
+   ЗА пределы видимой карточки, а не остаётся внутри неё */
+.search-card__manage-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  margin: var(--space-lg) var(--space-lg) 0;
+}
+
+[data-panel="manage"] .search-card__subpanel,
+[data-panel="status"] .search-card__subpanel {
+  padding-bottom: var(--space-lg);
+}
+
+.search-card__manage-row .search-card__fields {
+  flex: 1;
+  margin: 0;
+}
+
+.search-card__fields--manage .search-card__group {
+  flex: 1;
+}
+
+.search-card__fields--manage .search-card__group--last {
+  border-right: none;
+  padding-right: 0;
+  margin-left: 0;
+}
+
+/* Flight status: дата — не календарь, а простой выпадающий список дат
+   (сегодня ± несколько дней), поэтому нужен свой якорь для позиционирования */
+[data-panel="status"] .search-card__group--last .search-field {
+  position: relative;
+}
+
+[data-panel="status"] .destinations__class-menu {
+  z-index: 30;
+}
+
+/* Flight status > By flight number: неизменяемый префикс авиакомпании
+   перед номером рейса, в одном поле с инпутом */
+.search-card__flight-number-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-card__flight-prefix {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--color-dark);
+  flex-shrink: 0;
+}
+
+.search-card__flight-number-field input {
+  flex: 1;
+}
+
+.stopover-stepper__btn {
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(10, 25, 49, 0.25);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-dark);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+}
+
+.stopover-stepper__btn:hover {
+  background: var(--color-dark);
+  color: var(--color-white);
 }
 
 /* ==========================================================================
@@ -834,7 +1480,7 @@ body {
   padding: var(--space-md);
   overflow: hidden;
   isolation: isolate;
-  transition: transform 0.3s ease;
+  transition: transform var(--duration-medium) var(--ease-out);
 }
 
 .promo-card::before {
@@ -854,6 +1500,7 @@ body {
   font-weight: bold;
   margin-bottom: 6px;
   line-height: 1;
+  letter-spacing: -0.02em;
   gap: 0;
 }
 
@@ -889,6 +1536,8 @@ body {
 .destinations h2 {
   font-size: 36px;
   font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
   margin-bottom: var(--space-lg);
 }
 
@@ -900,6 +1549,7 @@ body {
 }
 
 .destinations__from {
+  position: relative;
   display: flex;
   align-items: baseline;
   gap: var(--space-sm);
@@ -950,7 +1600,7 @@ body {
   border: 1px solid var(--color-dark);
   color: var(--color-dark);
   background: transparent;
-  transition: all 0.2s ease;
+  transition: all var(--duration-base) var(--ease-out);
 }
 
 .destinations__toggle-btn--active {
@@ -987,7 +1637,7 @@ body {
 .destinations__class-chevron {
   color: rgba(10, 25, 49, 0.5);
   flex-shrink: 0;
-  transition: transform 0.2s ease;
+  transition: transform var(--duration-base) var(--ease-out);
 }
 
 .destinations__class-trigger[aria-expanded="true"] .destinations__class-chevron {
@@ -1007,7 +1657,7 @@ body {
   opacity: 0;
   visibility: hidden;
   transform: translateY(-8px);
-  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  transition: opacity var(--duration-base) var(--ease-spring), transform var(--duration-base) var(--ease-spring), visibility var(--duration-base) var(--ease-spring);
   z-index: 20;
 }
 
@@ -1026,17 +1676,24 @@ body {
   font-size: 16px;
   color: var(--color-dark);
   cursor: pointer;
-  transition: background 0.15s ease;
+  white-space: nowrap;
+  transition: background var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
 }
 
 .destinations__class-option:hover {
   background: rgba(10, 25, 49, 0.06);
 }
 
-.destinations__class-check {
-  width: 16px;
-  color: var(--color-accent);
-  font-weight: 700;
+/* Выбранный пункт — отдельным тёмным прямоугольником, а не просто галочкой,
+   чтобы явнее читалось во всех таких выпадающих списках (класс перелёта,
+   дата в Flight status и т.д.) */
+.destinations__class-option--selected {
+  background: var(--color-dark);
+  color: var(--color-white);
+}
+
+.destinations__class-option--selected:hover {
+  background: var(--color-dark);
 }
 
 .destinations__class span {
@@ -1078,7 +1735,7 @@ body {
   position: absolute;
   inset: 0;
   background: rgba(10, 25, 49, 0);
-  transition: background 0.35s ease;
+  transition: background var(--duration-slow) var(--ease-out);
 }
 
 /* При наведении на карточку — подложка темнеет */
@@ -1091,7 +1748,7 @@ body {
 .destination-card__discover {
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity 0.35s ease, transform 0.35s ease;
+  transition: opacity var(--duration-slow) var(--ease-spring), transform var(--duration-slow) var(--ease-spring);
 }
 
 /* При наведении — кнопки "всплывают" на место */
@@ -1119,7 +1776,7 @@ body {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  transition: transform 0.35s ease;
+  transition: transform var(--duration-slow) var(--ease-spring);
   z-index: 1; /* поверх фото, но за overlay при наведении можно скрыть */
 }
 
@@ -1193,7 +1850,7 @@ body {
   gap: var(--space-sm);
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity 0.35s ease, transform 0.35s ease;
+  transition: opacity var(--duration-slow) var(--ease-spring), transform var(--duration-slow) var(--ease-spring);
   z-index: 1;
 }
 
@@ -1246,7 +1903,7 @@ body {
   padding-bottom: 8px;
   opacity: 0.6;
   border-bottom: 2px solid transparent;
-  transition: all 0.2s ease;
+  transition: all var(--duration-base) var(--ease-out);
 }
 
 .feature-tabs__link--active {
@@ -1272,31 +1929,48 @@ body {
 
 .feature-tabs__content {
   margin-left: auto;
-  max-width: 460px;
+  max-width: 760px;
   background: rgba(10, 25, 49, 0.92);
   color: var(--color-white);
-  padding: var(--space-lg);
+  padding: var(--space-xl);
   margin-right: var(--space-2xl);
   border-radius: var(--radius-sm);
+  text-align: right;
+}
+
+.feature-tabs__content .btn--outline {
+  margin-left: 0;
+  padding: 18px 56px;
+  font-size: 17px;
 }
 
 .feature-tabs__content h2 {
-  font-size: 40px;
+  font-size: 56px;
   font-weight: 700;
-  margin-bottom: var(--space-sm);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-md);
   margin-left: auto;
 }
 
+:lang(ru) .feature-tabs__content {
+  max-width: 880px;
+}
+
+:lang(ru) .feature-tabs__content h2 {
+  font-size: 38px;
+}
+
 .feature-tabs__content p {
-  font-size: 15px;
+  font-size: 19px;
   line-height: 1.6;
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-xl);
 }
 
 .btn--outline {
   color: var(--color-white);
   background: transparent;
-  transition: all 0.2s ease;
+  transition: all var(--duration-base) var(--ease-out);
   margin-left: 220px;
 }
 
@@ -1318,6 +1992,8 @@ body {
 .packages h2 {
   font-size: 36px;
   font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
   margin-bottom: var(--space-xs);
 }
 
@@ -1359,20 +2035,42 @@ body {
   z-index: -1;
 }
 
+.package-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 25, 49, 0);
+  transition: background var(--duration-slow) var(--ease-out);
+  z-index: -1;
+}
+
+.package-card:hover .package-card__overlay {
+  background: rgba(10, 25, 49, 0.45);
+}
+
 .package-card h3 {
   font-size: 22px;
   font-weight: 600;
   max-width: 260px;
+  transition: transform var(--duration-slow) var(--ease-spring);
 }
 
-.package-card--featured .btn--filled {
-  background: var(--color-dark);
-  color: var(--color-white);
+.package-card:hover h3 {
+  transform: translateY(-56px);
 }
 
-.package-card--featured .btn--filled:hover {
-  background: var(--color-white);
-  color: var(--color-dark);
+.package-card__cta {
+  position: absolute;
+  left: 50%;
+  bottom: var(--space-md);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(-50%, 16px);
+  transition: opacity var(--duration-slow) var(--ease-spring), transform var(--duration-slow) var(--ease-spring);
+}
+
+.package-card:hover .package-card__cta {
+  opacity: 1;
+  transform: translate(-50%, 0);
 }
 
 /* ==========================================================================
@@ -1409,6 +2107,8 @@ body {
 .newsletter__card h2 {
   font-size: 34px;
   font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
   margin-bottom: var(--space-xs);
 }
 
@@ -1442,6 +2142,305 @@ body {
   font-size: 13px;
   color: #ccc;
   margin-bottom: var(--space-md);
+}
+
+.newsletter__content .btn--outline {
+  margin-left: 0;
+  padding-left: 56px;
+  padding-right: 56px;
+}
+
+/* ==========================================================================
+   LOGO — вариант для страниц Privilege Club (AeroVista | PRIVILEGE CLUB)
+   ========================================================================== */
+
+.logo--privilege {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo__divider {
+  width: 1px;
+  height: 26px;
+  background: currentColor;
+  opacity: 0.3;
+}
+
+.logo__sub {
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+/* Хедер на страницах без hero-фото под ним — всегда в материализованном виде */
+.page-auth .header {
+  background: rgba(253, 252, 248, 0.92);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  color: var(--color-dark);
+  box-shadow: 0 1px 0 rgba(10, 25, 49, 0.06);
+}
+
+.page-auth .help-text,
+.page-auth .search-button,
+.page-auth .lang-switcher__trigger,
+.page-auth .login-button {
+  color: var(--color-dark);
+}
+
+/* ==========================================================================
+   AUTH — страница входа в аккаунт (Log in)
+   ========================================================================== */
+
+.auth {
+  padding-top: calc(72px + var(--space-2xl));
+  padding-bottom: var(--space-2xl);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: var(--color-bg);
+}
+
+.auth > .container {
+  width: 100%;
+}
+
+.auth__card {
+  max-width: 640px;
+  margin-inline: auto;
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: 0px 12px 32px rgba(10, 25, 49, 0.08);
+  padding: var(--space-xl);
+  text-align: left;
+}
+
+.auth__card h1 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--space-lg);
+}
+
+.auth__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth__field {
+  position: relative;
+  margin-bottom: var(--space-md);
+}
+
+.auth__field input {
+  width: 100%;
+  padding: 15px var(--space-md);
+  border: 1px solid rgba(10, 25, 49, 0.18);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-main);
+  font-size: 15px;
+  color: var(--color-dark);
+  background: var(--color-white);
+  transition: border-color var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out);
+}
+
+.auth__field input::placeholder {
+  color: rgba(10, 25, 49, 0.35);
+}
+
+.auth__field input:focus {
+  outline: none;
+  border-color: var(--color-dark);
+  box-shadow: 0 0 0 3px rgba(10, 25, 49, 0.08);
+}
+
+.auth__field-error {
+  display: none;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--color-error);
+}
+
+.auth__field--error input {
+  border-color: var(--color-error);
+}
+
+.auth__field--error input:focus {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px rgba(209, 52, 56, 0.12);
+}
+
+.auth__field--error .auth__field-error {
+  display: block;
+}
+
+.auth__field--password input {
+  padding-right: 40px;
+}
+
+.auth__password-toggle {
+  position: absolute;
+  right: var(--space-xs);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: rgba(10, 25, 49, 0.5);
+  transition: color var(--duration-base) var(--ease-out);
+}
+
+.auth__password-toggle:hover {
+  color: var(--color-dark);
+}
+
+.auth__eye-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.auth__eye-icon--hide {
+  display: none;
+}
+
+.auth__field--password--visible .auth__eye-icon--show {
+  display: none;
+}
+
+.auth__field--password--visible .auth__eye-icon--hide {
+  display: block;
+}
+
+.auth__forgot {
+  align-self: flex-start;
+  font-size: 13px;
+  color: var(--color-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin-bottom: var(--space-lg);
+  transition: color var(--duration-base) var(--ease-out);
+}
+
+.auth__forgot:hover {
+  color: var(--color-accent);
+}
+
+.auth__error-banner {
+  display: none;
+  padding: 12px var(--space-md);
+  margin-bottom: var(--space-md);
+  border-radius: var(--radius-sm);
+  background: rgba(209, 52, 56, 0.08);
+  color: var(--color-error);
+  font-size: 13px;
+}
+
+.auth__error-banner--visible {
+  display: block;
+}
+
+.auth__success-banner {
+  display: none;
+  padding: 12px var(--space-md);
+  margin-bottom: var(--space-md);
+  border-radius: var(--radius-sm);
+  background: rgba(30, 125, 60, 0.08);
+  color: var(--color-success);
+  font-size: 13px;
+}
+
+.auth__success-banner--visible {
+  display: block;
+}
+
+.auth__submit {
+  width: 100%;
+  text-align: center;
+  padding: 15px var(--space-lg);
+  background: var(--color-dark);
+  color: var(--color-white);
+  border: 1px solid var(--color-dark);
+  transition: background var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out);
+}
+
+.auth__submit:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.auth__submit:disabled:hover {
+  background: var(--color-dark);
+  color: var(--color-white);
+}
+
+.auth__submit:hover {
+  background: transparent;
+  color: var(--color-dark);
+}
+
+.auth__beyond {
+  text-align: left;
+  font-size: 13px;
+  color: var(--color-dark);
+  margin-top: var(--space-sm);
+}
+
+.auth__beyond a {
+  color: var(--color-dark);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--duration-base) var(--ease-out);
+}
+
+.auth__beyond a:hover {
+  color: var(--color-accent);
+}
+
+.auth__divider {
+  height: 1px;
+  background: rgba(10, 25, 49, 0.1);
+  margin-block: var(--space-md);
+}
+
+.auth__join {
+  font-size: 13px;
+  color: var(--color-dark);
+  margin-bottom: var(--space-xs);
+}
+
+#registerForm .auth__join {
+  margin-top: var(--space-lg);
+}
+
+.auth__join a {
+  color: var(--color-dark);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--duration-base) var(--ease-out);
+}
+
+.auth__join a:hover {
+  color: var(--color-accent);
+}
+
+.auth__reset-link {
+  font-size: 13px;
+  color: var(--color-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--duration-base) var(--ease-out);
+}
+
+.auth__reset-link:hover {
+  color: var(--color-accent);
 }
 
 /* ==========================================================================
@@ -1489,7 +2488,7 @@ body {
 
 .footer__social {
   display: flex;
-  transition: transform 0.2s ease;
+  transition: transform var(--duration-base) var(--ease-out);
 }
 
 .footer__social:hover {
@@ -1509,6 +2508,51 @@ body {
 .footer__legal-links {
   display: flex;
   gap: var(--space-md);
+}
+
+/* ==========================================================================
+   RESPONSE — фидбек на pointer-down, а не только на release/hover
+   ========================================================================== */
+
+.btn,
+.search-card__submit,
+.destinations__toggle-btn,
+.destination-card__book,
+.passengers-panel__btn,
+.passengers-panel__class,
+.passengers-panel__done,
+.footer__social,
+.search-card__swap {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:active,
+.search-card__submit:active,
+.destinations__toggle-btn:active,
+.destination-card__book:active,
+.passengers-panel__btn:active,
+.passengers-panel__class:active,
+.passengers-panel__done:active,
+.footer__social:active,
+.search-card__swap:active,
+.auth__password-toggle:active {
+  transform: scale(0.96);
+  transition: transform var(--duration-instant) var(--ease-out);
+}
+
+/* ==========================================================================
+   REDUCED MOTION / TRANSPARENCY — фидбек остаётся, движение убираем
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* ==========================================================================

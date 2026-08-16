@@ -1,14 +1,637 @@
 // ==========================================================================
+// i18n — словари переводов EN / RU
+// ==========================================================================
+const translations = {
+  en: {
+    'nav.explore': 'Explore',
+    'nav.book': 'Book',
+    'nav.experience': 'Experience',
+    'nav.club': 'Club',
+    'header.help': 'Help',
+    'header.searchAria': 'Search',
+    'header.login': 'Login | Sign up',
+    'hero.title': 'Fly further, travel better',
+    'hero.cta': 'Start planning',
+    'tabs.bookFlight': 'Book a flight',
+    'tabs.stopover': 'Stopover / Packages',
+    'tabs.manage': 'Manage / Check-in',
+    'tabs.status': 'Flight status',
+    'tripType.return': 'Return',
+    'tripType.oneway': 'One way',
+    'tripType.multicity': 'Multi-city',
+    'field.from': 'From',
+    'field.to': 'To',
+    'field.departure': 'Departure',
+    'field.return': 'Return',
+    'field.passengersClass': 'Passangers / Class',
+    'field.passengersRoom': 'Passengers / Room',
+    'field.class': 'Class',
+    'field.swapAria': 'Swap From and To',
+    'calendar.clear': 'Clear',
+    'calendar.apply': 'Apply',
+    'calendar.selectDate': 'Select date',
+    'stopover.subtab.vienna': 'Vienna stopover',
+    'stopover.subtab.flightsHotel': 'Flights + Hotel',
+    'stopover.subtab.hotels': 'Hotels',
+    'stopover.intro': 'Explore Vienna during your journey with amazing stopover packages starting from USD 14 pp at 4-star and 5-star hotels.',
+    'stopover.whenQuestion': 'When would you like to add a stop in Vienna during your journey?',
+    'stopover.daysQuestion': 'How many days would you like to stay in Vienna?',
+    'stopover.comingSoon': 'Coming soon',
+    'stopover.rooms': 'Rooms',
+    'stopover.hotelDestination': 'Hotel destination',
+    'stopover.checkIn': 'Check-in',
+    'stopover.checkOut': 'Check-out',
+    'stopover.hotelsIntro': 'Choose from 200,000 hotels from over 500 global destinations',
+    'stopover.whereAreYouGoing': 'Where are you going?',
+    'search.searchShort': 'Search',
+    'manage.subtab.manageBooking': 'Manage booking',
+    'manage.subtab.checkIn': 'Check in',
+    'manage.bookingReference': 'Booking reference',
+    'manage.lastName': 'Last name',
+    'manage.retrieveBooking': 'Retrieve booking',
+    'manage.checkInSubmit': 'Check in',
+    'status.subtab.byRoute': 'By route',
+    'status.subtab.byFlightNumber': 'By flight number',
+    'status.flightNumberPlaceholder': 'Flight number',
+    'passengers.adults': 'Adults',
+    'passengers.adultsHint': '12+ years',
+    'passengers.children': 'Children',
+    'passengers.childrenHint': '2-11 years',
+    'passengers.done': 'Done',
+    'passengers.passenger': 'Passenger',
+    'passengers.passengers': 'Passengers',
+    'room.room': 'Room',
+    'room.rooms': 'Rooms',
+    'classOption.economy': 'Economy',
+    'classOption.business': 'Business',
+    'classOption.first': 'First class',
+    'multicity.addFlight': '+ Add a flight',
+    'multicity.removeAria': 'Remove flight',
+    'search.avios': 'Book using Avios',
+    'search.addPromo': 'Add promo code',
+    'search.promoPlaceholder': 'Enter promo code',
+    'search.promoApplied': 'Promo code applied',
+    'search.submit': 'Search flights',
+    'promoCards.exploreVienna': 'Explore Vienna',
+    'promoCards.experienceFreedom': 'Experience freedom',
+    'promoCards.bestService': 'Get the best service',
+    'promoCards.upgradeNow': 'Upgrade now',
+    'promoCards.findOutMore': 'Find out more',
+    'destinations.heading': "Places we think, you'll love",
+    'destinations.classLabel': 'Class',
+    'destinations.bookNow': 'Book now',
+    'destinations.discover': 'Discover',
+    'destinationCity.almaty': 'Almaty',
+    'destinationCity.kyiv': 'Kyiv',
+    'destinationCity.vienna': 'Vienna',
+    'destinationCity.london': 'London',
+    'destinationCity.batumi': 'Batumi',
+    'destinationCity.newyork': 'New York',
+    'destinationCity.dubai': 'Dubai',
+    'destinationCity.kopenhagen': 'Kopenhagen',
+    'featureTabs.viennaDutyFree': 'Vienna Duty Free',
+    'featureTabs.starlinkWifi': 'Starlink Wi-Fi',
+    'featureTabs.bsuite': 'Bsuite',
+    'featureTabs.heading': 'Shop. Earn. Repeat.',
+    'featureTabs.text': 'Step into Vienna Duty Free and enjoy premium shopping, fine dining, and rewards that follow you home.',
+    'featureTabs.cta': 'Start Earning',
+    'packages.heading': 'Looking for a travel package?',
+    'packages.subheading': 'Save more and earn extra miles when you book flight + hotel together',
+    'packages.stopoverAlmaty': 'Stopover in Almaty',
+    'packages.signatureCollection': 'The Signature Collection',
+    'packages.winterEscapes': 'Up to 30% off winter escapes',
+    'packages.cta': 'Explore packages',
+    'newsletter.heading': 'Never miss a deal',
+    'newsletter.text': 'Subscribe and be the first to know about exclusive fares and offers.',
+    'newsletter.emailPlaceholder': 'Email Address',
+    'newsletter.cityPlaceholder': 'Preferred departure city',
+    'newsletter.checkbox': "I'd like to receive offers and news from AeroVista. I understand the Privacy Notice and can unsubscribe anytime.",
+    'newsletter.subscribe': 'Subscribe',
+    'footer.aboutUs': 'About Us',
+    'footer.careers': 'Careers',
+    'footer.press': 'Press releases',
+    'footer.sustainability': 'Sustainability',
+    'footer.exploreCol': 'Explore',
+    'footer.destinations': 'Destinations',
+    'footer.fleet': 'Fleet',
+    'footer.loyalty': 'Loyalty programme',
+    'footer.supportCol': 'Support',
+    'footer.contact': 'Contact us',
+    'footer.faqs': 'FAQs',
+    'footer.alerts': 'Travel alerts',
+    'footer.bookingHelp': 'Booking help',
+    'footer.legalCol': 'Legal',
+    'footer.cookiePolicy': 'Cookie policy',
+    'footer.privacy': 'Privacy',
+    'footer.terms': 'Terms of use',
+    'footer.connect': "Let's stay connected",
+    'footerBottom.privacy': 'Privacy',
+    'footerBottom.legal': 'Legal',
+    'footerBottom.accessibility': 'Accessibility',
+    'footerBottom.sitemap': 'Sitemap',
+    'footerBottom.cookieConsent': 'Cookie Consent',
+    'footerBottom.copyright': 'AeroVista. All rights reserved',
+    'airport.suggestions': 'Suggestions',
+    'airport.exploreDestinations': 'Explore destinations',
+    'airport.noMatches': 'No matches',
+    'langSwitcher.code': 'EN',
+    'login.heading': 'Log in to your account',
+    'login.emailPlaceholder': 'Email address or membership number',
+    'login.passwordPlaceholder': 'Password',
+    'login.showPassword': 'Show password',
+    'login.hidePassword': 'Hide password',
+    'login.forgotPassword': 'Forgot your password?',
+    'login.submit': 'Log in',
+    'login.beyondLabel': 'Log in to',
+    'login.beyondLink': 'Beyond Business',
+    'login.notMember': 'Not yet a Privilege Club member?',
+    'login.joinNow': 'Join now',
+    'login.resetEmail': 'Reset email',
+    'login.emailRequired': 'Enter your email address or membership number',
+    'login.passwordRequired': 'Enter your password',
+    'login.invalidCredentials': 'Incorrect email/membership number or password',
+    'login.success': 'Logged in successfully',
+    'login.notConfigured': 'Sign-in isn’t connected to a backend yet. Add your Supabase project keys in supabase-config.js.',
+    'register.heading': 'Create your account',
+    'register.emailPlaceholder': 'Email address',
+    'register.passwordPlaceholder': 'Create a password',
+    'register.confirmPlaceholder': 'Confirm password',
+    'register.submit': 'Sign up',
+    'register.alreadyMember': 'Already a Privilege Club member?',
+    'register.logIn': 'Log in',
+    'register.emailRequired': 'Enter your email address',
+    'register.passwordRequired': 'Create a password (min. 6 characters)',
+    'register.confirmRequired': 'Passwords don’t match',
+    'register.notConfigured': 'Sign-up isn’t connected to a backend yet. Add your Supabase project keys in supabase-config.js.',
+    'register.emailInUse': 'An account with this email already exists',
+    'register.errorGeneric': 'Something went wrong. Please try again.',
+    'register.success': 'Account created — check your email to confirm it.',
+  },
+  ru: {
+    'nav.explore': 'Куда лететь',
+    'nav.book': 'Бронирование',
+    'nav.experience': 'Сервис',
+    'nav.club': 'Клуб',
+    'header.help': 'Помощь',
+    'header.searchAria': 'Поиск',
+    'header.login': 'Войти | Регистрация',
+    'hero.title': 'Летайте дальше, путешествуйте лучше',
+    'hero.cta': 'Начать планирование',
+    'tabs.bookFlight': 'Забронировать рейс',
+    'tabs.stopover': 'Остановка / Пакеты',
+    'tabs.manage': 'Управление / Регистрация',
+    'tabs.status': 'Статус рейса',
+    'tripType.return': 'Туда-обратно',
+    'tripType.oneway': 'В одну сторону',
+    'tripType.multicity': 'Мульти-город',
+    'field.from': 'Откуда',
+    'field.to': 'Куда',
+    'field.departure': 'Вылет',
+    'field.return': 'Обратно',
+    'field.passengersClass': 'Пассажиры / Класс',
+    'field.passengersRoom': 'Пассажиры / Номер',
+    'field.class': 'Класс',
+    'field.swapAria': 'Поменять местами Откуда и Куда',
+    'calendar.clear': 'Очистить',
+    'calendar.apply': 'Применить',
+    'calendar.selectDate': 'Выберите дату',
+    'stopover.subtab.vienna': 'Остановка в Вене',
+    'stopover.subtab.flightsHotel': 'Рейс + Отель',
+    'stopover.subtab.hotels': 'Отели',
+    'stopover.intro': 'Исследуйте Вену во время путешествия с выгодными пакетами остановки от $14 с человека в отелях 4–5 звёзд.',
+    'stopover.whenQuestion': 'Когда вы хотите добавить остановку в Вене во время поездки?',
+    'stopover.daysQuestion': 'Сколько дней вы хотите провести в Вене?',
+    'stopover.comingSoon': 'Скоро здесь появится содержимое',
+    'stopover.rooms': 'Номера',
+    'stopover.hotelDestination': 'Направление отеля',
+    'stopover.checkIn': 'Заезд',
+    'stopover.checkOut': 'Выезд',
+    'stopover.hotelsIntro': 'Выбирайте из 200 000 отелей в более чем 500 направлениях по всему миру',
+    'stopover.whereAreYouGoing': 'Куда вы направляетесь?',
+    'search.searchShort': 'Поиск',
+    'manage.subtab.manageBooking': 'Управление бронированием',
+    'manage.subtab.checkIn': 'Регистрация',
+    'manage.bookingReference': 'Номер бронирования',
+    'manage.lastName': 'Фамилия',
+    'manage.retrieveBooking': 'Найти бронирование',
+    'manage.checkInSubmit': 'Зарегистрироваться',
+    'status.subtab.byRoute': 'По маршруту',
+    'status.subtab.byFlightNumber': 'По номеру рейса',
+    'status.flightNumberPlaceholder': 'Номер рейса',
+    'passengers.adults': 'Взрослые',
+    'passengers.adultsHint': 'от 12 лет',
+    'passengers.children': 'Дети',
+    'passengers.childrenHint': '2-11 лет',
+    'passengers.done': 'Готово',
+    'passengers.passenger': 'пассажир',
+    'passengers.passengers': 'пассажиров',
+    'room.room': 'номер',
+    'room.rooms': 'номеров',
+    'classOption.economy': 'Эконом',
+    'classOption.business': 'Бизнес',
+    'classOption.first': 'Первый класс',
+    'multicity.addFlight': '+ Добавить рейс',
+    'multicity.removeAria': 'Удалить рейс',
+    'search.avios': 'Оплатить милями Avios',
+    'search.addPromo': 'Добавить промокод',
+    'search.promoPlaceholder': 'Введите промокод',
+    'search.promoApplied': 'Промокод применён',
+    'search.submit': 'Найти рейсы',
+    'promoCards.exploreVienna': 'Откройте для себя Вену',
+    'promoCards.experienceFreedom': 'Почувствуйте свободу',
+    'promoCards.bestService': 'Лучший сервис',
+    'promoCards.upgradeNow': 'Улучшить класс',
+    'promoCards.findOutMore': 'Узнать больше',
+    'destinations.heading': 'Направления, которые вам понравятся',
+    'destinations.classLabel': 'Класс',
+    'destinations.bookNow': 'Забронировать',
+    'destinations.discover': 'Подробнее',
+    'destinationCity.almaty': 'Алматы',
+    'destinationCity.kyiv': 'Киев',
+    'destinationCity.vienna': 'Вена',
+    'destinationCity.london': 'Лондон',
+    'destinationCity.batumi': 'Батуми',
+    'destinationCity.newyork': 'Нью-Йорк',
+    'destinationCity.dubai': 'Дубай',
+    'destinationCity.kopenhagen': 'Копенгаген',
+    'featureTabs.viennaDutyFree': 'Vienna Duty Free',
+    'featureTabs.starlinkWifi': 'Starlink Wi-Fi',
+    'featureTabs.bsuite': 'Bsuite',
+    'featureTabs.heading': 'Покупайте. Копите. Повторяйте.',
+    'featureTabs.text': 'Загляните в Vienna Duty Free и наслаждайтесь премиальным шопингом, изысканной едой и наградами, которые останутся с вами.',
+    'featureTabs.cta': 'Начать копить',
+    'packages.heading': 'Ищете турпакет для путешествия?',
+    'packages.subheading': 'Экономьте больше и получайте дополнительные мили, бронируя перелёт и отель вместе',
+    'packages.stopoverAlmaty': 'Остановка в Алматы',
+    'packages.signatureCollection': 'Фирменная коллекция',
+    'packages.winterEscapes': 'Скидка до 30% на зимние направления',
+    'packages.cta': 'Смотреть пакеты',
+    'newsletter.heading': 'Не пропустите выгодное предложение',
+    'newsletter.text': 'Подпишитесь, чтобы первыми узнавать об эксклюзивных тарифах и акциях.',
+    'newsletter.emailPlaceholder': 'Электронная почта',
+    'newsletter.cityPlaceholder': 'Предпочитаемый город вылета',
+    'newsletter.checkbox': 'Хочу получать предложения и новости от AeroVista. Ознакомлен(а) с Уведомлением о конфиденциальности и могу отписаться в любое время.',
+    'newsletter.subscribe': 'Подписаться',
+    'footer.aboutUs': 'О нас',
+    'footer.careers': 'Карьера',
+    'footer.press': 'Пресс-релизы',
+    'footer.sustainability': 'Устойчивое развитие',
+    'footer.exploreCol': 'Куда лететь',
+    'footer.destinations': 'Направления',
+    'footer.fleet': 'Флот',
+    'footer.loyalty': 'Программа лояльности',
+    'footer.supportCol': 'Поддержка',
+    'footer.contact': 'Связаться с нами',
+    'footer.faqs': 'Вопросы и ответы',
+    'footer.alerts': 'Уведомления о поездках',
+    'footer.bookingHelp': 'Помощь с бронированием',
+    'footer.legalCol': 'Правовая информация',
+    'footer.cookiePolicy': 'Политика cookie',
+    'footer.privacy': 'Конфиденциальность',
+    'footer.terms': 'Условия использования',
+    'footer.connect': 'Оставайтесь на связи',
+    'footerBottom.privacy': 'Конфиденциальность',
+    'footerBottom.legal': 'Правовая информация',
+    'footerBottom.accessibility': 'Доступность',
+    'footerBottom.sitemap': 'Карта сайта',
+    'footerBottom.cookieConsent': 'Настройки cookie',
+    'footerBottom.copyright': 'AeroVista. Все права защищены',
+    'airport.suggestions': 'Подсказки',
+    'airport.exploreDestinations': 'Популярные направления',
+    'airport.noMatches': 'Совпадений не найдено',
+    'langSwitcher.code': 'RU',
+    'login.heading': 'Вход в аккаунт',
+    'login.emailPlaceholder': 'Email или номер участника',
+    'login.passwordPlaceholder': 'Пароль',
+    'login.showPassword': 'Показать пароль',
+    'login.hidePassword': 'Скрыть пароль',
+    'login.forgotPassword': 'Забыли пароль?',
+    'login.submit': 'Войти',
+    'login.beyondLabel': 'Войти в',
+    'login.beyondLink': 'Beyond Business',
+    'login.notMember': 'Ещё не участник Privilege Club?',
+    'login.joinNow': 'Присоединиться',
+    'login.resetEmail': 'Отправить письмо для сброса',
+    'login.emailRequired': 'Введите email или номер участника',
+    'login.passwordRequired': 'Введите пароль',
+    'login.invalidCredentials': 'Неверный email/номер участника или пароль',
+    'login.success': 'Вход выполнен успешно',
+    'login.notConfigured': 'Вход пока не подключён к бэкенду. Впишите ключи вашего проекта Supabase в supabase-config.js.',
+    'register.heading': 'Создать аккаунт',
+    'register.emailPlaceholder': 'Email',
+    'register.passwordPlaceholder': 'Придумайте пароль',
+    'register.confirmPlaceholder': 'Повторите пароль',
+    'register.submit': 'Зарегистрироваться',
+    'register.alreadyMember': 'Уже участник Privilege Club?',
+    'register.logIn': 'Войти',
+    'register.emailRequired': 'Введите email',
+    'register.passwordRequired': 'Придумайте пароль (мин. 6 символов)',
+    'register.confirmRequired': 'Пароли не совпадают',
+    'register.notConfigured': 'Регистрация пока не подключена к бэкенду. Впишите ключи вашего проекта Supabase в supabase-config.js.',
+    'register.emailInUse': 'Аккаунт с таким email уже существует',
+    'register.errorGeneric': 'Что-то пошло не так. Попробуйте ещё раз.',
+    'register.success': 'Аккаунт создан — проверьте почту, чтобы подтвердить его.',
+  },
+};
+
+const monthNamesFull = {
+  en: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+  ru: ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'],
+};
+
+const monthNamesFullNominative = {
+  en: monthNamesFull.en,
+  ru: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+};
+
+const monthNamesAbbr = {
+  en: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+  ru: ['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'],
+};
+
+const weekdayAbbr = {
+  en: ['Mo','Tu','We','Th','Fr','Sa','Su'],
+  ru: ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'],
+};
+
+let currentLang = localStorage.getItem('aerovista-lang') || 'en';
+let updatePassengersLabelRef = null;
+let updateStopoverPassengersLabelRef = null;
+let updateStopoverClassRef = null;
+let updateFlightsHotelPassengersLabelRef = null;
+let updateFlightsHotelClassRef = null;
+let updateHotelsPassengersLabelRef = null;
+
+function t(key) {
+  return (translations[currentLang] && translations[currentLang][key]) || translations.en[key] || key;
+}
+
+function pluralizePassengers(n, lang) {
+  if (lang !== 'ru') return n === 1 ? t('passengers.passenger') : t('passengers.passengers');
+  const mod10 = n % 10;
+  const mod100 = n % 100;
+  if (mod10 === 1 && mod100 !== 11) return 'пассажир';
+  if (mod10 >= 2 && mod10 <= 4 && !(mod100 >= 12 && mod100 <= 14)) return 'пассажира';
+  return 'пассажиров';
+}
+
+function pluralizeRooms(n, lang) {
+  if (lang !== 'ru') return n === 1 ? t('room.room') : t('room.rooms');
+  const mod10 = n % 10;
+  const mod100 = n % 100;
+  if (mod10 === 1 && mod100 !== 11) return 'номер';
+  if (mod10 >= 2 && mod10 <= 4 && !(mod100 >= 12 && mod100 <= 14)) return 'номера';
+  return 'номеров';
+}
+
+function formatTriggerDate(dateObj, lang) {
+  const day = String(dateObj.getDate()).padStart(2, '0');
+  const year = dateObj.getFullYear();
+  const month = monthNamesAbbr[lang][dateObj.getMonth()];
+  return `${day} ${month} ${year}`;
+}
+
+function refreshDateTriggers() {
+  document.querySelectorAll('.search-card__date-trigger[data-date]').forEach((trigger) => {
+    const [y, m, d] = trigger.dataset.date.split('-').map(Number);
+    trigger.textContent = formatTriggerDate(new Date(y, m - 1, d), currentLang);
+  });
+}
+
+function translateDateString(str, lang) {
+  if (lang === 'en') return str;
+  return str.replace(/\b([A-Z][a-z]{2})\b/g, (m) => {
+    const idx = monthNamesAbbr.en.indexOf(m);
+    return idx > -1 ? monthNamesAbbr.ru[idx] : m;
+  });
+}
+
+function renderDestinationDates() {
+  const activeToggle = document.querySelector('.destinations__toggle-btn--active');
+  const isOneWay = activeToggle ? activeToggle.dataset.value === 'oneway' : false;
+
+  document.querySelectorAll('.destination-card__dates').forEach((dateEl) => {
+    const fullDates = dateEl.dataset.dates;
+    if (!fullDates) return;
+    const base = isOneWay ? fullDates.split('–')[0].trim() : fullDates;
+    dateEl.textContent = translateDateString(base, currentLang);
+  });
+}
+
+function applyTranslations(lang) {
+  currentLang = lang;
+  localStorage.setItem('aerovista-lang', lang);
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    el.textContent = t(el.dataset.i18n);
+  });
+
+  // Текст вкладок сменил ширину вместе с языком — сдвигаем индикатор следом
+  if (typeof updateAllTabIndicators === 'function') updateAllTabIndicators();
+  if (typeof updateAllSubtabIndicators === 'function') updateAllSubtabIndicators();
+
+  document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+    el.placeholder = t(el.dataset.i18nPlaceholder);
+  });
+
+  document.querySelectorAll('[data-i18n-aria-label]').forEach((el) => {
+    el.setAttribute('aria-label', t(el.dataset.i18nAriaLabel));
+  });
+
+  const langSwitcherText = document.getElementById('langSwitcherText');
+  if (langSwitcherText) langSwitcherText.textContent = t('langSwitcher.code');
+
+  document.querySelectorAll('.lang-switcher__option').forEach((opt) => {
+    const selected = opt.dataset.lang === lang;
+    opt.classList.toggle('lang-switcher__option--selected', selected);
+    const check = opt.querySelector('.lang-switcher__check');
+    if (check) check.textContent = selected ? '✓' : '';
+  });
+
+  ['calendarWeekdays', 'calendarWeekdays2'].forEach((id) => {
+    const weekdaysEl = document.getElementById(id);
+    if (!weekdaysEl) return;
+    weekdaysEl.querySelectorAll('span').forEach((span, i) => {
+      span.textContent = weekdayAbbr[lang][i];
+    });
+  });
+
+  if (typeof renderCalendar === 'function' && document.getElementById('calendarDays')) {
+    renderCalendar();
+  }
+
+  refreshDateTriggers();
+  renderDestinationDates();
+
+  const classDropdownTrigger = document.getElementById('classDropdownTrigger');
+  if (classDropdownTrigger) {
+    const selectedOption = document.querySelector('#classDropdownMenu .destinations__class-option--selected');
+    const classDropdownValue = document.getElementById('classDropdownValue');
+    if (selectedOption && classDropdownValue) {
+      const key = { Economy: 'classOption.economy', Business: 'classOption.business', 'First class': 'classOption.first' }[selectedOption.dataset.value];
+      if (key) classDropdownValue.textContent = t(key);
+    }
+  }
+
+  const classKeyMap = { Economy: 'classOption.economy', Business: 'classOption.business', 'First class': 'classOption.first' };
+  const currentClassValue = document.querySelector('#classDropdownMenu .destinations__class-option--selected')?.dataset.value;
+  if (currentClassValue) {
+    document.querySelectorAll('.destination-card__class').forEach((el) => {
+      el.textContent = t(classKeyMap[currentClassValue]);
+    });
+  }
+
+  if (updatePassengersLabelRef) updatePassengersLabelRef();
+  if (updateStopoverPassengersLabelRef) updateStopoverPassengersLabelRef();
+  if (updateStopoverClassRef) updateStopoverClassRef();
+  if (updateFlightsHotelPassengersLabelRef) updateFlightsHotelPassengersLabelRef();
+  if (updateFlightsHotelClassRef) updateFlightsHotelClassRef();
+  if (updateHotelsPassengersLabelRef) updateHotelsPassengersLabelRef();
+  if (updateStatusRouteDateRef) updateStatusRouteDateRef();
+  if (updateStatusFlightDateRef) updateStatusFlightDateRef();
+
+  document.querySelectorAll('.auth__password-toggle').forEach((toggleEl) => {
+    const fieldEl = toggleEl.closest('.auth__field--password');
+    if (!fieldEl) return;
+    const visible = fieldEl.classList.contains('auth__field--password--visible');
+    toggleEl.setAttribute('aria-label', t(visible ? 'login.hidePassword' : 'login.showPassword'));
+  });
+}
+
+// ==========================================================================
+// Переключатель языка (EN / RU) в header
+// ==========================================================================
+const langSwitcher = document.getElementById('langSwitcher');
+const langSwitcherTrigger = document.getElementById('langSwitcherTrigger');
+const langSwitcherMenu = document.getElementById('langSwitcherMenu');
+
+if (langSwitcher && langSwitcherTrigger && langSwitcherMenu) {
+  langSwitcherTrigger.addEventListener('click', () => {
+    const isOpen = langSwitcherMenu.classList.toggle('lang-switcher__menu--open');
+    langSwitcherTrigger.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  langSwitcherMenu.querySelectorAll('.lang-switcher__option').forEach((option) => {
+    option.addEventListener('click', () => {
+      applyTranslations(option.dataset.lang);
+      langSwitcherMenu.classList.remove('lang-switcher__menu--open');
+      langSwitcherTrigger.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!langSwitcher.contains(e.target)) {
+      langSwitcherMenu.classList.remove('lang-switcher__menu--open');
+      langSwitcherTrigger.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
+// ==========================================================================
+// Хедер — материализуется в полупрозрачную панель при скролле
+// ==========================================================================
+const header = document.querySelector('.header');
+if (header) {
+  const updateHeaderState = () => {
+    header.classList.toggle('header--scrolled', window.scrollY > 40);
+  };
+  updateHeaderState();
+  window.addEventListener('scroll', updateHeaderState, { passive: true });
+}
+
+// ==========================================================================
 // Переключение вкладок в форме поиска (Book a flight / Stopover / Manage / Status)
 // ==========================================================================
+
+// Двигает плавающий индикатор под активную вкладку (ширина + позиция).
+// Вызывается при клике, смене языка (меняется ширина текста) и ресайзе.
+function updateTabIndicator(tabsEl) {
+  const indicator = tabsEl.querySelector('.search-card__tab-indicator');
+  const active = tabsEl.querySelector('.search-card__tab--active');
+  if (!indicator || !active) return;
+  indicator.style.width = `${active.offsetWidth}px`;
+  indicator.style.transform = `translateX(${active.offsetLeft}px)`;
+}
+
 document.querySelectorAll('.search-card__tabs').forEach((tabs) => {
   tabs.addEventListener('click', (e) => {
     const btn = e.target.closest('.search-card__tab');
     if (!btn) return;
     tabs.querySelectorAll('.search-card__tab').forEach((t) => t.classList.remove('search-card__tab--active'));
     btn.classList.add('search-card__tab--active');
+    updateTabIndicator(tabs);
+
+    // Показываем панель, привязанную к вкладке (data-panel), остальные скрываем.
+    // Book a flight / Stopover / Manage / Status — независимые блоки контента.
+    const targetPanel = btn.dataset.panel;
+    if (targetPanel) {
+      document.querySelectorAll('.search-card > .search-card__panel').forEach((panel) => {
+        panel.classList.toggle('search-card__panel--active', panel.dataset.panel === targetPanel);
+      });
+    }
+
+    // Саб-вкладки (Vienna stopover / Flights + Hotel / Hotels) внутри только
+    // что показанной панели были высчитаны с шириной/позицией 0, пока их
+    // родитель был display:none — пересчитываем теперь, когда он виден.
+    updateAllSubtabIndicators();
   });
 });
+
+function updateAllTabIndicators() {
+  document.querySelectorAll('.search-card__tabs').forEach(updateTabIndicator);
+}
+
+// Первая позиция индикатора — после загрузки шрифта, чтобы ширина текста
+// (а значит и ширина вкладки) уже была посчитана верно.
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(updateAllTabIndicators);
+}
+window.addEventListener('load', updateAllTabIndicators);
+window.addEventListener('resize', updateAllTabIndicators);
+updateAllTabIndicators();
+
+// ==========================================================================
+// Саб-вкладки внутри Stopover / Packages (Vienna stopover / Flights + Hotel / Hotels)
+// ==========================================================================
+
+// Тот же плавающий индикатор, что и у верхних вкладок, только скользит под
+// подчёркиванием саб-вкладки, а не под пилюлей.
+function updateSubtabIndicator(subtabsEl) {
+  const indicator = subtabsEl.querySelector('.search-card__subtab-indicator');
+  const active = subtabsEl.querySelector('.search-card__subtab--active');
+  if (!indicator || !active) return;
+  indicator.style.width = `${active.offsetWidth}px`;
+  indicator.style.transform = `translateX(${active.offsetLeft}px)`;
+}
+
+function updateAllSubtabIndicators() {
+  document.querySelectorAll('.search-card__subtabs').forEach(updateSubtabIndicator);
+}
+
+document.querySelectorAll('.search-card__subtabs').forEach((subtabs) => {
+  subtabs.addEventListener('click', (e) => {
+    const btn = e.target.closest('.search-card__subtab');
+    if (!btn) return;
+    const target = btn.dataset.subpanel;
+
+    subtabs.querySelectorAll('.search-card__subtab').forEach((t) => t.classList.remove('search-card__subtab--active'));
+    btn.classList.add('search-card__subtab--active');
+    updateSubtabIndicator(subtabs);
+
+    const panel = subtabs.closest('.search-card__panel');
+    panel.querySelectorAll(':scope > .search-card__subpanel').forEach((sp) => {
+      sp.classList.toggle('search-card__subpanel--active', sp.dataset.subpanel === target);
+    });
+  });
+});
+
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(updateAllSubtabIndicators);
+}
+window.addEventListener('load', updateAllSubtabIndicators);
+window.addEventListener('resize', updateAllSubtabIndicators);
+updateAllSubtabIndicators();
 
 // ==========================================================================
 // Переключение вкладок Vienna Duty Free / Starlink Wi-Fi / Bsuite
@@ -36,17 +659,18 @@ if (navToggle && nav) {
 }
 
 // ==========================================================================
-// Swap From / To в форме поиска рейсов
+// Swap From / To — работает и в основной строке, и в каждой строке Multi-city
 // ==========================================================================
-const fromInput = document.getElementById('fromInput');
-const toInput = document.getElementById('toInput');
-const swapBtn = document.querySelector('.search-card__swap');
-
-if (swapBtn && fromInput && toInput) {
-  swapBtn.addEventListener('click', () => {
-    [fromInput.value, toInput.value] = [toInput.value, fromInput.value];
-  });
-}
+document.addEventListener('click', (e) => {
+  const swapBtn = e.target.closest('.search-card__swap');
+  if (!swapBtn) return;
+  const group = swapBtn.closest('.search-card__group, .multicity-leg');
+  if (!group) return;
+  const inputs = group.querySelectorAll('input[type="text"]');
+  if (inputs.length < 2) return;
+  const [from, to] = inputs;
+  [from.value, to.value] = [to.value, from.value];
+});
 
 // ==========================================================================
 // Panel Passengers / Class (в форме поиска рейсов)
@@ -59,12 +683,14 @@ const passDone = document.getElementById('passengersDone');
 if (passTrigger && passPanel && passValue) {
   let counts = { adults: 1, children: 0 };
   let selectedClass = 'First class';
+  const classKeyMap = { Economy: 'classOption.economy', Business: 'classOption.business', 'First class': 'classOption.first' };
 
   function updatePassengersLabel() {
     const total = counts.adults + counts.children;
-    const label = total === 1 ? 'Passenger' : 'Passengers';
-    passValue.textContent = `${total} ${label} / ${selectedClass}`;
+    const label = pluralizePassengers(total, currentLang);
+    passValue.textContent = `${total} ${label} / ${t(classKeyMap[selectedClass])}`;
   }
+  updatePassengersLabelRef = updatePassengersLabel;
 
   passTrigger.addEventListener('click', () => {
     passPanel.classList.toggle('passengers-panel--open');
@@ -112,6 +738,206 @@ if (passTrigger && passPanel && passValue) {
 }
 
 // ==========================================================================
+// Passengers/Room панель и Class-дропдаун — переиспользуемая пара для любых
+// полей вида "Passengers / Room" + отдельное "Class" (Stopover, Flights +
+// Hotel, и т.д.). Возвращают функцию обновления подписи для applyTranslations.
+// ==========================================================================
+function setupPassengersRoomPanel(trigger, panel, valueEl, doneBtn) {
+  if (!trigger || !panel || !valueEl) return null;
+  const counts = { adults: 1, children: 0, rooms: 1 };
+
+  function update() {
+    const total = counts.adults + counts.children;
+    const passengerLabel = pluralizePassengers(total, currentLang);
+    const roomLabel = pluralizeRooms(counts.rooms, currentLang);
+    valueEl.textContent = `${total} ${passengerLabel} / ${counts.rooms} ${roomLabel}`;
+  }
+
+  trigger.addEventListener('click', () => {
+    panel.classList.toggle('passengers-panel--open');
+  });
+
+  panel.querySelectorAll('.passengers-panel__btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.target; // 'adults' / 'children' / 'rooms'
+      const action = btn.dataset.action; // 'increase' / 'decrease'
+
+      if (action === 'increase') {
+        counts[target]++;
+      } else if (target === 'adults' && counts.adults > 1) {
+        counts.adults--; // минимум 1 взрослый
+      } else if (target === 'children' && counts.children > 0) {
+        counts.children--;
+      } else if (target === 'rooms' && counts.rooms > 1) {
+        counts.rooms--; // минимум 1 номер
+      }
+
+      const countEl = panel.querySelector(`[data-count-target="${target}"]`);
+      if (countEl) countEl.textContent = counts[target];
+      update();
+    });
+  });
+
+  if (doneBtn) {
+    doneBtn.addEventListener('click', () => {
+      panel.classList.remove('passengers-panel--open');
+    });
+  }
+
+  document.addEventListener('click', (e) => {
+    if (!trigger.contains(e.target) && !panel.contains(e.target)) {
+      panel.classList.remove('passengers-panel--open');
+    }
+  });
+
+  return update;
+}
+
+function setupClassDropdown(trigger, menu, valueEl) {
+  if (!trigger || !menu || !valueEl) return null;
+  const options = menu.querySelectorAll('.destinations__class-option');
+  const classKeyMap = { Economy: 'classOption.economy', Business: 'classOption.business', 'First class': 'classOption.first' };
+
+  function update() {
+    const selected = menu.querySelector('.destinations__class-option--selected');
+    if (selected) valueEl.textContent = t(classKeyMap[selected.dataset.value]);
+  }
+
+  trigger.addEventListener('click', () => {
+    const isOpen = menu.classList.toggle('destinations__class-menu--open');
+    trigger.setAttribute('aria-expanded', isOpen);
+  });
+
+  options.forEach((option) => {
+    option.addEventListener('click', () => {
+      const selected = option.dataset.value;
+      valueEl.textContent = t(classKeyMap[selected]);
+
+      options.forEach((o) => o.classList.remove('destinations__class-option--selected'));
+      option.classList.add('destinations__class-option--selected');
+
+      menu.classList.remove('destinations__class-menu--open');
+      trigger.setAttribute('aria-expanded', false);
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!trigger.contains(e.target) && !menu.contains(e.target)) {
+      menu.classList.remove('destinations__class-menu--open');
+      trigger.setAttribute('aria-expanded', false);
+    }
+  });
+
+  return update;
+}
+
+updateStopoverPassengersLabelRef = setupPassengersRoomPanel(
+  document.getElementById('stopoverPassengersTrigger'),
+  document.getElementById('stopoverPassengersPanel'),
+  document.getElementById('stopoverPassengersValue'),
+  document.getElementById('stopoverPassengersDone'),
+);
+updateStopoverClassRef = setupClassDropdown(
+  document.getElementById('stopoverClassTrigger'),
+  document.getElementById('stopoverClassMenu'),
+  document.getElementById('stopoverClassValue'),
+);
+
+updateFlightsHotelPassengersLabelRef = setupPassengersRoomPanel(
+  document.getElementById('flightsHotelPassengersTrigger'),
+  document.getElementById('flightsHotelPassengersPanel'),
+  document.getElementById('flightsHotelPassengersValue'),
+  document.getElementById('flightsHotelPassengersDone'),
+);
+updateFlightsHotelClassRef = setupClassDropdown(
+  document.getElementById('flightsHotelClassTrigger'),
+  document.getElementById('flightsHotelClassMenu'),
+  document.getElementById('flightsHotelClassValue'),
+);
+
+updateHotelsPassengersLabelRef = setupPassengersRoomPanel(
+  document.getElementById('hotelsPassengersTrigger'),
+  document.getElementById('hotelsPassengersPanel'),
+  document.getElementById('hotelsPassengersValue'),
+  document.getElementById('hotelsPassengersDone'),
+);
+
+// ==========================================================================
+// Flight status — дата выбирается не календарём, а простым выпадающим
+// списком: сегодня ± несколько дней (а не любая дата в году), как в макете.
+// ==========================================================================
+function formatStatusDate(dateObj, lang) {
+  return `${dateObj.getDate()} ${monthNamesFull[lang][dateObj.getMonth()]}`;
+}
+
+// Диапазон дат для выпадающего списка: 2 дня назад — 5 дней вперёд от
+// сегодняшнего (то есть неделя с небольшим запасом в обе стороны)
+function buildStatusDateRange() {
+  const today = startOfToday();
+  const dates = [];
+  for (let offset = -2; offset <= 5; offset++) {
+    const d = new Date(today);
+    d.setDate(d.getDate() + offset);
+    dates.push(d);
+  }
+  return dates;
+}
+
+function setupStatusDateDropdown(trigger, menu, valueEl) {
+  if (!trigger || !menu || !valueEl) return null;
+  let selectedDate = startOfToday();
+
+  function render() {
+    const dates = buildStatusDateRange();
+    menu.innerHTML = dates.map((d) => {
+      const selected = isSameDay(d, selectedDate);
+      return `
+        <li class="destinations__class-option${selected ? ' destinations__class-option--selected' : ''}" data-time="${d.getTime()}">
+          <span>${formatStatusDate(d, currentLang)}</span>
+        </li>
+      `;
+    }).join('');
+    valueEl.textContent = formatStatusDate(selectedDate, currentLang);
+  }
+
+  trigger.addEventListener('click', () => {
+    render();
+    const isOpen = menu.classList.toggle('destinations__class-menu--open');
+    trigger.setAttribute('aria-expanded', isOpen);
+  });
+
+  menu.addEventListener('click', (e) => {
+    const option = e.target.closest('.destinations__class-option');
+    if (!option) return;
+    selectedDate = new Date(Number(option.dataset.time));
+    render();
+    menu.classList.remove('destinations__class-menu--open');
+    trigger.setAttribute('aria-expanded', false);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!trigger.contains(e.target) && !menu.contains(e.target)) {
+      menu.classList.remove('destinations__class-menu--open');
+      trigger.setAttribute('aria-expanded', false);
+    }
+  });
+
+  render();
+  return render;
+}
+
+const updateStatusRouteDateRef = setupStatusDateDropdown(
+  document.getElementById('statusRouteDateTrigger'),
+  document.getElementById('statusRouteDateMenu'),
+  document.getElementById('statusRouteDateValue'),
+);
+const updateStatusFlightDateRef = setupStatusDateDropdown(
+  document.getElementById('statusFlightDateTrigger'),
+  document.getElementById('statusFlightDateMenu'),
+  document.getElementById('statusFlightDateValue'),
+);
+
+// ==========================================================================
 // Destinations — Return / One way (переключает даты на карточках городов)
 // ==========================================================================
 document.querySelectorAll('.destinations__toggle').forEach((toggle) => {
@@ -119,22 +945,10 @@ document.querySelectorAll('.destinations__toggle').forEach((toggle) => {
     const btn = e.target.closest('.destinations__toggle-btn');
     if (!btn) return;
 
-    toggle.querySelectorAll('.destinations__toggle-btn').forEach((t) => t.classList.remove('destinations__toggle-btn--active'));
+    toggle.querySelectorAll('.destinations__toggle-btn').forEach((b) => b.classList.remove('destinations__toggle-btn--active'));
     btn.classList.add('destinations__toggle-btn--active');
 
-    const isOneWay = btn.textContent.trim() === 'One way';
-
-    document.querySelectorAll('.destination-card__dates').forEach((dateEl) => {
-      const fullDates = dateEl.dataset.dates; // "05 Aug 2026 – 07 Aug 2026"
-      if (!fullDates) return;
-
-      if (isOneWay) {
-        const departureOnly = fullDates.split('–')[0].trim();
-        dateEl.textContent = departureOnly;
-      } else {
-        dateEl.textContent = fullDates;
-      }
-    });
+    renderDestinationDates();
   });
 });
 
@@ -165,26 +979,21 @@ if (classTrigger && classMenu && classValue) {
     classTrigger.setAttribute('aria-expanded', isOpen);
   });
 
+  const classKeyMap = { Economy: 'classOption.economy', Business: 'classOption.business', 'First class': 'classOption.first' };
+
   classOptions.forEach((option) => {
     option.addEventListener('click', () => {
       const selected = option.dataset.value; // "Economy" / "Business" / "First class"
 
       // обновляем видимый текст в dropdown
-      classValue.textContent = selected;
+      classValue.textContent = t(classKeyMap[selected]);
 
-      // обновляем чекмарки
-      classOptions.forEach((o) => {
-        o.classList.remove('destinations__class-option--selected');
-        const check = o.querySelector('.destinations__class-check');
-        if (check) check.textContent = '';
-      });
+      classOptions.forEach((o) => o.classList.remove('destinations__class-option--selected'));
       option.classList.add('destinations__class-option--selected');
-      const check = option.querySelector('.destinations__class-check');
-      if (check) check.textContent = '✓';
 
       // обновляем класс на всех карточках направлений
       document.querySelectorAll('.destination-card__class').forEach((classEl) => {
-        classEl.textContent = selected;
+        classEl.textContent = t(classKeyMap[selected]);
       });
 
       // закрываем меню
@@ -201,120 +1010,378 @@ if (classTrigger && classMenu && classValue) {
   });
 }
 
-const returnField = document.getElementById('returnField');
-const multicityFields = document.getElementById('multicityFields');
+// Переключение Return / One way / Multi-city — обобщено на любую панель
+// (Book a flight, Stopover, и будущие), а не завязано на конкретные id:
+// ищем ближайшее поле Return и блок Multi-city внутри той же панели/саб-панели.
+// Селектор ловит только "верхний" trip-type каждой панели — вложенный
+// .search-card__trip-type внутри .stopover-options__col (переиспользованный
+// класс для вопроса "когда добавить остановку") под него не попадает.
+document.querySelectorAll('.search-card__form > .search-card__trip-type, .search-card__subpanel > .search-card__trip-type').forEach((tripType) => {
+  const scope = tripType.closest('.search-card__form, .search-card__subpanel');
+  const returnFieldEl = scope.querySelector('.search-card__return-field');
+  const multicityEl = scope.querySelector('.search-card__multicity');
 
-document.querySelectorAll('input[name="trip-type"]').forEach((radio) => {
-  radio.addEventListener('change', () => {
-    const value = radio.nextElementSibling.textContent.trim(); // "Return" / "One way" / "Multi-city"
+  tripType.querySelectorAll('input[type="radio"]').forEach((radio) => {
+    radio.addEventListener('change', () => {
+      const value = radio.dataset.value; // "return" / "oneway" / "multicity"
 
-    if (value === 'One way') {
-      returnField.style.display = 'none';
-      multicityFields.classList.remove('search-card__multicity--visible');
-    } else if (value === 'Multi-city') {
-      returnField.style.display = 'none';
-      multicityFields.classList.add('search-card__multicity--visible');
-    } else {
-      // Return
-      returnField.style.display = '';
-      multicityFields.classList.remove('search-card__multicity--visible');
-    }
+      if (value === 'oneway') {
+        if (returnFieldEl) returnFieldEl.style.display = 'none';
+        if (multicityEl) multicityEl.classList.remove('search-card__multicity--visible');
+      } else if (value === 'multicity') {
+        if (returnFieldEl) returnFieldEl.style.display = 'none';
+        if (multicityEl) multicityEl.classList.add('search-card__multicity--visible');
+      } else {
+        // Return
+        if (returnFieldEl) returnFieldEl.style.display = '';
+        if (multicityEl) multicityEl.classList.remove('search-card__multicity--visible');
+      }
+    });
   });
 });
 
-// Кнопка "+ Add city" — добавляет ещё одно поле города
-document.getElementById('addCityBtn').addEventListener('click', () => {
-  const newField = document.createElement('div');
-  newField.className = 'search-field';
-  newField.innerHTML = `
-    <label>Add another city</label>
-    <input type="text" placeholder="e.g. London LHR">
+// Кнопка "+ Add a flight" — добавляет ещё одну строку рейса (From / To / Departure)
+// в тот блок .search-card__multicity, где на неё нажали (делегирование вместо id,
+// чтобы одинаково работать и в Book a flight, и в Stopover)
+document.addEventListener('click', (e) => {
+  const addBtn = e.target.closest('.search-card__add-city');
+  if (!addBtn) return;
+  const leg = document.createElement('div');
+  leg.className = 'multicity-leg';
+  leg.innerHTML = `
+    <div class="search-field search-field--floating multicity-leg__field">
+      <input type="text" class="multicity-from" placeholder=" " autocomplete="off">
+      <label data-i18n="field.from">From</label>
+      <div class="airport-suggestions"></div>
+    </div>
+
+    <button class="search-card__swap" aria-label="Swap From and To" data-i18n-aria-label="field.swapAria">
+      <svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 3.5H12M12 3.5L8.5 0M12 3.5L8.5 7M15 8.5H3M3 8.5L6.5 5M3 8.5L6.5 12" stroke="currentColor" stroke-width="1.2"/>
+      </svg>
+    </button>
+
+    <div class="search-field search-field--floating multicity-leg__field">
+      <input type="text" class="multicity-to" placeholder=" " autocomplete="off">
+      <label data-i18n="field.to">To</label>
+      <div class="airport-suggestions"></div>
+    </div>
+
+    <div class="search-field multicity-leg__date">
+      <label data-i18n="field.departure">Departure</label>
+      <button type="button" class="search-card__date-trigger"></button>
+    </div>
+
+    <button type="button" class="multicity-leg__remove" aria-label="Remove flight" data-i18n-aria-label="multicity.removeAria">×</button>
   `;
-  document.getElementById('addCityBtn').before(newField);
+  addBtn.before(leg);
+  const legDate = new Date(startOfToday());
+  legDate.setDate(legDate.getDate() + 30);
+  writeTrigger(leg.querySelector('.search-card__date-trigger'), legDate);
+  leg.querySelectorAll('.multicity-leg__field').forEach(attachAirportField);
+  leg.querySelectorAll('[data-i18n]').forEach((el) => { el.textContent = t(el.dataset.i18n); });
+  leg.querySelectorAll('[data-i18n-aria-label]').forEach((el) => { el.setAttribute('aria-label', t(el.dataset.i18nAriaLabel)); });
+  refreshDateTriggers();
 });
 
-const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+// Кнопка "×" — убирает рейс из списка Multi-city
+document.addEventListener('click', (e) => {
+  const removeBtn = e.target.closest('.multicity-leg__remove');
+  if (!removeBtn) return;
+  removeBtn.closest('.multicity-leg').remove();
+});
 
-let currentView = new Date(2026, 2, 1); // март 2026
-let activeField = null; // 'departure' или 'return'
+const todayForInit = new Date();
+let currentView = new Date(todayForInit.getFullYear(), todayForInit.getMonth(), 1); // месяц первой (левой) сетки, вторая сетка = currentView + 1
+let activeTriggerEl = null; // кнопка даты, которую редактируем в одиночном режиме (Multi-city / One way)
+let pickerMode = 'single'; // 'single' | 'range'
+let rangeStart = null; // Date | null — выбранная дата Departure в режиме диапазона
+let rangeEnd = null; // Date | null — выбранная дата Return в режиме диапазона
 
 const calendarPopup = document.getElementById('calendarPopup');
 const calendarDays = document.getElementById('calendarDays');
+const calendarDays2 = document.getElementById('calendarDays2');
 const calendarMonthLabel = document.getElementById('calendarMonthLabel');
+const calendarMonthLabel2 = document.getElementById('calendarMonthLabel2');
+const searchCard = document.querySelector('.search-card');
 const departureTrigger = document.getElementById('departureTrigger');
 const returnTrigger = document.getElementById('returnTrigger');
 
-function renderCalendar() {
-  calendarMonthLabel.textContent = `${monthNames[currentView.getMonth()]} ${currentView.getFullYear()}`;
-  calendarDays.innerHTML = '';
+// Триггер Departure/Return, к которому сейчас относится диапазон (rangeStart/rangeEnd).
+// Меняется на пару, привязанную к конкретной группе полей — Book a flight,
+// Stopover и любые будущие блоки с датами больше не завязаны на конкретные id.
+let activeDepartureTrigger = departureTrigger;
+let activeReturnTrigger = returnTrigger;
 
-  const firstDay = new Date(currentView.getFullYear(), currentView.getMonth(), 1);
-  const daysInMonth = new Date(currentView.getFullYear(), currentView.getMonth() + 1, 0).getDate();
+// Даты-заглушки в разметке быстро устаревают. Если Departure/Return уже в прошлом
+// (или отсутствуют), подставляем ближайшие разумные даты в будущем от сегодняшней.
+function ensureFutureDefaultDates(depTrigger, retTrigger) {
+  if (!depTrigger || !retTrigger) return;
+  const today = startOfToday();
+  const depDate = parseTriggerDate(depTrigger);
+
+  if (!depDate || depDate < today) {
+    const newDep = new Date(today);
+    newDep.setDate(newDep.getDate() + 30);
+    writeTrigger(depTrigger, newDep);
+    const newRet = new Date(newDep);
+    newRet.setDate(newRet.getDate() + 7);
+    writeTrigger(retTrigger, newRet);
+    return;
+  }
+
+  const retDate = parseTriggerDate(retTrigger);
+  if (!retDate || retDate < depDate) {
+    const newRet = new Date(depDate);
+    newRet.setDate(newRet.getDate() + 7);
+    writeTrigger(retTrigger, newRet);
+  }
+}
+
+ensureFutureDefaultDates(departureTrigger, returnTrigger);
+ensureFutureDefaultDates(document.getElementById('stopoverDepartureTrigger'), document.getElementById('stopoverReturnTrigger'));
+ensureFutureDefaultDates(document.getElementById('flightsHotelDepartureTrigger'), document.getElementById('flightsHotelReturnTrigger'));
+ensureFutureDefaultDates(document.getElementById('flightsHotelCheckinTrigger'), document.getElementById('flightsHotelCheckoutTrigger'));
+ensureFutureDefaultDates(document.getElementById('hotelsCheckinTrigger'), document.getElementById('hotelsCheckoutTrigger'));
+
+document.querySelectorAll('.multicity-leg__date .search-card__date-trigger').forEach((trigger) => {
+  const today = startOfToday();
+  const date = parseTriggerDate(trigger);
+  if (!date || date < today) {
+    const newDate = new Date(today);
+    newDate.setDate(newDate.getDate() + 30);
+    writeTrigger(trigger, newDate);
+  }
+});
+
+function parseTriggerDate(trigger) {
+  if (!trigger || !trigger.dataset.date) return null;
+  const [y, m, d] = trigger.dataset.date.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
+
+function isSameDay(a, b) {
+  return !!a && !!b && a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+}
+
+function startOfToday() {
+  const d = new Date();
+  d.setHours(0, 0, 0, 0);
+  return d;
+}
+
+function buildMonthGrid(monthDate, container) {
+  container.innerHTML = '';
+
+  const today = startOfToday();
+  const firstDay = new Date(monthDate.getFullYear(), monthDate.getMonth(), 1);
+  const daysInMonth = new Date(monthDate.getFullYear(), monthDate.getMonth() + 1, 0).getDate();
 
   // День недели первого числа (0=вс, переводим на пн=0)
   let startOffset = firstDay.getDay() - 1;
   if (startOffset < 0) startOffset = 6;
 
-  for (let i = 0; i < startOffset; i++) {
-    const empty = document.createElement('span');
-    empty.className = 'calendar-popup__day calendar-popup__day--empty';
-    calendarDays.appendChild(empty);
-  }
+  const cells = [];
+  for (let i = 0; i < startOffset; i++) cells.push(null);
+  for (let day = 1; day <= daysInMonth; day++) cells.push(new Date(monthDate.getFullYear(), monthDate.getMonth(), day));
+  while (cells.length % 7 !== 0) cells.push(null);
 
-  for (let day = 1; day <= daysInMonth; day++) {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'calendar-popup__day';
-    btn.textContent = day;
-    btn.addEventListener('click', () => selectDate(day));
-    calendarDays.appendChild(btn);
+  for (let w = 0; w < cells.length; w += 7) {
+    const week = cells.slice(w, w + 7);
+    const weekEl = document.createElement('div');
+    weekEl.className = 'calendar-popup__week';
+
+    week.forEach((date) => {
+      if (!date) {
+        const empty = document.createElement('span');
+        empty.className = 'calendar-popup__day calendar-popup__day--empty';
+        weekEl.appendChild(empty);
+        return;
+      }
+
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'calendar-popup__day';
+      btn.textContent = date.getDate();
+
+      const isPast = date < today;
+      const isStart = pickerMode === 'range' && rangeStart && isSameDay(date, rangeStart);
+      const isEnd = pickerMode === 'range' && rangeEnd && isSameDay(date, rangeEnd);
+      const isMiddle = pickerMode === 'range' && rangeStart && rangeEnd && date > rangeStart && date < rangeEnd;
+      const isSingleSelected = pickerMode === 'single' && activeTriggerEl && isSameDay(date, parseTriggerDate(activeTriggerEl));
+
+      if (isPast) {
+        btn.disabled = true;
+        btn.className += ' calendar-popup__day--disabled';
+      } else if ((isStart && isEnd) || isSingleSelected) {
+        // Начало и конец диапазона совпадают (или одиночный режим) — обычный сплошной кружок
+        btn.className += ' calendar-popup__day--selected';
+      } else if (isStart) {
+        btn.className += ' calendar-popup__day--range-start';
+      } else if (isEnd) {
+        btn.className += ' calendar-popup__day--range-end';
+      } else if (isMiddle) {
+        btn.className += ' calendar-popup__day--range-middle';
+      }
+
+      if (!isPast) btn.addEventListener('click', (e) => {
+        // Клик перерисовывает календарь и отсоединяет эту кнопку от DOM,
+        // поэтому глобальный "клик вне поповера" не должен увидеть это всплытие
+        e.stopPropagation();
+        selectDate(date);
+      });
+      weekEl.appendChild(btn);
+    });
+
+    container.appendChild(weekEl);
   }
 }
 
-function selectDate(day) {
-  const formatted = `${String(day).padStart(2, '0')} ${monthNames[currentView.getMonth()].slice(0,3)} ${currentView.getFullYear()}`;
+function renderCalendar() {
+  const nextMonthView = new Date(currentView.getFullYear(), currentView.getMonth() + 1, 1);
 
-  if (activeField === 'departure') {
-    departureTrigger.textContent = formatted;
-  } else if (activeField === 'return') {
-    returnTrigger.textContent = formatted;
+  calendarMonthLabel.textContent = `${monthNamesFullNominative[currentLang][currentView.getMonth()]} ${currentView.getFullYear()}`;
+  calendarMonthLabel2.textContent = `${monthNamesFullNominative[currentLang][nextMonthView.getMonth()]} ${nextMonthView.getFullYear()}`;
+
+  buildMonthGrid(currentView, calendarDays);
+  buildMonthGrid(nextMonthView, calendarDays2);
+
+  calendarPopup.classList.toggle('calendar-popup--range', pickerMode === 'range');
+}
+
+function toISODate(dateObj) {
+  return `${dateObj.getFullYear()}-${String(dateObj.getMonth() + 1).padStart(2, '0')}-${String(dateObj.getDate()).padStart(2, '0')}`;
+}
+
+function writeTrigger(trigger, dateObj) {
+  trigger.dataset.date = toISODate(dateObj);
+  trigger.textContent = formatTriggerDate(dateObj, currentLang);
+}
+
+function selectDate(dateObj) {
+  if (pickerMode === 'single') {
+    if (activeTriggerEl) writeTrigger(activeTriggerEl, dateObj);
+    calendarPopup.classList.remove('calendar-popup--open');
+    return;
   }
 
-  calendarPopup.classList.remove('calendar-popup--open');
+  // Режим диапазона (Departure + Return, кто бы ими ни были в данный момент)
+  if (!rangeStart || (rangeStart && rangeEnd)) {
+    rangeStart = dateObj;
+    rangeEnd = null;
+  } else if (dateObj < rangeStart) {
+    rangeStart = dateObj;
+    rangeEnd = null;
+  } else {
+    rangeEnd = dateObj;
+  }
+
+  if (rangeStart) writeTrigger(activeDepartureTrigger, rangeStart);
+  if (rangeEnd) writeTrigger(activeReturnTrigger, rangeEnd);
+
+  renderCalendar();
+}
+
+// Ищет вторую кнопку даты в той же группе полей (.search-card__group), чтобы понять,
+// что перед нами пара Departure+Return, а не одиночная дата (Multi-city, One way).
+// Так один и тот же календарь одинаково работает и в Book a flight, и в Stopover,
+// и в любом будущем блоке с такой же разметкой — без привязки к конкретным id.
+function findDateTriggerPair(triggerEl) {
+  const group = triggerEl.closest('.search-card__group');
+  if (!group) return null;
+
+  const triggers = Array.from(group.querySelectorAll('.search-card__date-trigger')).filter((t) => {
+    const field = t.closest('.search-field');
+    return field && field.offsetParent !== null; // пропускаем скрытые (Return при One way)
+  });
+
+  if (triggers.length !== 2) return null;
+  return triggers; // [Departure, Return] — в порядке появления в разметке
 }
 
 function openCalendar(triggerEl) {
-  activeField = triggerEl === departureTrigger ? 'departure' : 'return';
+  const pair = findDateTriggerPair(triggerEl);
+  pickerMode = pair ? 'range' : 'single';
 
-  const fieldsContainer = document.querySelector('.search-card__fields');
-  const fieldsRect = fieldsContainer.getBoundingClientRect();
-  const triggerRect = triggerEl.getBoundingClientRect();
+  if (pickerMode === 'range') {
+    [activeDepartureTrigger, activeReturnTrigger] = pair;
+    rangeStart = parseTriggerDate(activeDepartureTrigger);
+    rangeEnd = parseTriggerDate(activeReturnTrigger);
+    activeTriggerEl = null;
+    currentView = rangeStart ? new Date(rangeStart.getFullYear(), rangeStart.getMonth(), 1) : new Date();
+  } else {
+    activeTriggerEl = triggerEl;
+    const d = parseTriggerDate(triggerEl) || new Date();
+    currentView = new Date(d.getFullYear(), d.getMonth(), 1);
+  }
 
-  const leftOffset = triggerRect.left - fieldsRect.left;
+  const cardRect = searchCard.getBoundingClientRect();
+  // В режиме диапазона встаём под группу Departure/Return целиком, иначе — под саму кнопку-триггер
+  const anchorEl = pickerMode === 'range' ? triggerEl.closest('.search-card__group') : triggerEl;
+  const anchorRect = anchorEl.getBoundingClientRect();
+
+  calendarPopup.classList.add('calendar-popup--open');
+  renderCalendar();
+
+  // Центрируем поповер под якорем (а не просто прижимаем к его левому краю),
+  // чтобы он визуально оказался прямо под полем, а не уезжал вправо.
+  // Не даём ему вылезти за пределы карточки поиска.
+  const popupWidth = calendarPopup.offsetWidth;
+  let leftOffset = anchorRect.left - cardRect.left + anchorRect.width / 2 - popupWidth / 2;
+  leftOffset = Math.max(0, Math.min(leftOffset, cardRect.width - popupWidth));
   calendarPopup.style.left = `${leftOffset}px`;
 
-  calendarPopup.classList.toggle('calendar-popup--open');
-  renderCalendar();
+  // Вертикально ставим прямо под якорем, а не под всей карточкой (top: 100%
+  // из CSS относится к высоте всей .search-card — раз календарь общий на всю
+  // карточку, а не вложен в конкретную панель, это уводило его далеко вниз
+  // на панелях, где поля дат стоят не в самом низу, например в Stopover)
+  const topOffset = anchorRect.bottom - cardRect.top + 12;
+  calendarPopup.style.top = `${topOffset}px`;
 }
 
-departureTrigger.addEventListener('click', () => openCalendar(departureTrigger));
-returnTrigger.addEventListener('click', () => openCalendar(returnTrigger));
+// Делегирование клика — открывает календарь для любой кнопки даты
+// (Departure / Return открывают диапазон, каждый рейс Multi-city — одиночный выбор)
+if (calendarPopup) {
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest('.search-card__date-trigger');
+    if (trigger) {
+      openCalendar(trigger);
+      return;
+    }
+    if (!calendarPopup.contains(e.target)) {
+      calendarPopup.classList.remove('calendar-popup--open');
+    }
+  });
 
-document.getElementById('calendarPrev').addEventListener('click', () => {
-  currentView.setMonth(currentView.getMonth() - 1);
-  renderCalendar();
-});
+  document.getElementById('calendarPrev').addEventListener('click', () => {
+    currentView.setMonth(currentView.getMonth() - 1);
+    renderCalendar();
+  });
 
-document.getElementById('calendarNext').addEventListener('click', () => {
-  currentView.setMonth(currentView.getMonth() + 1);
-  renderCalendar();
-});
+  document.getElementById('calendarNext').addEventListener('click', () => {
+    currentView.setMonth(currentView.getMonth() + 1);
+    renderCalendar();
+  });
 
-document.addEventListener('click', (e) => {
-  if (!calendarPopup.contains(e.target) && e.target !== departureTrigger && e.target !== returnTrigger) {
+  document.getElementById('calendarApply').addEventListener('click', () => {
     calendarPopup.classList.remove('calendar-popup--open');
-  }
-});
+  });
+
+  document.getElementById('calendarClear').addEventListener('click', () => {
+    if (pickerMode === 'range') {
+      rangeStart = null;
+      rangeEnd = null;
+      departureTrigger.textContent = t('calendar.selectDate');
+      delete departureTrigger.dataset.date;
+      returnTrigger.textContent = t('calendar.selectDate');
+      delete returnTrigger.dataset.date;
+    } else if (activeTriggerEl) {
+      activeTriggerEl.textContent = t('calendar.selectDate');
+      delete activeTriggerEl.dataset.date;
+    }
+    renderCalendar();
+  });
+}
 
 const promoToggle = document.getElementById('promoToggle');
 const promoInput = document.getElementById('promoInput');
@@ -367,8 +1434,8 @@ async function loadAirports() {
 loadAirports();
 
 const planeIcon = `
-  <svg class="airport-suggestion__icon" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12.5799 4.40039C12.4661 4.40039 12.0847 4.40314 11.9773 4.40864L9.80427 4.4554C9.79298 4.45597 9.78171 4.45395 9.77172 4.44958C9.76174 4.44522 9.75342 4.43866 9.74769 4.43065L5.4091 0.0979087C5.38278 0.0692945 5.34921 0.045719 5.31071 0.0288137C5.2722 0.0119083 5.22969 0.002077 5.18611 0H4.28578L6.72996 4.4279C6.73579 4.43803 6.73831 4.44924 6.73727 4.46042C6.73623 4.47159 6.73168 4.48236 6.72404 4.49165C6.71641 4.50094 6.70597 4.50845 6.69374 4.51342C6.68151 4.5184 6.66791 4.52067 6.65429 4.52003L2.57987 4.56953C2.53747 4.57059 2.49537 4.56342 2.45697 4.5486C2.41858 4.53379 2.38497 4.51175 2.35889 4.48427L1.12006 3.24666C1.01961 3.13941 0.831443 3.08165 0.667716 3.08165H0.0362466C-0.00694516 3.08165 -0.000583587 3.11493 0.0111351 3.14848L0.675417 5.11271C0.72563 5.2179 0.72563 5.33479 0.675417 5.43998L0.0104654 7.39816C-0.00928891 7.45179 -0.00694516 7.48067 0.0697285 7.48067H0.669725C0.942268 7.48067 0.979433 7.45151 1.11872 7.3074L2.38099 6.05054C2.4073 6.02327 2.44095 6.00139 2.47929 5.9866C2.51763 5.9718 2.55962 5.96451 2.60197 5.96528L6.64257 6.03954C6.65728 6.03981 6.67169 6.04303 6.68454 6.04892C6.69739 6.05481 6.7083 6.06318 6.71632 6.07332C6.72434 6.08345 6.72922 6.09505 6.73055 6.10708C6.73187 6.11912 6.7296 6.13124 6.72393 6.1424L4.28578 10.5609H5.17773C5.22123 10.5589 5.26367 10.5491 5.30211 10.5322C5.34055 10.5153 5.37408 10.4918 5.40039 10.4633L9.74802 6.13305C9.76108 6.11655 9.81498 6.10829 9.83809 6.10829L11.9776 6.15505C12.0881 6.16055 12.4661 6.1633 12.5803 6.1633C14.0625 6.1633 15 5.82859 15 5.28047C15 4.73235 14.0665 4.40039 12.5799 4.40039Z" fill="currentColor"/>
+  <svg class="airport-suggestion__icon" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.0959 7.5C14.9593 7.5 14.5017 7.50469 14.3727 7.51406L11.7651 7.59375C11.7516 7.59472 11.7381 7.59129 11.7261 7.58384C11.7141 7.5764 11.7041 7.56522 11.6972 7.55156L6.49091 0.166875C6.45934 0.118105 6.41905 0.0779232 6.37285 0.0491098C6.32665 0.0202965 6.27563 0.00354003 6.22333 0H5.14293L8.07595 7.54688C8.08295 7.56415 8.08597 7.58325 8.08473 7.6023C8.08348 7.62135 8.07801 7.6397 8.06885 7.65554C8.05969 7.67138 8.04716 7.68417 8.03249 7.69265C8.01781 7.70113 8.0015 7.70501 7.98515 7.70391L3.09584 7.78828C3.04497 7.79008 2.99444 7.77786 2.94837 7.75261C2.90229 7.72736 2.86197 7.6898 2.83067 7.64297L1.34407 5.53359C1.22353 5.35078 0.997731 5.25234 0.801259 5.25234H0.0434959C-0.00833419 5.25234 -0.000700304 5.30906 0.0133621 5.36625L0.8105 8.71406C0.870756 8.89336 0.870756 9.09258 0.8105 9.27187L0.0125585 12.6094C-0.0111467 12.7008 -0.0083342 12.75 0.0836742 12.75H0.80367C1.13072 12.75 1.17532 12.7003 1.34246 12.4547L2.85719 10.3125C2.88876 10.266 2.92914 10.2287 2.97515 10.2035C3.02116 10.1783 3.07154 10.1659 3.12236 10.1672L7.97108 10.2938C7.98874 10.2942 8.00603 10.2997 8.02145 10.3097C8.03687 10.3198 8.04996 10.334 8.05959 10.3513C8.06921 10.3686 8.07507 10.3884 8.07666 10.4089C8.07825 10.4294 8.07553 10.4501 8.06872 10.4691L5.14293 18H6.21328C6.26548 17.9965 6.3164 17.9797 6.36253 17.951C6.40866 17.9223 6.44889 17.8822 6.48047 17.8336L11.6976 10.4531C11.7133 10.425 11.778 10.4109 11.8057 10.4109L14.3731 10.4906C14.5057 10.5 14.9593 10.5047 15.0963 10.5047C16.875 10.5047 18 9.93422 18 9C18 8.06578 16.8798 7.5 15.0959 7.5Z" fill="currentColor"/>
   </svg>
 `;
 
@@ -377,9 +1444,7 @@ function getRandomAirports(count) {
   return shuffled.slice(0, count);
 }
 
-function setupAirportAutocomplete(inputId, suggestionsId) {
-  const input = document.getElementById(inputId);
-  const suggestionsBox = document.getElementById(suggestionsId);
+function setupAirportAutocomplete(input, suggestionsBox) {
   if (!input || !suggestionsBox) return;
 
   const popularCodes = ['ALA', 'VIE', 'KBP', 'LHR', 'BUS', 'JFK', 'DXB', 'CPH'];
@@ -397,12 +1462,12 @@ function setupAirportAutocomplete(inputId, suggestionsId) {
     }
 
     if (filtered.length === 0) {
-      suggestionsBox.innerHTML = '<div class="airport-suggestions__group-label">No matches</div>';
+      suggestionsBox.innerHTML = `<div class="airport-suggestions__group-label">${t('airport.noMatches')}</div>`;
       return;
     }
 
     suggestionsBox.innerHTML = `
-      <div class="airport-suggestions__group-label">${query ? 'Suggestions' : 'Explore destinations'}</div>
+      <div class="airport-suggestions__group-label">${query ? t('airport.suggestions') : t('airport.exploreDestinations')}</div>
       ${filtered.map(a => `
         <div class="airport-suggestion" data-city="${a.city}" data-code="${a.iata}">
           ${planeIcon}
@@ -441,6 +1506,217 @@ function setupAirportAutocomplete(inputId, suggestionsId) {
   });
 }
 
-setupAirportAutocomplete('fromInput', 'fromSuggestions');
-setupAirportAutocomplete('toInput', 'toSuggestions');
+function attachAirportField(fieldEl) {
+  const input = fieldEl.querySelector('input');
+  if (!input) return;
+  // Переиспользуем уже существующий div подсказок, если он есть в разметке —
+  // вставка нового между input и label сломала бы селектор `input + label`,
+  // на котором держится всплытие лейбла (floating label).
+  let suggestionsBox = fieldEl.querySelector('.airport-suggestions');
+  if (!suggestionsBox) {
+    suggestionsBox = document.createElement('div');
+    suggestionsBox.className = 'airport-suggestions';
+    input.insertAdjacentElement('afterend', suggestionsBox);
+  }
+  setupAirportAutocomplete(input, suggestionsBox);
+}
+
+setupAirportAutocomplete(document.getElementById('fromInput'), document.getElementById('fromSuggestions'));
+setupAirportAutocomplete(document.getElementById('toInput'), document.getElementById('toSuggestions'));
+
+document.querySelectorAll('.search-card__multicity .search-field').forEach(attachAirportField);
+
+setupAirportAutocomplete(document.getElementById('stopoverFromInput'), document.getElementById('stopoverFromSuggestions'));
+setupAirportAutocomplete(document.getElementById('stopoverToInput'), document.getElementById('stopoverToSuggestions'));
+
+setupAirportAutocomplete(document.getElementById('flightsHotelFromInput'), document.getElementById('flightsHotelFromSuggestions'));
+setupAirportAutocomplete(document.getElementById('flightsHotelToInput'), document.getElementById('flightsHotelToSuggestions'));
+setupAirportAutocomplete(document.getElementById('flightsHotelDestinationInput'), document.getElementById('flightsHotelDestinationSuggestions'));
+
+setupAirportAutocomplete(document.getElementById('hotelsDestinationInput'), document.getElementById('hotelsDestinationSuggestions'));
+
+setupAirportAutocomplete(document.getElementById('statusFromInput'), document.getElementById('statusFromSuggestions'));
+setupAirportAutocomplete(document.getElementById('statusToInput'), document.getElementById('statusToSuggestions'));
+// statusFlightNumberInput — намеренно без автокомплита, это номер рейса, а не город
+
+// ==========================================================================
+// Stopover / Packages > Vienna stopover — счётчик "Сколько дней остаться" (мин. 1)
+// ==========================================================================
+const stopoverDaysEl = document.getElementById('stopoverDays');
+if (stopoverDaysEl) {
+  document.querySelectorAll('.stopover-stepper__btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      let value = parseInt(stopoverDaysEl.textContent, 10) || 1;
+      value = btn.dataset.action === 'increase' ? value + 1 : Math.max(1, value - 1);
+      stopoverDaysEl.textContent = value;
+    });
+  });
+}
+
+// ==========================================================================
+// Destinations — автокомплит города в поле "From". Та же база аэропортов и
+// тот же компонент, что и в форме поиска: пустое поле показывает случайную
+// подборку городов ("Explore destinations"), ввод — совпадения по названию
+// города. Карточки направлений ниже не трогаем — их 8, все статичные,
+// с реальными фото под каждую.
+// ==========================================================================
+const destFromInput = document.getElementById('destFromInput');
+const destFromSuggestions = document.getElementById('destFromSuggestions');
+setupAirportAutocomplete(destFromInput, destFromSuggestions);
+
+// ==========================================================================
+// Страницы входа/регистрации — общие хелперы (показать/скрыть пароль, поля с ошибкой, баннеры)
+// ==========================================================================
+function wirePasswordToggle(toggleId, fieldId, inputId) {
+  const toggle = document.getElementById(toggleId);
+  const field = document.getElementById(fieldId);
+  const input = document.getElementById(inputId);
+  if (!toggle || !field || !input) return;
+
+  toggle.addEventListener('click', () => {
+    const visible = field.classList.toggle('auth__field--password--visible');
+    input.type = visible ? 'text' : 'password';
+    toggle.setAttribute('aria-label', t(visible ? 'login.hidePassword' : 'login.showPassword'));
+  });
+}
+
+wirePasswordToggle('passwordToggle', 'passwordField', 'loginPassword');
+wirePasswordToggle('registerPasswordToggle', 'registerPasswordField', 'registerPassword');
+wirePasswordToggle('registerConfirmToggle', 'registerConfirmField', 'registerConfirm');
+
+function setFieldError(fieldEl, hasError) {
+  fieldEl.classList.toggle('auth__field--error', hasError);
+}
+
+function showBanner(bannerEl, message, modifierClass) {
+  if (!bannerEl) return;
+  bannerEl.textContent = message;
+  bannerEl.classList.add(modifierClass);
+}
+
+function hideBanner(bannerEl, modifierClass) {
+  if (!bannerEl) return;
+  bannerEl.classList.remove(modifierClass);
+}
+
+const supabaseClient = (window.supabase && window.SUPABASE_URL && window.SUPABASE_URL !== 'YOUR_SUPABASE_PROJECT_URL')
+  ? window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY)
+  : null;
+
+// ==========================================================================
+// Страница входа — отправка формы
+// ==========================================================================
+const loginForm = document.getElementById('loginForm');
+const loginEmail = document.getElementById('loginEmail');
+const loginPassword = document.getElementById('loginPassword');
+const passwordField = document.getElementById('passwordField');
+const loginSubmit = document.getElementById('loginSubmit');
+const authErrorBanner = document.getElementById('authErrorBanner');
+
+if (loginForm && loginEmail && loginPassword) {
+  const emailField = loginEmail.closest('.auth__field');
+
+  loginEmail.addEventListener('input', () => { setFieldError(emailField, false); hideBanner(authErrorBanner, 'auth__error-banner--visible'); });
+  loginPassword.addEventListener('input', () => { setFieldError(passwordField, false); hideBanner(authErrorBanner, 'auth__error-banner--visible'); });
+
+  loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    hideBanner(authErrorBanner, 'auth__error-banner--visible');
+
+    const emailEmpty = loginEmail.value.trim() === '';
+    const passwordEmpty = loginPassword.value.trim() === '';
+    setFieldError(emailField, emailEmpty);
+    setFieldError(passwordField, passwordEmpty);
+    if (emailEmpty || passwordEmpty) {
+      (emailEmpty ? loginEmail : loginPassword).focus();
+      return;
+    }
+
+    if (!supabaseClient) {
+      showBanner(authErrorBanner, t('login.notConfigured'), 'auth__error-banner--visible');
+      return;
+    }
+
+    loginSubmit.disabled = true;
+    const { error } = await supabaseClient.auth.signInWithPassword({
+      email: loginEmail.value.trim(),
+      password: loginPassword.value,
+    });
+    loginSubmit.disabled = false;
+
+    if (error) {
+      showBanner(authErrorBanner, t('login.invalidCredentials'), 'auth__error-banner--visible');
+      return;
+    }
+
+    window.location.href = 'index.html';
+  });
+}
+
+// ==========================================================================
+// Страница регистрации — отправка формы
+// ==========================================================================
+const registerForm = document.getElementById('registerForm');
+const registerEmail = document.getElementById('registerEmail');
+const registerPassword = document.getElementById('registerPassword');
+const registerConfirm = document.getElementById('registerConfirm');
+const registerPasswordField = document.getElementById('registerPasswordField');
+const registerConfirmField = document.getElementById('registerConfirmField');
+const registerSubmit = document.getElementById('registerSubmit');
+const registerErrorBanner = document.getElementById('registerErrorBanner');
+const registerSuccessBanner = document.getElementById('registerSuccessBanner');
+
+if (registerForm && registerEmail && registerPassword && registerConfirm) {
+  const registerEmailField = registerEmail.closest('.auth__field');
+  const clearRegisterFeedback = () => {
+    hideBanner(registerErrorBanner, 'auth__error-banner--visible');
+    hideBanner(registerSuccessBanner, 'auth__success-banner--visible');
+  };
+
+  registerEmail.addEventListener('input', () => { setFieldError(registerEmailField, false); clearRegisterFeedback(); });
+  registerPassword.addEventListener('input', () => { setFieldError(registerPasswordField, false); setFieldError(registerConfirmField, false); clearRegisterFeedback(); });
+  registerConfirm.addEventListener('input', () => { setFieldError(registerConfirmField, false); clearRegisterFeedback(); });
+
+  registerForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    clearRegisterFeedback();
+
+    const emailEmpty = registerEmail.value.trim() === '';
+    const passwordTooShort = registerPassword.value.length < 6;
+    const confirmMismatch = registerConfirm.value !== registerPassword.value || registerConfirm.value === '';
+    setFieldError(registerEmailField, emailEmpty);
+    setFieldError(registerPasswordField, passwordTooShort);
+    setFieldError(registerConfirmField, confirmMismatch);
+    if (emailEmpty || passwordTooShort || confirmMismatch) {
+      (emailEmpty ? registerEmail : passwordTooShort ? registerPassword : registerConfirm).focus();
+      return;
+    }
+
+    if (!supabaseClient) {
+      showBanner(registerErrorBanner, t('register.notConfigured'), 'auth__error-banner--visible');
+      return;
+    }
+
+    registerSubmit.disabled = true;
+    const { error } = await supabaseClient.auth.signUp({
+      email: registerEmail.value.trim(),
+      password: registerPassword.value,
+    });
+    registerSubmit.disabled = false;
+
+    if (error) {
+      const key = error.message && error.message.toLowerCase().includes('already registered') ? 'register.emailInUse' : 'register.errorGeneric';
+      showBanner(registerErrorBanner, t(key), 'auth__error-banner--visible');
+      return;
+    }
+
+    registerForm.reset();
+    showBanner(registerSuccessBanner, t('register.success'), 'auth__success-banner--visible');
+  });
+}
+
+// ==========================================================================
+// Первичное применение перевода при загрузке страницы (язык из localStorage)
+// ==========================================================================
+applyTranslations(currentLang);
 
