@@ -2638,14 +2638,17 @@ button.search-card__static-value {
   .hero {
     min-height: auto;
     padding-top: 100px;
+    padding-bottom: 90px;
   }
 
   .hero__title {
     font-size: 34px;
   }
 
+  /* Меньше "наезда" карточки поиска на heroсекцию, чем на десктопе —
+     иначе верхние вкладки перекрывают кнопку "Start planning" */
   .search-card {
-    margin-top: -80px;
+    margin-top: -36px;
     border-radius: 20px;
   }
 
@@ -2786,10 +2789,78 @@ button.search-card__static-value {
     width: 100%;
   }
 
-  /* Календарь — один месяц вместо двух, иначе не влезает по ширине */
+  /* Нижний ряд формы (Avios / промокод / Search flights) — в столбец,
+     иначе подписи переносятся на несколько строк и выглядят криво */
+  .search-card__footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-sm);
+  }
+
+  .search-card__checkbox,
+  .search-card__promo {
+    white-space: nowrap;
+  }
+
+  .search-card__promo {
+    margin-left: 0;
+    margin-top: 0;
+    bottom: 0;
+  }
+
+  .search-card__promo-success {
+    margin-left: 0;
+  }
+
+  .search-card__promo-input {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .search-card__submit {
+    width: 100%;
+  }
+
+  /* Календарь — один месяц вместо двух, иначе не влезает по ширине;
+     плюс сжимаем внутренние отступы, иначе дни схлопываются друг в друга */
   .calendar-popup {
-    width: calc(100vw - 48px);
-    max-width: 320px;
+    width: calc(100vw - 32px);
+    max-width: 360px;
+    padding: var(--space-md) var(--space-sm) var(--space-md);
+  }
+
+  .calendar-popup__body {
+    gap: var(--space-sm);
+  }
+
+  .calendar-popup__nav {
+    padding: 4px;
+    font-size: 18px;
+  }
+
+  /* Vienna Duty Free баннер — гигантский десктопный заголовок/паддинги
+     иначе вылезают за пределы карточки и наезжают на вкладки над ней */
+  .feature-tabs__content {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .feature-tabs__content h2 {
+    font-size: 28px;
+  }
+
+  :lang(ru) .feature-tabs__content h2 {
+    font-size: 24px;
+  }
+
+  .feature-tabs__content p {
+    font-size: 15px;
+    margin-bottom: var(--space-md);
+  }
+
+  .feature-tabs__content .btn--outline {
+    margin-left: 0;
+    padding: 12px 28px;
+    font-size: 14px;
   }
 
   .calendar-popup__month:last-of-type {
