@@ -751,12 +751,14 @@ if (searchButton && siteSearch && siteSearchForm && siteSearchInput) {
 
   const openSiteSearch = () => {
     siteSearch.classList.add('site-search--open');
+    if (header) header.classList.add('header--search-open');
     siteSearchInput.focus();
   };
 
   const closeSiteSearch = () => {
     siteSearch.classList.remove('site-search--open');
     siteSearchError.classList.remove('site-search__error--visible');
+    if (header) header.classList.remove('header--search-open');
   };
 
   const goToSiteSearchRoute = (route) => {

@@ -95,12 +95,23 @@ body {
 .header--scrolled .help-text,
 .header--scrolled .search-button,
 .header--scrolled .lang-switcher__trigger,
-.header--scrolled .login-button {
+.header--scrolled .login-button,
+.header--search-open .help-text,
+.header--search-open .search-button,
+.header--search-open .lang-switcher__trigger,
+.header--search-open .login-button {
   color: var(--color-dark);
 }
 
-.header--scrolled .nav-toggle span {
+.header--scrolled .nav-toggle span,
+.header--search-open .nav-toggle span {
   background: var(--color-dark);
+}
+
+.header--search-open {
+  background: var(--color-white);
+  color: var(--color-dark);
+  box-shadow: 0 1px 0 rgba(10, 25, 49, 0.06);
 }
 
 @media (prefers-reduced-transparency: reduce) {
