@@ -1868,9 +1868,9 @@ button.search-card__static-value {
 
 .feature-tabs__banner {
   position: relative;
-  min-height: 400px;
-  height: 38vw;
-  max-height: 544px;
+  min-height: 320px;
+  height: 30vw;
+  max-height: 440px;
   background-color: #333;
   background-size: cover;
   background-position: center;
