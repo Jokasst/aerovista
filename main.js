@@ -191,6 +191,30 @@ const translations = {
     'search.pillNewsletter': 'Newsletter',
     'search.notFound': 'We couldn’t find that. Try “Destinations” or “Packages”.',
     'search.closeAria': 'Close search',
+    'clubMenu.closeAria': 'Close menu',
+    'clubMenu.discoverHeading': 'Discover',
+    'clubMenu.discoverAbout': 'About Privilege Club',
+    'clubMenu.discoverTiers': 'Member tiers & benefits',
+    'clubMenu.discoverDutyFree': 'Rewards at AeroVista Duty Free',
+    'clubMenu.discoverFamily': 'Family & Friends',
+    'clubMenu.discoverStudent': 'Student Club',
+    'clubMenu.collectHeading': 'Collect',
+    'clubMenu.collectEarn': 'Earn Miles',
+    'clubMenu.collectClaim': 'Claim missing Miles',
+    'clubMenu.collectBuyBoost': 'Buy or boost Miles',
+    'clubMenu.collectBuyPoints': 'Buy Points',
+    'clubMenu.collectPro': 'Privilege Club Pro',
+    'clubMenu.spendHeading': 'Spend',
+    'clubMenu.spendMiles': 'Spend your Miles',
+    'clubMenu.spendCash': 'Cash + Miles',
+    'clubMenu.spendCollection': 'Privilege Club Collection',
+    'clubMenu.spendUpgrade': 'Upgrade with Miles',
+    'clubMenu.spendConvert': 'Convert your Miles',
+    'clubMenu.promoHeading': 'Enjoy exclusive benefits',
+    'clubMenu.joinCta': 'Join Privilege Club',
+    'clubMenu.loginCta': 'Log in →',
+    'clubMenu.partnersText': 'Privilege Club partners.',
+    'clubMenu.partnersLink': 'Discover →',
   },
   ru: {
     'nav.explore': 'Куда лететь',
@@ -384,6 +408,30 @@ const translations = {
     'search.pillNewsletter': 'Рассылка',
     'search.notFound': 'Ничего не найдено. Попробуйте «Направления» или «Пакеты».',
     'search.closeAria': 'Закрыть поиск',
+    'clubMenu.closeAria': 'Закрыть меню',
+    'clubMenu.discoverHeading': 'Узнать',
+    'clubMenu.discoverAbout': 'О Privilege Club',
+    'clubMenu.discoverTiers': 'Уровни участия и привилегии',
+    'clubMenu.discoverDutyFree': 'Привилегии в AeroVista Duty Free',
+    'clubMenu.discoverFamily': 'Семья и друзья',
+    'clubMenu.discoverStudent': 'Студенческий клуб',
+    'clubMenu.collectHeading': 'Копить',
+    'clubMenu.collectEarn': 'Начислять мили',
+    'clubMenu.collectClaim': 'Заявить недостающие мили',
+    'clubMenu.collectBuyBoost': 'Купить или увеличить мили',
+    'clubMenu.collectBuyPoints': 'Купить баллы',
+    'clubMenu.collectPro': 'Privilege Club Pro',
+    'clubMenu.spendHeading': 'Тратить',
+    'clubMenu.spendMiles': 'Потратить мили',
+    'clubMenu.spendCash': 'Наличные + мили',
+    'clubMenu.spendCollection': 'Коллекция Privilege Club',
+    'clubMenu.spendUpgrade': 'Повышение класса за мили',
+    'clubMenu.spendConvert': 'Обменять мили',
+    'clubMenu.promoHeading': 'Пользуйтесь эксклюзивными привилегиями',
+    'clubMenu.joinCta': 'Вступить в Privilege Club',
+    'clubMenu.loginCta': 'Войти →',
+    'clubMenu.partnersText': 'Партнёры Privilege Club.',
+    'clubMenu.partnersLink': 'Узнать →',
   },
 };
 
@@ -750,15 +798,16 @@ if (searchButton && siteSearch && siteSearchForm && siteSearchInput) {
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 
   const openSiteSearch = () => {
+    document.getElementById('clubMenu')?.classList.remove('club-menu--open');
     siteSearch.classList.add('site-search--open');
-    if (header) header.classList.add('header--search-open');
+    if (header) header.classList.add('header--panel-open');
     siteSearchInput.focus();
   };
 
   const closeSiteSearch = () => {
     siteSearch.classList.remove('site-search--open');
     siteSearchError.classList.remove('site-search__error--visible');
-    if (header) header.classList.remove('header--search-open');
+    if (header) header.classList.remove('header--panel-open');
   };
 
   const goToSiteSearchRoute = (route) => {
@@ -812,6 +861,58 @@ if (searchButton && siteSearch && siteSearchForm && siteSearchInput) {
       const route = findSiteSearchRoute(query);
       if (route) goToSiteSearchRoute(route);
     });
+  });
+}
+
+const clubMenuTrigger = document.getElementById('clubMenuTrigger');
+const clubMenu = document.getElementById('clubMenu');
+const clubMenuClose = document.getElementById('clubMenuClose');
+
+if (clubMenuTrigger && clubMenu && clubMenuClose) {
+  const isDesktopNav = () => window.matchMedia('(min-width: 901px)').matches;
+  const clubMenuSpendImage = document.getElementById('clubMenuSpendImage');
+  const clubMenuSpendDefault = clubMenuSpendImage ? clubMenuSpendImage.getAttribute('src') : '';
+
+  clubMenu.querySelectorAll('[data-club-image]').forEach((link) => {
+    const swapImage = () => {
+      if (clubMenuSpendImage) clubMenuSpendImage.src = link.dataset.clubImage;
+    };
+    link.addEventListener('mouseenter', swapImage);
+    link.addEventListener('focus', swapImage);
+  });
+
+  const openClubMenu = () => {
+    document.getElementById('siteSearch')?.classList.remove('site-search--open');
+    clubMenu.classList.add('club-menu--open');
+    clubMenuTrigger.setAttribute('aria-expanded', 'true');
+    if (header) header.classList.add('header--panel-open');
+  };
+
+  const closeClubMenu = () => {
+    clubMenu.classList.remove('club-menu--open');
+    clubMenuTrigger.setAttribute('aria-expanded', 'false');
+    if (header) header.classList.remove('header--panel-open');
+    if (clubMenuSpendImage) clubMenuSpendImage.src = clubMenuSpendDefault;
+  };
+
+  clubMenuTrigger.addEventListener('click', (e) => {
+    if (!isDesktopNav()) return;
+    e.preventDefault();
+    if (clubMenu.classList.contains('club-menu--open')) {
+      closeClubMenu();
+    } else {
+      openClubMenu();
+    }
+  });
+
+  clubMenuClose.addEventListener('click', closeClubMenu);
+
+  clubMenu.addEventListener('click', (e) => {
+    if (e.target.hasAttribute('data-club-close')) closeClubMenu();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && clubMenu.classList.contains('club-menu--open')) closeClubMenu();
   });
 }
 

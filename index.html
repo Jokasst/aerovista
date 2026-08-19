@@ -23,7 +23,7 @@
         <a href="#destinations" class="nav__link_explore" data-i18n="nav.explore">Explore</a>
         <a href="#hero" class="nav__link_book" data-i18n="nav.book">Book</a>
         <a href="#featureTabs" class="nav__link_experience" data-i18n="nav.experience">Experience</a>
-        <a href="login.html" class="nav__link_club" data-i18n="nav.club">Club</a>
+        <a href="login.html" class="nav__link_club" id="clubMenuTrigger" aria-haspopup="true" aria-expanded="false" data-i18n="nav.club">Club</a>
       </nav>
 
       <div class="header__actions">
@@ -95,6 +95,72 @@
         </div>
 
         <p class="site-search__error" id="siteSearchError" data-i18n="search.notFound">We couldn’t find that. Try “Destinations” or “Packages”.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="club-menu" id="clubMenu">
+    <div class="club-menu__backdrop" data-club-close></div>
+    <div class="club-menu__panel">
+      <div class="container club-menu__inner">
+        <button type="button" class="club-menu__close" id="clubMenuClose" aria-label="Close menu" data-i18n-aria-label="clubMenu.closeAria">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1L15 15M15 1L1 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <div class="club-menu__grid">
+          <div class="club-menu__col">
+            <h3 data-i18n="clubMenu.discoverHeading">Discover</h3>
+            <ul class="club-menu__list">
+              <li><a href="#"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="8"/><line x1="10" y1="9" x2="10" y2="14"/><circle cx="10" cy="6.5" r="0.75" fill="currentColor" stroke="none"/></svg><span data-i18n="clubMenu.discoverAbout">About Privilege Club</span></a></li>
+              <li><a href="#"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M10 2l2.35 4.76 5.25.76-3.8 3.7.9 5.23L10 14l-4.7 2.47.9-5.23-3.8-3.7 5.25-.76L10 2z"/></svg><span data-i18n="clubMenu.discoverTiers">Member tiers &amp; benefits</span></a></li>
+              <li><a href="#"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M5 7h10l-.8 10.2a1 1 0 01-1 .8H6.8a1 1 0 01-1-.8L5 7z"/><path d="M7.5 7V5.5a2.5 2.5 0 015 0V7"/></svg><span data-i18n="clubMenu.discoverDutyFree">Rewards at AeroVista Duty Free</span></a></li>
+              <li><a href="#"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="7" r="2.2"/><circle cx="13.5" cy="7.5" r="1.8"/><path d="M2.5 17c0-2.8 2-4.5 4.5-4.5s4.5 1.7 4.5 4.5"/><path d="M12 13.2c1.9.2 3.3 1.7 3.3 3.8"/></svg><span data-i18n="clubMenu.discoverFamily">Family &amp; Friends</span></a></li>
+              <li><a href="#"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M10 3L2 7l8 4 8-4-8-4z"/><path d="M5.5 9.2V13c0 1.4 2 2.5 4.5 2.5s4.5-1.1 4.5-2.5V9.2"/><path d="M17.5 7v5"/></svg><span data-i18n="clubMenu.discoverStudent">Student Club</span></a></li>
+            </ul>
+          </div>
+
+          <div class="club-menu__col">
+            <h3 data-i18n="clubMenu.collectHeading">Collect</h3>
+            <ul class="club-menu__list club-menu__list--plain">
+              <li><a href="#" data-i18n="clubMenu.collectEarn">Earn Miles</a></li>
+              <li><a href="#" data-i18n="clubMenu.collectClaim">Claim missing Miles</a></li>
+              <li><a href="#" data-i18n="clubMenu.collectBuyBoost">Buy or boost Miles</a></li>
+              <li><a href="#" data-i18n="clubMenu.collectBuyPoints">Buy Points</a></li>
+              <li><a href="#" data-i18n="clubMenu.collectPro">Privilege Club Pro</a></li>
+            </ul>
+          </div>
+
+          <div class="club-menu__col club-menu__col--media">
+            <img src="images/spend-your-avios.webp" alt="" loading="lazy" id="clubMenuSpendImage">
+            <div>
+              <h3 data-i18n="clubMenu.spendHeading">Spend</h3>
+              <ul class="club-menu__list club-menu__list--plain">
+                <li><a href="#" data-club-image="images/spend-your-avios.webp" data-i18n="clubMenu.spendMiles">Spend your Miles</a></li>
+                <li><a href="#" data-club-image="images/cash-plus-avios.webp" data-i18n="clubMenu.spendCash">Cash + Miles</a></li>
+                <li><a href="#" data-club-image="images/privilege-club-collection.webp" data-i18n="clubMenu.spendCollection">Privilege Club Collection</a></li>
+                <li><a href="#" data-club-image="images/upgrade-using-avios.webp" data-i18n="clubMenu.spendUpgrade">Upgrade with Miles</a></li>
+                <li><a href="#" data-club-image="images/convert-your-avios.webp" data-i18n="clubMenu.spendConvert">Convert your Miles</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="club-menu__promo">
+            <img src="images/join-privilege-club.webp" alt="" class="club-menu__promo-image" loading="lazy">
+            <div class="club-menu__promo-overlay"></div>
+            <div class="club-menu__promo-content">
+              <p class="club-menu__promo-heading" data-i18n="clubMenu.promoHeading">Enjoy exclusive benefits</p>
+              <a href="register.html" class="club-menu__promo-cta" data-i18n="clubMenu.joinCta">Join Privilege Club</a>
+              <a href="login.html" class="club-menu__promo-login" data-i18n="clubMenu.loginCta">Log in →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="club-menu__footer">
+          <span data-i18n="clubMenu.partnersText">Privilege Club partners.</span>
+          <a href="#" data-i18n="clubMenu.partnersLink">Discover →</a>
+        </div>
       </div>
     </div>
   </div>
