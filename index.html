@@ -1238,17 +1238,19 @@
   <section class="feature-tabs" id="featureTabs">
   <div class="feature-tabs__nav">
     <div class="container feature-tabs__nav-inner">
-      <button class="feature-tabs__link feature-tabs__link--active" data-i18n="featureTabs.viennaDutyFree">Vienna Duty Free</button>
-      <button class="feature-tabs__link" data-i18n="featureTabs.starlinkWifi">Starlink Wi-Fi</button>
-      <button class="feature-tabs__link" data-i18n="featureTabs.bsuite">Bsuite</button>
+      <button class="feature-tabs__link feature-tabs__link--active" data-i18n="featureTabs.viennaDutyFree" data-image="images/vienna-duty-free.webp" data-heading-key="featureTabs.heading" data-text-key="featureTabs.text" data-cta-key="featureTabs.cta">Vienna Duty Free</button>
+      <button class="feature-tabs__link" data-i18n="featureTabs.starlinkWifi" data-image="images/starlink-wifi.webp" data-heading-key="featureTabs.wifiHeading" data-text-key="featureTabs.wifiText" data-cta-key="featureTabs.wifiCta">Starlink Wi-Fi</button>
+      <button class="feature-tabs__link" data-i18n="featureTabs.bsuite" data-image="images/bsuite.webp" data-heading-key="featureTabs.bsuiteHeading" data-text-key="featureTabs.bsuiteText" data-cta-key="featureTabs.bsuiteCta">Bsuite</button>
     </div>
   </div>
 
-  <div class="feature-tabs__banner" style="background-image: url('images/vienna-duty-free.webp')">
-    <div class="feature-tabs__content">
-      <h2 data-i18n="featureTabs.heading">Shop. Earn. Repeat.</h2>
-      <p data-i18n="featureTabs.text">Step into Vienna Duty Free and enjoy premium shopping, fine dining, and rewards that follow you home.</p>
-      <button class="btn btn--outline" data-i18n="featureTabs.cta">Start Earning</button>
+  <div class="feature-tabs__banner" id="featureTabsBanner" style="background-image: url('images/vienna-duty-free.webp')">
+    <div class="container feature-tabs__banner-inner">
+      <div class="feature-tabs__content">
+        <h2 id="featureTabsHeading" data-i18n="featureTabs.heading">Shop. Earn. Repeat.</h2>
+        <p id="featureTabsText" data-i18n="featureTabs.text">Step into Vienna Duty Free and enjoy premium shopping, fine dining, and rewards that follow you home.</p>
+        <button class="btn btn--outline" id="featureTabsCta" data-i18n="featureTabs.cta">Start Earning</button>
+      </div>
     </div>
   </div>
 </section>

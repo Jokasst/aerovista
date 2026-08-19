@@ -92,6 +92,12 @@ const translations = {
     'featureTabs.heading': 'Shop. Earn. Repeat.',
     'featureTabs.text': 'Step into Vienna Duty Free and enjoy premium shopping, fine dining, and rewards that follow you home.',
     'featureTabs.cta': 'Start Earning',
+    'featureTabs.wifiHeading': 'Starlink Wi-Fi. Fast and free.',
+    'featureTabs.wifiText': 'Message friends and family or stream your favourite shows at 35,000 feet. Log in or join Privilege Club for uninterrupted access on every flight.',
+    'featureTabs.wifiCta': 'Find out more',
+    'featureTabs.bsuiteHeading': 'Private. Spacious. Bsuite.',
+    'featureTabs.bsuiteText': 'Begin an unforgettable journey where comfort meets privacy. Relax, dine, and unwind in a suite designed entirely around you.',
+    'featureTabs.bsuiteCta': 'Explore Bsuite',
     'packages.heading': 'Looking for a travel package?',
     'packages.subheading': 'Save more and earn extra miles when you book flight + hotel together',
     'packages.stopoverAlmaty': 'Stopover in Almaty',
@@ -309,6 +315,12 @@ const translations = {
     'featureTabs.heading': 'Покупайте. Копите. Повторяйте.',
     'featureTabs.text': 'Загляните в Vienna Duty Free и наслаждайтесь премиальным шопингом, изысканной едой и наградами, которые останутся с вами.',
     'featureTabs.cta': 'Начать копить',
+    'featureTabs.wifiHeading': 'Starlink Wi-Fi. Быстро и бесплатно.',
+    'featureTabs.wifiText': 'Общайтесь с близкими или смотрите любимые сериалы на высоте 10 тысяч метров. Войдите или вступите в Privilege Club для безлимитного доступа в каждом полёте.',
+    'featureTabs.wifiCta': 'Узнать больше',
+    'featureTabs.bsuiteHeading': 'Приватность. Простор. Bsuite.',
+    'featureTabs.bsuiteText': 'Начните незабываемое путешествие, где комфорт сочетается с приватностью. Отдыхайте, наслаждайтесь ужином и простором в сьюте, созданном для вас.',
+    'featureTabs.bsuiteCta': 'Узнать про Bsuite',
     'packages.heading': 'Ищете турпакет для путешествия?',
     'packages.subheading': 'Экономьте больше и получайте дополнительные мили, бронируя перелёт и отель вместе',
     'packages.stopoverAlmaty': 'Остановка в Алматы',
@@ -710,12 +722,30 @@ window.addEventListener('load', updateAllSubtabIndicators);
 window.addEventListener('resize', updateAllSubtabIndicators);
 updateAllSubtabIndicators();
 
+const featureTabsBanner = document.getElementById('featureTabsBanner');
+const featureTabsHeading = document.getElementById('featureTabsHeading');
+const featureTabsText = document.getElementById('featureTabsText');
+const featureTabsCta = document.getElementById('featureTabsCta');
+
 document.querySelectorAll('.feature-tabs__nav').forEach((nav) => {
   nav.addEventListener('click', (e) => {
     const btn = e.target.closest('.feature-tabs__link');
     if (!btn) return;
     nav.querySelectorAll('.feature-tabs__link').forEach((t) => t.classList.remove('feature-tabs__link--active'));
     btn.classList.add('feature-tabs__link--active');
+
+    if (!featureTabsBanner || !btn.dataset.image) return;
+    featureTabsBanner.classList.add('feature-tabs__banner--switching');
+    window.setTimeout(() => {
+      featureTabsBanner.style.backgroundImage = `url('${btn.dataset.image}')`;
+      featureTabsHeading.dataset.i18n = btn.dataset.headingKey;
+      featureTabsHeading.textContent = t(btn.dataset.headingKey);
+      featureTabsText.dataset.i18n = btn.dataset.textKey;
+      featureTabsText.textContent = t(btn.dataset.textKey);
+      featureTabsCta.dataset.i18n = btn.dataset.ctaKey;
+      featureTabsCta.textContent = t(btn.dataset.ctaKey);
+      featureTabsBanner.classList.remove('feature-tabs__banner--switching');
+    }, 150);
   });
 });
 
@@ -909,6 +939,13 @@ if (clubMenuTrigger && clubMenu && clubMenuClose) {
 
   clubMenu.addEventListener('click', (e) => {
     if (e.target.hasAttribute('data-club-close')) closeClubMenu();
+  });
+
+  document.querySelectorAll('.nav a').forEach((link) => {
+    if (link === clubMenuTrigger) return;
+    link.addEventListener('click', () => {
+      if (clubMenu.classList.contains('club-menu--open')) closeClubMenu();
+    });
   });
 
   document.addEventListener('keydown', (e) => {

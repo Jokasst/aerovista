@@ -1856,6 +1856,7 @@ button.search-card__static-value {
 }
 
 .feature-tabs__banner {
+  position: relative;
   min-height: 400px;
   height: 38vw;
   max-height: 544px;
@@ -1864,46 +1865,66 @@ button.search-card__static-value {
   background-position: center;
   display: flex;
   align-items: center;
+  transition: opacity var(--duration-base) var(--ease-out);
+}
+
+.feature-tabs__banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 25, 49, 0.2);
+  pointer-events: none;
+}
+
+.feature-tabs__banner--switching {
+  opacity: 0.4;
+}
+
+.feature-tabs__banner-inner {
+  position: relative;
+  width: 100%;
+  z-index: 1;
 }
 
 .feature-tabs__content {
   margin-left: auto;
-  max-width: 760px;
+  max-width: 640px;
   background: rgba(10, 25, 49, 0.92);
   color: var(--color-white);
-  padding: var(--space-xl);
-  margin-right: var(--space-2xl);
+  padding: var(--space-lg) 56px;
   border-radius: var(--radius-sm);
   text-align: right;
 }
 
 .feature-tabs__content .btn--outline {
   margin-left: 0;
-  padding: 18px 56px;
-  font-size: 17px;
+  padding: 15px 44px;
+  font-size: 15px;
 }
 
 .feature-tabs__content h2 {
-  font-size: 56px;
+  font-size: 30px;
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.15;
   letter-spacing: -0.02em;
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-sm);
   margin-left: auto;
+  white-space: nowrap;
 }
 
 :lang(ru) .feature-tabs__content {
-  max-width: 880px;
+  max-width: 700px;
+  padding: var(--space-lg) 48px;
 }
 
 :lang(ru) .feature-tabs__content h2 {
-  font-size: 38px;
+  font-size: 28px;
 }
 
 .feature-tabs__content p {
-  font-size: 19px;
+  font-size: 16px;
   line-height: 1.6;
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-md);
 }
 
 .btn--outline {
@@ -3059,8 +3080,7 @@ body.modal-open {
   }
 
   .feature-tabs__content {
-    margin-right: var(--space-md);
-    margin-left: var(--space-md);
+    margin-right: 0;
   }
 
   .nav {
@@ -3317,6 +3337,7 @@ body.modal-open {
 
   .feature-tabs__content h2 {
     font-size: 28px;
+    white-space: normal;
   }
 
   :lang(ru) .feature-tabs__content h2 {
