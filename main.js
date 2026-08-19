@@ -160,6 +160,7 @@ const translations = {
     'register.alreadyMember': 'Already a Privilege Club member?',
     'register.logIn': 'Log in',
     'register.emailRequired': 'Enter your email address',
+    'register.emailInvalid': 'Enter a valid email address',
     'register.passwordRequired': 'Create a password (min. 6 characters)',
     'register.confirmRequired': 'Passwords don’t match',
     'register.notConfigured': 'Sign-up isn’t connected to a backend yet. Add your Supabase project keys in supabase-config.js.',
@@ -325,6 +326,7 @@ const translations = {
     'register.alreadyMember': 'Уже участник Privilege Club?',
     'register.logIn': 'Войти',
     'register.emailRequired': 'Введите email',
+    'register.emailInvalid': 'Введите корректный email',
     'register.passwordRequired': 'Придумайте пароль (мин. 6 символов)',
     'register.confirmRequired': 'Пароли не совпадают',
     'register.notConfigured': 'Регистрация пока не подключена к бэкенду. Впишите ключи вашего проекта Supabase в supabase-config.js.',
@@ -1671,6 +1673,8 @@ const registerSuccessBanner = document.getElementById('registerSuccessBanner');
 
 if (registerForm && registerEmail && registerPassword && registerConfirm) {
   const registerEmailField = registerEmail.closest('.auth__field');
+  const registerEmailError = registerEmailField.querySelector('.auth__field-error');
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const clearRegisterFeedback = () => {
     hideBanner(registerErrorBanner, 'auth__error-banner--visible');
     hideBanner(registerSuccessBanner, 'auth__success-banner--visible');
@@ -1684,14 +1688,20 @@ if (registerForm && registerEmail && registerPassword && registerConfirm) {
     e.preventDefault();
     clearRegisterFeedback();
 
-    const emailEmpty = registerEmail.value.trim() === '';
+    const emailValue = registerEmail.value.trim();
+    const emailEmpty = emailValue === '';
+    const emailInvalid = !emailEmpty && !emailPattern.test(emailValue);
     const passwordTooShort = registerPassword.value.length < 6;
     const confirmMismatch = registerConfirm.value !== registerPassword.value || registerConfirm.value === '';
-    setFieldError(registerEmailField, emailEmpty);
+
+    const emailErrorKey = emailEmpty ? 'register.emailRequired' : 'register.emailInvalid';
+    registerEmailError.dataset.i18n = emailErrorKey;
+    registerEmailError.textContent = t(emailErrorKey);
+    setFieldError(registerEmailField, emailEmpty || emailInvalid);
     setFieldError(registerPasswordField, passwordTooShort);
     setFieldError(registerConfirmField, confirmMismatch);
-    if (emailEmpty || passwordTooShort || confirmMismatch) {
-      (emailEmpty ? registerEmail : passwordTooShort ? registerPassword : registerConfirm).focus();
+    if (emailEmpty || emailInvalid || passwordTooShort || confirmMismatch) {
+      (emailEmpty || emailInvalid ? registerEmail : passwordTooShort ? registerPassword : registerConfirm).focus();
       return;
     }
 
