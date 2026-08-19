@@ -165,6 +165,16 @@ const translations = {
     'register.emailInUse': 'An account with this email already exists',
     'register.errorGeneric': 'Something went wrong. Please try again.',
     'register.success': 'Account created — check your email to confirm it.',
+    'forgotModal.heading': 'Forgot your password?',
+    'forgotModal.description': 'Enter your email address and we’ll send you a link to reset your password.',
+    'forgotModal.emailPlaceholder': 'Email address',
+    'forgotModal.emailRequired': 'Enter your email address',
+    'forgotModal.emailInvalid': 'Enter a valid email address',
+    'forgotModal.submit': 'Send email',
+    'forgotModal.backToLogin': 'Back to log in',
+    'forgotModal.success': 'Check your email for a link to reset your password.',
+    'forgotModal.notConfigured': 'Password reset isn’t connected to a backend yet. Add your Supabase project keys in supabase-config.js.',
+    'forgotModal.errorGeneric': 'Something went wrong. Please try again.',
   },
   ru: {
     'nav.explore': 'Куда лететь',
@@ -332,6 +342,16 @@ const translations = {
     'register.emailInUse': 'Аккаунт с таким email уже существует',
     'register.errorGeneric': 'Что-то пошло не так. Попробуйте ещё раз.',
     'register.success': 'Аккаунт создан — проверьте почту, чтобы подтвердить его.',
+    'forgotModal.heading': 'Забыли пароль?',
+    'forgotModal.description': 'Введите email, и мы отправим ссылку для сброса пароля.',
+    'forgotModal.emailPlaceholder': 'Email',
+    'forgotModal.emailRequired': 'Введите email',
+    'forgotModal.emailInvalid': 'Введите корректный email',
+    'forgotModal.submit': 'Отправить письмо',
+    'forgotModal.backToLogin': 'Назад ко входу',
+    'forgotModal.success': 'Проверьте почту — мы отправили ссылку для сброса пароля.',
+    'forgotModal.notConfigured': 'Сброс пароля пока не подключён к бэкенду. Впишите ключи вашего проекта Supabase в supabase-config.js.',
+    'forgotModal.errorGeneric': 'Что-то пошло не так. Попробуйте ещё раз.',
   },
 };
 
@@ -1544,6 +1564,95 @@ if (loginForm && loginEmail && loginPassword) {
     }
 
     window.location.href = 'index.html';
+  });
+}
+
+const forgotModalOverlay = document.getElementById('forgotModalOverlay');
+const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+const forgotBackLink = document.getElementById('forgotBackLink');
+const forgotForm = document.getElementById('forgotForm');
+const forgotEmail = document.getElementById('forgotEmail');
+const forgotSubmit = document.getElementById('forgotSubmit');
+const forgotErrorBanner = document.getElementById('forgotErrorBanner');
+const forgotSuccessBanner = document.getElementById('forgotSuccessBanner');
+
+if (forgotModalOverlay && forgotPasswordLink && forgotForm && forgotEmail) {
+  const forgotEmailField = forgotEmail.closest('.auth__field');
+  const forgotEmailError = forgotEmailField.querySelector('.auth__field-error');
+  const forgotEmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const openForgotModal = () => {
+    forgotModalOverlay.classList.add('modal-overlay--open');
+    document.body.classList.add('modal-open');
+    forgotEmail.focus();
+  };
+
+  const closeForgotModal = () => {
+    forgotModalOverlay.classList.remove('modal-overlay--open');
+    document.body.classList.remove('modal-open');
+    forgotForm.reset();
+    setFieldError(forgotEmailField, false);
+    hideBanner(forgotErrorBanner, 'auth__error-banner--visible');
+    hideBanner(forgotSuccessBanner, 'auth__success-banner--visible');
+    forgotSubmit.disabled = false;
+  };
+
+  forgotPasswordLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    openForgotModal();
+  });
+
+  forgotBackLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    closeForgotModal();
+  });
+
+  forgotModalOverlay.addEventListener('click', (e) => {
+    if (e.target.hasAttribute('data-modal-close')) closeForgotModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && forgotModalOverlay.classList.contains('modal-overlay--open')) closeForgotModal();
+  });
+
+  forgotEmail.addEventListener('input', () => {
+    setFieldError(forgotEmailField, false);
+    hideBanner(forgotErrorBanner, 'auth__error-banner--visible');
+  });
+
+  forgotForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    hideBanner(forgotErrorBanner, 'auth__error-banner--visible');
+    hideBanner(forgotSuccessBanner, 'auth__success-banner--visible');
+
+    const emailValue = forgotEmail.value.trim();
+    const emailEmpty = emailValue === '';
+    const emailInvalid = !emailEmpty && !forgotEmailPattern.test(emailValue);
+
+    const emailErrorKey = emailEmpty ? 'forgotModal.emailRequired' : 'forgotModal.emailInvalid';
+    forgotEmailError.dataset.i18n = emailErrorKey;
+    forgotEmailError.textContent = t(emailErrorKey);
+    setFieldError(forgotEmailField, emailEmpty || emailInvalid);
+    if (emailEmpty || emailInvalid) {
+      forgotEmail.focus();
+      return;
+    }
+
+    if (!supabaseClient) {
+      showBanner(forgotErrorBanner, t('forgotModal.notConfigured'), 'auth__error-banner--visible');
+      return;
+    }
+
+    forgotSubmit.disabled = true;
+    const { error } = await supabaseClient.auth.resetPasswordForEmail(emailValue);
+    forgotSubmit.disabled = false;
+
+    if (error) {
+      showBanner(forgotErrorBanner, t('forgotModal.errorGeneric'), 'auth__error-banner--visible');
+      return;
+    }
+
+    showBanner(forgotSuccessBanner, t('forgotModal.success'), 'auth__success-banner--visible');
   });
 }
 

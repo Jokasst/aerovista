@@ -92,7 +92,7 @@
             <span class="auth__field-error" data-i18n="login.passwordRequired">Enter your password</span>
           </div>
 
-          <a href="#" class="auth__forgot" data-i18n="login.forgotPassword">Forgot your password?</a>
+          <a href="#" class="auth__forgot" id="forgotPasswordLink" data-i18n="login.forgotPassword">Forgot your password?</a>
 
           <div class="auth__error-banner" id="authErrorBanner"></div>
 
@@ -114,6 +114,28 @@
       </div>
     </div>
   </main>
+
+  <div class="modal-overlay" id="forgotModalOverlay">
+    <div class="modal-overlay__backdrop" data-modal-close></div>
+    <div class="auth__card modal-overlay__card" role="dialog" aria-modal="true" aria-labelledby="forgotModalHeading">
+      <h1 id="forgotModalHeading" data-i18n="forgotModal.heading">Forgot your password?</h1>
+      <p class="auth__subtext" data-i18n="forgotModal.description">Enter your email address and we’ll send you a link to reset your password.</p>
+
+      <form class="auth__form" id="forgotForm" novalidate>
+        <div class="auth__field">
+          <input type="text" id="forgotEmail" placeholder="Email address" data-i18n-placeholder="forgotModal.emailPlaceholder" autocomplete="email" required>
+          <span class="auth__field-error" data-i18n="forgotModal.emailRequired">Enter your email address</span>
+        </div>
+
+        <div class="auth__error-banner" id="forgotErrorBanner"></div>
+        <div class="auth__success-banner" id="forgotSuccessBanner"></div>
+
+        <button type="submit" class="btn btn--filled auth__submit" id="forgotSubmit" data-i18n="forgotModal.submit">Send email</button>
+      </form>
+
+      <a href="#" class="auth__forgot modal-overlay__back" id="forgotBackLink" data-i18n="forgotModal.backToLogin">Back to log in</a>
+    </div>
+  </div>
 
   <footer class="footer">
     <div class="container footer__grid">

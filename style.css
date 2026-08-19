@@ -2346,6 +2346,64 @@ button.search-card__static-value {
   color: var(--color-accent);
 }
 
+.auth__subtext {
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(10, 25, 49, 0.65);
+  margin-bottom: var(--space-lg);
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+}
+
+.modal-overlay--open {
+  display: flex;
+}
+
+.modal-overlay__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 25, 49, 0.5);
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-out);
+}
+
+.modal-overlay--open .modal-overlay__backdrop {
+  opacity: 1;
+}
+
+.modal-overlay__card {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(16px) scale(0.98);
+  transition: opacity var(--duration-base) var(--ease-out), transform var(--duration-base) var(--ease-spring);
+}
+
+.modal-overlay--open .modal-overlay__card {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.modal-overlay__back {
+  display: inline-block;
+  margin-top: var(--space-lg);
+  margin-bottom: 0;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
 .footer {
   background: var(--color-dark);
   color: var(--color-white);
