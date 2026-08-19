@@ -29,6 +29,15 @@
         ],
         "createdAt": "2026-08-19T13:37:45.368Z",
         "reason": "pre-existing site-wide font choice (Inter, per original Figma mockup), used across index.html/style.css/register.html/login.html since project start — not a new choice made this turn"
+      },
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-08-19T13:56:49.694Z",
+        "reason": "pre-existing site-wide font choice (Inter, per original Figma mockup), used across index.html/style.css/login.html/register.html since project start — not a new choice made this turn"
       }
     ]
   }
