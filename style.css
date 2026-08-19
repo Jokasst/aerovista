@@ -316,7 +316,7 @@ body {
 }
 
 .hero {
-  background-image: url('images/hero-bg.png');
+  background-image: url('images/hero-bg.webp');
   background-size: cover;
   min-height: 600px;
   color: var(--color-white);
