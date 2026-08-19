@@ -1834,7 +1834,7 @@ button.search-card__static-value {
   display: flex;
   justify-content: center;
   gap: var(--space-lg);
-  padding: 0 var(--space-md);
+  padding: 0 var(--space-md) var(--space-md);
   font-size: 15px;
   position: relative;
 }
@@ -1842,7 +1842,7 @@ button.search-card__static-value {
 .feature-tabs__indicator {
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: var(--space-md);
   height: 2px;
   background: var(--color-white);
   border-radius: 1px;
