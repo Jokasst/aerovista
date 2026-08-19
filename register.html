@@ -65,6 +65,37 @@
     </div>
   </header>
 
+  <div class="site-search" id="siteSearch">
+    <div class="site-search__backdrop" data-search-close></div>
+    <div class="site-search__panel" role="search">
+      <div class="container site-search__inner">
+        <button type="button" class="site-search__close" id="siteSearchClose" aria-label="Close search" data-i18n-aria-label="search.closeAria">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1L15 15M15 1L1 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <form class="site-search__form" id="siteSearchForm">
+          <input type="text" class="site-search__input" id="siteSearchInput" placeholder="e.g.: Destinations, Packages, Book a flight" data-i18n-placeholder="search.placeholder" autocomplete="off">
+          <button type="submit" class="site-search__submit" data-i18n="search.submit">Search</button>
+        </form>
+
+        <div class="site-search__suggestions">
+          <span class="site-search__suggestions-label" data-i18n="search.popularLabel">Popular searches</span>
+          <div class="site-search__pills">
+            <button type="button" class="site-search__pill" data-search-query="book a flight" data-i18n="search.pillBookFlight">Book a flight</button>
+            <button type="button" class="site-search__pill" data-search-query="destinations" data-i18n="search.pillDestinations">Destinations</button>
+            <button type="button" class="site-search__pill" data-search-query="packages" data-i18n="search.pillPackages">Packages</button>
+            <button type="button" class="site-search__pill" data-search-query="vienna duty free" data-i18n="search.pillOffers">Vienna Duty Free</button>
+            <button type="button" class="site-search__pill" data-search-query="newsletter" data-i18n="search.pillNewsletter">Newsletter</button>
+          </div>
+        </div>
+
+        <p class="site-search__error" id="siteSearchError" data-i18n="search.notFound">We couldn’t find that. Try “Destinations” or “Packages”.</p>
+      </div>
+    </div>
+  </div>
+
   <main class="auth">
     <div class="container">
       <div class="auth__card">

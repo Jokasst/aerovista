@@ -20,10 +20,10 @@
       <a href="#hero" class="logo">AeroVista</a>
 
       <nav class="nav" id="nav">
-        <a href="#" class="nav__link_explore" data-i18n="nav.explore">Explore</a>
-        <a href="#" class="nav__link_book" data-i18n="nav.book">Book</a>
-        <a href="#" class="nav__link_experience" data-i18n="nav.experience">Experience</a>
-        <a href="#" class="nav__link_club" data-i18n="nav.club">Club</a>
+        <a href="#destinations" class="nav__link_explore" data-i18n="nav.explore">Explore</a>
+        <a href="#hero" class="nav__link_book" data-i18n="nav.book">Book</a>
+        <a href="#featureTabs" class="nav__link_experience" data-i18n="nav.experience">Experience</a>
+        <a href="login.html" class="nav__link_club" data-i18n="nav.club">Club</a>
       </nav>
 
       <div class="header__actions">
@@ -67,6 +67,37 @@
       </div>
     </div>
   </header>
+
+  <div class="site-search" id="siteSearch">
+    <div class="site-search__backdrop" data-search-close></div>
+    <div class="site-search__panel" role="search">
+      <div class="container site-search__inner">
+        <button type="button" class="site-search__close" id="siteSearchClose" aria-label="Close search" data-i18n-aria-label="search.closeAria">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1L15 15M15 1L1 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <form class="site-search__form" id="siteSearchForm">
+          <input type="text" class="site-search__input" id="siteSearchInput" placeholder="e.g.: Destinations, Packages, Book a flight" data-i18n-placeholder="search.placeholder" autocomplete="off">
+          <button type="submit" class="site-search__submit" data-i18n="search.submit">Search</button>
+        </form>
+
+        <div class="site-search__suggestions">
+          <span class="site-search__suggestions-label" data-i18n="search.popularLabel">Popular searches</span>
+          <div class="site-search__pills">
+            <button type="button" class="site-search__pill" data-search-query="book a flight" data-i18n="search.pillBookFlight">Book a flight</button>
+            <button type="button" class="site-search__pill" data-search-query="destinations" data-i18n="search.pillDestinations">Destinations</button>
+            <button type="button" class="site-search__pill" data-search-query="packages" data-i18n="search.pillPackages">Packages</button>
+            <button type="button" class="site-search__pill" data-search-query="vienna duty free" data-i18n="search.pillOffers">Vienna Duty Free</button>
+            <button type="button" class="site-search__pill" data-search-query="newsletter" data-i18n="search.pillNewsletter">Newsletter</button>
+          </div>
+        </div>
+
+        <p class="site-search__error" id="siteSearchError" data-i18n="search.notFound">We couldn’t find that. Try “Destinations” or “Packages”.</p>
+      </div>
+    </div>
+  </div>
 
   <section class="hero" id="hero">
     <div class="container">
@@ -891,7 +922,7 @@
     </div>
   </div>
 
-  <section class="promo-cards">
+  <section class="promo-cards" id="promoCards">
     <div class="container promo-cards__grid">
       <article class="promo-card" style="background-image: url('images/Vienna(explore).webp')">
         <h3 data-i18n="promoCards.exploreVienna">Explore Vienna</h3>
@@ -932,7 +963,7 @@
     </div>
   </section>
 
-  <section class="destinations">
+  <section class="destinations" id="destinations">
     <div class="container">
       <h2 data-i18n="destinations.heading">Places we think, you'll love</h2>
 
@@ -1138,7 +1169,7 @@
     </div>
   </section>
 
-  <section class="feature-tabs">
+  <section class="feature-tabs" id="featureTabs">
   <div class="feature-tabs__nav">
     <div class="container feature-tabs__nav-inner">
       <button class="feature-tabs__link feature-tabs__link--active" data-i18n="featureTabs.viennaDutyFree">Vienna Duty Free</button>
@@ -1155,7 +1186,7 @@
     </div>
   </div>
 </section>
-  <section class="packages">
+  <section class="packages" id="packages">
     <div class="container">
       <h2 data-i18n="packages.heading">Looking for a travel package?</h2>
       <p data-i18n="packages.subheading">Save more and earn extra miles when you book flight + hotel together</p>
@@ -1179,7 +1210,7 @@
     </div>
   </section>
 
-  <section class="newsletter">
+  <section class="newsletter" id="newsletter">
     <div class="container newsletter__card" style="background-image: url('images/newsletter-bg.webp')">
       <div class="newsletter__content">
         <h2 data-i18n="newsletter.heading">Never miss a deal</h2>

@@ -181,6 +181,16 @@ const translations = {
     'beyond.subtext': 'Your details will be automatically filled in for a faster, easier experience',
     'beyond.backLabel': 'Not travelling for business?',
     'beyond.backLink': 'Log in to Privilege Club',
+    'search.placeholder': 'e.g.: Destinations, Packages, Book a flight',
+    'search.submit': 'Search',
+    'search.popularLabel': 'Popular searches',
+    'search.pillBookFlight': 'Book a flight',
+    'search.pillDestinations': 'Destinations',
+    'search.pillPackages': 'Packages',
+    'search.pillOffers': 'Vienna Duty Free',
+    'search.pillNewsletter': 'Newsletter',
+    'search.notFound': 'We couldn’t find that. Try “Destinations” or “Packages”.',
+    'search.closeAria': 'Close search',
   },
   ru: {
     'nav.explore': 'Куда лететь',
@@ -364,6 +374,16 @@ const translations = {
     'beyond.subtext': 'Ваши данные будут заполнены автоматически для быстрого и удобного входа',
     'beyond.backLabel': 'Не летите по делам бизнеса?',
     'beyond.backLink': 'Войти в Privilege Club',
+    'search.placeholder': 'Например: направления, пакеты, забронировать рейс',
+    'search.submit': 'Найти',
+    'search.popularLabel': 'Популярные запросы',
+    'search.pillBookFlight': 'Забронировать рейс',
+    'search.pillDestinations': 'Направления',
+    'search.pillPackages': 'Пакеты',
+    'search.pillOffers': 'Vienna Duty Free',
+    'search.pillNewsletter': 'Рассылка',
+    'search.notFound': 'Ничего не найдено. Попробуйте «Направления» или «Пакеты».',
+    'search.closeAria': 'Закрыть поиск',
   },
 };
 
@@ -658,6 +678,138 @@ if (navToggle && nav) {
     const expanded = navToggle.getAttribute('aria-expanded') === 'true';
     navToggle.setAttribute('aria-expanded', String(!expanded));
     nav.classList.toggle('nav--open');
+  });
+
+  nav.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      navToggle.setAttribute('aria-expanded', 'false');
+      nav.classList.remove('nav--open');
+    });
+  });
+}
+
+const siteSearchRoutes = [
+  {
+    keywords: ['book a flight', 'book flight', 'buy tickets', 'buy a ticket', 'tickets', 'flights', 'search flights', 'flight search', 'забронировать рейс', 'забронировать', 'билеты', 'купить билет', 'рейсы', 'поиск рейсов'],
+    page: 'index.html',
+    hash: '#hero',
+  },
+  {
+    keywords: ['destinations', "places we think you'll love", 'places', 'куда полететь', 'направления', 'места'],
+    page: 'index.html',
+    hash: '#destinations',
+  },
+  {
+    keywords: ['packages', 'travel package', 'travel packages', 'пакеты', 'турпакеты', 'пакетные туры'],
+    page: 'index.html',
+    hash: '#packages',
+  },
+  {
+    keywords: ['promo cards', 'explore vienna', 'experience freedom', 'best service', 'upgrade now', 'акции'],
+    page: 'index.html',
+    hash: '#promoCards',
+  },
+  {
+    keywords: ['vienna duty free', 'duty free', 'starlink', 'wifi', 'bsuite', 'shop earn repeat', 'дьюти фри', 'магазин'],
+    page: 'index.html',
+    hash: '#featureTabs',
+  },
+  {
+    keywords: ['newsletter', 'never miss a deal', 'deals', 'subscribe', 'рассылка', 'подписка', 'скидки'],
+    page: 'index.html',
+    hash: '#newsletter',
+  },
+  {
+    keywords: ['login', 'log in', 'sign in', 'вход', 'войти'],
+    page: 'login.html',
+  },
+  {
+    keywords: ['sign up', 'register', 'create account', 'join', 'регистрация', 'создать аккаунт'],
+    page: 'register.html',
+  },
+  {
+    keywords: ['beyond business', 'business login', 'бизнес'],
+    page: 'beyond-business.html',
+  },
+];
+
+function findSiteSearchRoute(query) {
+  const q = query.trim().toLowerCase();
+  if (!q) return null;
+  return siteSearchRoutes.find((route) => route.keywords.some((kw) => kw.includes(q) || q.includes(kw))) || null;
+}
+
+const searchButton = document.querySelector('.search-button');
+const siteSearch = document.getElementById('siteSearch');
+const siteSearchClose = document.getElementById('siteSearchClose');
+const siteSearchForm = document.getElementById('siteSearchForm');
+const siteSearchInput = document.getElementById('siteSearchInput');
+const siteSearchError = document.getElementById('siteSearchError');
+
+if (searchButton && siteSearch && siteSearchForm && siteSearchInput) {
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+
+  const openSiteSearch = () => {
+    siteSearch.classList.add('site-search--open');
+    siteSearchInput.focus();
+  };
+
+  const closeSiteSearch = () => {
+    siteSearch.classList.remove('site-search--open');
+    siteSearchError.classList.remove('site-search__error--visible');
+  };
+
+  const goToSiteSearchRoute = (route) => {
+    if (route.page === currentPage && route.hash) {
+      const target = document.querySelector(route.hash);
+      if (target) {
+        closeSiteSearch();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+    }
+    window.location.href = route.hash ? `${route.page}${route.hash}` : route.page;
+  };
+
+  searchButton.addEventListener('click', () => {
+    if (siteSearch.classList.contains('site-search--open')) {
+      closeSiteSearch();
+    } else {
+      openSiteSearch();
+    }
+  });
+
+  siteSearchClose.addEventListener('click', closeSiteSearch);
+
+  siteSearch.addEventListener('click', (e) => {
+    if (e.target.hasAttribute('data-search-close')) closeSiteSearch();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && siteSearch.classList.contains('site-search--open')) closeSiteSearch();
+  });
+
+  siteSearchInput.addEventListener('input', () => {
+    siteSearchError.classList.remove('site-search__error--visible');
+  });
+
+  siteSearchForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const route = findSiteSearchRoute(siteSearchInput.value);
+    if (!route) {
+      siteSearchError.classList.add('site-search__error--visible');
+      return;
+    }
+    goToSiteSearchRoute(route);
+  });
+
+  document.querySelectorAll('.site-search__pill').forEach((pill) => {
+    pill.addEventListener('click', () => {
+      const query = pill.dataset.searchQuery || pill.textContent;
+      siteSearchInput.value = pill.textContent.trim();
+      const route = findSiteSearchRoute(query);
+      if (route) goToSiteSearchRoute(route);
+    });
   });
 }
 

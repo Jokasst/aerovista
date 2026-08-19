@@ -2050,10 +2050,17 @@ button.search-card__static-value {
 
 .newsletter__checkbox {
   display: flex;
+  align-items: flex-start;
   gap: var(--space-xs);
   font-size: 13px;
+  line-height: 1.5;
   color: #ccc;
   margin-bottom: var(--space-md);
+}
+
+.newsletter__checkbox input[type="checkbox"] {
+  flex-shrink: 0;
+  margin-top: 4px;
 }
 
 .newsletter__content .btn--outline {
@@ -2498,6 +2505,158 @@ body.modal-open {
 
 .beyond__back a:hover {
   color: var(--color-accent);
+}
+
+.site-search {
+  position: fixed;
+  top: 72px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 45;
+  display: none;
+}
+
+.site-search--open {
+  display: block;
+}
+
+.site-search__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 25, 49, 0.35);
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-out);
+}
+
+.site-search--open .site-search__backdrop {
+  opacity: 1;
+}
+
+.site-search__panel {
+  position: relative;
+  background: var(--color-white);
+  box-shadow: 0 20px 40px rgba(10, 25, 49, 0.15);
+  padding-block: var(--space-xl);
+  opacity: 0;
+  transform: translateY(-16px);
+  transition: opacity var(--duration-base) var(--ease-out), transform var(--duration-base) var(--ease-out);
+}
+
+.site-search--open .site-search__panel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.site-search__inner {
+  position: relative;
+}
+
+.site-search__close {
+  position: absolute;
+  top: 0;
+  right: var(--space-md);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-dark);
+  transition: opacity var(--duration-base) var(--ease-out);
+}
+
+.site-search__close:hover {
+  opacity: 0.6;
+}
+
+.site-search__form {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  border-bottom: 1px solid rgba(10, 25, 49, 0.15);
+  padding-bottom: var(--space-sm);
+  margin-bottom: var(--space-lg);
+  padding-right: 48px;
+}
+
+.site-search__input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  font-family: var(--font-main);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--color-dark);
+  padding: var(--space-xs) 0;
+}
+
+.site-search__input::placeholder {
+  color: rgba(10, 25, 49, 0.35);
+}
+
+.site-search__input:focus {
+  outline: none;
+}
+
+.site-search__submit {
+  padding: 14px var(--space-lg);
+  background: var(--color-dark);
+  color: var(--color-white);
+  border: 1px solid var(--color-dark);
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 15px;
+  white-space: nowrap;
+  transition: background var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out);
+}
+
+.site-search__submit:hover {
+  background: transparent;
+  color: var(--color-dark);
+}
+
+.site-search__suggestions-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(10, 25, 49, 0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: var(--space-sm);
+}
+
+.site-search__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.site-search__pill {
+  padding: 10px var(--space-md);
+  border: 1px solid rgba(10, 25, 49, 0.18);
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-dark);
+  background: transparent;
+  transition: background var(--duration-base) var(--ease-out), border-color var(--duration-base) var(--ease-out);
+}
+
+.site-search__pill:hover {
+  background: rgba(10, 25, 49, 0.05);
+  border-color: var(--color-dark);
+}
+
+.site-search__error {
+  display: none;
+  margin-top: var(--space-md);
+  font-size: 13px;
+  color: var(--color-error);
+}
+
+.site-search__error--visible {
+  display: block;
 }
 
 .footer {
@@ -2954,5 +3113,25 @@ body.modal-open {
 
   .beyond__media-badge-title {
     font-size: 16px;
+  }
+
+  .site-search__panel {
+    padding-block: var(--space-md);
+  }
+
+  .site-search__form {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-sm);
+    padding-right: 0;
+  }
+
+  .site-search__input {
+    font-size: 20px;
+  }
+
+  .site-search__submit {
+    width: 100%;
+    text-align: center;
   }
 }
