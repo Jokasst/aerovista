@@ -1834,16 +1834,27 @@ button.search-card__static-value {
   display: flex;
   justify-content: center;
   gap: var(--space-lg);
-  padding: var(--space-md) var(--space-md);
+  padding: 0 var(--space-md);
   font-size: 15px;
+  position: relative;
+}
+
+.feature-tabs__indicator {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--color-white);
+  border-radius: 1px;
+  transition: transform var(--duration-medium) var(--ease-spring),
+              width var(--duration-medium) var(--ease-spring);
 }
 
 .feature-tabs__link {
   color: var(--color-text-muted);
-  padding-bottom: 8px;
+  padding: var(--space-md) 0 8px;
   opacity: 0.6;
-  border-bottom: 2px solid transparent;
-  transition: opacity var(--duration-base) var(--ease-out), border-color var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out);
+  transition: opacity var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out);
 }
 
 .feature-tabs__link--active {
@@ -1853,7 +1864,6 @@ button.search-card__static-value {
 .feature-tabs__link--active,
 .feature-tabs__link:hover {
   opacity: 1;
-  border-bottom-color: var(--color-white);
 }
 
 .feature-tabs__banner {

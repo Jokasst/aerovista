@@ -727,7 +727,27 @@ const featureTabsHeading = document.getElementById('featureTabsHeading');
 const featureTabsText = document.getElementById('featureTabsText');
 const featureTabsCta = document.getElementById('featureTabsCta');
 
+function updateFeatureTabsIndicator(nav) {
+  const indicator = nav.querySelector('.feature-tabs__indicator');
+  const active = nav.querySelector('.feature-tabs__link--active');
+  if (!indicator || !active) return;
+  indicator.style.width = `${active.offsetWidth}px`;
+  indicator.style.transform = `translateX(${active.offsetLeft}px)`;
+}
+
+function updateAllFeatureTabsIndicators() {
+  document.querySelectorAll('.feature-tabs__nav-inner').forEach(updateFeatureTabsIndicator);
+}
+
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(updateAllFeatureTabsIndicators);
+}
+window.addEventListener('load', updateAllFeatureTabsIndicators);
+window.addEventListener('resize', updateAllFeatureTabsIndicators);
+updateAllFeatureTabsIndicators();
+
 document.querySelectorAll('.feature-tabs__nav').forEach((nav) => {
+  const navInner = nav.querySelector('.feature-tabs__nav-inner');
   const tabs = Array.from(nav.querySelectorAll('.feature-tabs__link'));
 
   nav.addEventListener('click', (e) => {
@@ -742,6 +762,7 @@ document.querySelectorAll('.feature-tabs__nav').forEach((nav) => {
 
     tabs.forEach((el) => el.classList.remove('feature-tabs__link--active'));
     btn.classList.add('feature-tabs__link--active');
+    updateFeatureTabsIndicator(navInner);
 
     if (!featureTabsBanner || !btn.dataset.image) return;
     featureTabsBanner.classList.add(exitClass);
