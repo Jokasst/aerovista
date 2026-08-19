@@ -41,6 +41,7 @@ body {
   font-family: var(--font-main);
   background: var(--color-bg);
   color: var(--color-dark);
+  overflow-x: hidden;
 }
 
 .container {
@@ -1865,7 +1866,8 @@ button.search-card__static-value {
   background-position: center;
   display: flex;
   align-items: center;
-  transition: opacity var(--duration-base) var(--ease-out);
+  overflow: hidden;
+  transition: opacity var(--duration-medium) var(--ease-out), transform var(--duration-medium) var(--ease-out);
 }
 
 .feature-tabs__banner::before {
@@ -1876,8 +1878,18 @@ button.search-card__static-value {
   pointer-events: none;
 }
 
-.feature-tabs__banner--switching {
-  opacity: 0.4;
+.feature-tabs__banner--exit-left {
+  opacity: 0;
+  transform: translateX(-32px);
+}
+
+.feature-tabs__banner--exit-right {
+  opacity: 0;
+  transform: translateX(32px);
+}
+
+.feature-tabs__banner--enter-instant {
+  transition: none;
 }
 
 .feature-tabs__banner-inner {

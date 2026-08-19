@@ -728,14 +728,24 @@ const featureTabsText = document.getElementById('featureTabsText');
 const featureTabsCta = document.getElementById('featureTabsCta');
 
 document.querySelectorAll('.feature-tabs__nav').forEach((nav) => {
+  const tabs = Array.from(nav.querySelectorAll('.feature-tabs__link'));
+
   nav.addEventListener('click', (e) => {
     const btn = e.target.closest('.feature-tabs__link');
-    if (!btn) return;
-    nav.querySelectorAll('.feature-tabs__link').forEach((t) => t.classList.remove('feature-tabs__link--active'));
+    if (!btn || btn.classList.contains('feature-tabs__link--active')) return;
+
+    const oldIndex = tabs.findIndex((el) => el.classList.contains('feature-tabs__link--active'));
+    const newIndex = tabs.indexOf(btn);
+    const forward = newIndex > oldIndex;
+    const exitClass = forward ? 'feature-tabs__banner--exit-left' : 'feature-tabs__banner--exit-right';
+    const enterFromClass = forward ? 'feature-tabs__banner--exit-right' : 'feature-tabs__banner--exit-left';
+
+    tabs.forEach((el) => el.classList.remove('feature-tabs__link--active'));
     btn.classList.add('feature-tabs__link--active');
 
     if (!featureTabsBanner || !btn.dataset.image) return;
-    featureTabsBanner.classList.add('feature-tabs__banner--switching');
+    featureTabsBanner.classList.add(exitClass);
+
     window.setTimeout(() => {
       featureTabsBanner.style.backgroundImage = `url('${btn.dataset.image}')`;
       featureTabsHeading.dataset.i18n = btn.dataset.headingKey;
@@ -744,8 +754,12 @@ document.querySelectorAll('.feature-tabs__nav').forEach((nav) => {
       featureTabsText.textContent = t(btn.dataset.textKey);
       featureTabsCta.dataset.i18n = btn.dataset.ctaKey;
       featureTabsCta.textContent = t(btn.dataset.ctaKey);
-      featureTabsBanner.classList.remove('feature-tabs__banner--switching');
-    }, 150);
+
+      featureTabsBanner.classList.remove(exitClass);
+      featureTabsBanner.classList.add('feature-tabs__banner--enter-instant', enterFromClass);
+      void featureTabsBanner.offsetWidth;
+      featureTabsBanner.classList.remove('feature-tabs__banner--enter-instant', enterFromClass);
+    }, 300);
   });
 });
 
