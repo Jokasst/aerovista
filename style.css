@@ -1084,6 +1084,10 @@ body {
   border-color: var(--color-dark);
 }
 
+.search-card__promo-input:focus-visible {
+  box-shadow: 0 0 0 3px rgba(10, 25, 49, 0.08);
+}
+
 .radio {
   display: flex;
   align-items: center;
@@ -1395,7 +1399,7 @@ button.search-card__static-value {
   padding: var(--space-md);
   overflow: hidden;
   isolation: isolate;
-  transition: transform var(--duration-medium) var(--ease-out);
+  transition: transform var(--duration-medium) var(--ease-out), box-shadow var(--duration-medium) var(--ease-out);
 }
 
 .promo-card::before {
@@ -1408,6 +1412,7 @@ button.search-card__static-value {
 
 .promo-card:hover {
   transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(10, 25, 49, 0.22);
 }
 
 .promo-card h3 {
@@ -1497,6 +1502,11 @@ button.search-card__static-value {
 
 .destinations__from-input:focus {
   color: var(--color-accent);
+}
+
+.destinations__from-input:focus-visible {
+  box-shadow: 0 0 0 3px rgba(10, 25, 49, 0.08);
+  border-radius: var(--radius-xs, 4px);
 }
 
 .destinations__edit-icon {
@@ -1637,6 +1647,11 @@ button.search-card__static-value {
   overflow: hidden;
   color: var(--color-white);
   font-weight: bold;
+  transition: box-shadow var(--duration-medium) var(--ease-out);
+}
+
+.destination-card:hover {
+  box-shadow: 0 20px 40px rgba(10, 25, 49, 0.25);
 }
 
 .destination-card__overlay {
@@ -1920,6 +1935,12 @@ button.search-card__static-value {
   padding: var(--space-md);
   overflow: hidden;
   isolation: isolate;
+  transition: transform var(--duration-medium) var(--ease-out), box-shadow var(--duration-medium) var(--ease-out);
+}
+
+.package-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(10, 25, 49, 0.22);
 }
 
 .package-card::before {
@@ -2413,6 +2434,36 @@ button.search-card__static-value {
   transform: scale(0.96);
   transition: transform var(--duration-instant) var(--ease-out);
 }
+
+.js-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--duration-slow) var(--ease-out), transform var(--duration-slow) var(--ease-out);
+}
+
+.js-reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.js-reveal > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--duration-slow) var(--ease-out), transform var(--duration-slow) var(--ease-out);
+}
+
+.js-reveal--visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.js-reveal--visible > *:nth-child(1) { transition-delay: 0ms; }
+.js-reveal--visible > *:nth-child(2) { transition-delay: 60ms; }
+.js-reveal--visible > *:nth-child(3) { transition-delay: 120ms; }
+.js-reveal--visible > *:nth-child(4) { transition-delay: 180ms; }
+.js-reveal--visible > *:nth-child(5) { transition-delay: 240ms; }
+.js-reveal--visible > *:nth-child(6) { transition-delay: 300ms; }
+.js-reveal--visible > *:nth-child(n+7) { transition-delay: 340ms; }
 
 @media (prefers-reduced-motion: reduce) {
   *,

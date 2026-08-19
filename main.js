@@ -133,7 +133,7 @@ const translations = {
     'airport.noMatches': 'No matches',
     'langSwitcher.code': 'EN',
     'login.heading': 'Log in to your account',
-    'login.emailPlaceholder': 'Email address or membership number',
+    'login.emailPlaceholder': 'Email address',
     'login.passwordPlaceholder': 'Password',
     'login.showPassword': 'Show password',
     'login.hidePassword': 'Hide password',
@@ -144,7 +144,8 @@ const translations = {
     'login.notMember': 'Not yet a Privilege Club member?',
     'login.joinNow': 'Join now',
     'login.resetEmail': 'Reset email',
-    'login.emailRequired': 'Enter your email address or membership number',
+    'login.emailRequired': 'Enter your email address',
+    'login.emailInvalid': 'Enter a valid email address',
     'login.passwordRequired': 'Enter your password',
     'login.invalidCredentials': 'Incorrect email/membership number or password',
     'login.success': 'Logged in successfully',
@@ -299,7 +300,7 @@ const translations = {
     'airport.noMatches': 'Совпадений не найдено',
     'langSwitcher.code': 'RU',
     'login.heading': 'Вход в аккаунт',
-    'login.emailPlaceholder': 'Email или номер участника',
+    'login.emailPlaceholder': 'Email',
     'login.passwordPlaceholder': 'Пароль',
     'login.showPassword': 'Показать пароль',
     'login.hidePassword': 'Скрыть пароль',
@@ -310,7 +311,8 @@ const translations = {
     'login.notMember': 'Ещё не участник Privilege Club?',
     'login.joinNow': 'Присоединиться',
     'login.resetEmail': 'Отправить письмо для сброса',
-    'login.emailRequired': 'Введите email или номер участника',
+    'login.emailRequired': 'Введите email',
+    'login.emailInvalid': 'Введите корректный email',
     'login.passwordRequired': 'Введите пароль',
     'login.invalidCredentials': 'Неверный email/номер участника или пароль',
     'login.success': 'Вход выполнен успешно',
@@ -1499,6 +1501,8 @@ const authErrorBanner = document.getElementById('authErrorBanner');
 
 if (loginForm && loginEmail && loginPassword) {
   const emailField = loginEmail.closest('.auth__field');
+  const emailFieldError = emailField.querySelector('.auth__field-error');
+  const loginEmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   loginEmail.addEventListener('input', () => { setFieldError(emailField, false); hideBanner(authErrorBanner, 'auth__error-banner--visible'); });
   loginPassword.addEventListener('input', () => { setFieldError(passwordField, false); hideBanner(authErrorBanner, 'auth__error-banner--visible'); });
@@ -1507,12 +1511,18 @@ if (loginForm && loginEmail && loginPassword) {
     e.preventDefault();
     hideBanner(authErrorBanner, 'auth__error-banner--visible');
 
-    const emailEmpty = loginEmail.value.trim() === '';
+    const emailValue = loginEmail.value.trim();
+    const emailEmpty = emailValue === '';
+    const emailInvalid = !emailEmpty && !loginEmailPattern.test(emailValue);
     const passwordEmpty = loginPassword.value.trim() === '';
-    setFieldError(emailField, emailEmpty);
+
+    const emailErrorKey = emailEmpty ? 'login.emailRequired' : 'login.emailInvalid';
+    emailFieldError.dataset.i18n = emailErrorKey;
+    emailFieldError.textContent = t(emailErrorKey);
+    setFieldError(emailField, emailEmpty || emailInvalid);
     setFieldError(passwordField, passwordEmpty);
-    if (emailEmpty || passwordEmpty) {
-      (emailEmpty ? loginEmail : loginPassword).focus();
+    if (emailEmpty || emailInvalid || passwordEmpty) {
+      (emailEmpty || emailInvalid ? loginEmail : loginPassword).focus();
       return;
     }
 
@@ -1605,4 +1615,21 @@ if (registerForm && registerEmail && registerPassword && registerConfirm) {
 }
 
 applyTranslations(currentLang);
+
+const revealTargets = document.querySelectorAll('.destinations__grid, .promo-cards__grid, .packages__grid, .feature-tabs__content');
+if (revealTargets.length && 'IntersectionObserver' in window) {
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('js-reveal--visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  revealTargets.forEach((el) => {
+    el.classList.add('js-reveal');
+    revealObserver.observe(el);
+  });
+}
 

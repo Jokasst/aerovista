@@ -1,0 +1,35 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "files": [
+          "register.html"
+        ],
+        "createdAt": "2026-08-19T09:14:23.451Z",
+        "reason": "pre-existing site-wide font choice (Inter, per Figma mockup), used across index.html/login.html/register.html since project start — not a new choice made this turn"
+      },
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "files": [
+          "style.css"
+        ],
+        "createdAt": "2026-08-19T13:10:58.822Z",
+        "reason": "pre-existing site-wide font choice (Inter, per original Figma mockup), used across the entire stylesheet since project start — not a choice made this turn"
+      },
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "files": [
+          "login.html"
+        ],
+        "createdAt": "2026-08-19T13:37:45.368Z",
+        "reason": "pre-existing site-wide font choice (Inter, per original Figma mockup), used across index.html/style.css/register.html/login.html since project start — not a new choice made this turn"
+      }
+    ]
+  }
+}
