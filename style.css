@@ -2404,6 +2404,102 @@ body.modal-open {
   overflow: hidden;
 }
 
+.beyond-auth {
+  min-height: 0;
+  align-items: flex-start;
+  padding-top: calc(72px + var(--space-xs) + 70px);
+  padding-bottom: calc(var(--space-xs) + 70px);
+}
+
+.beyond-auth .container {
+  max-width: 1160px;
+}
+
+.beyond__card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: 0px 12px 32px rgba(10, 25, 49, 0.08);
+  overflow: hidden;
+}
+
+.beyond__media {
+  position: relative;
+  min-height: 380px;
+}
+
+.beyond__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.beyond__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 25, 49, 0.22);
+}
+
+.beyond__media-badge {
+  position: absolute;
+  top: var(--space-lg);
+  right: var(--space-lg);
+  z-index: 1;
+  text-align: right;
+  color: var(--color-white);
+  text-shadow: 0 2px 12px rgba(10, 25, 49, 0.45);
+}
+
+.beyond__media-badge-title {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.beyond__media-badge-sub {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  opacity: 0.85;
+}
+
+.beyond__panel {
+  padding: var(--space-lg) var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.beyond__panel h1 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--space-xs);
+}
+
+.beyond__back {
+  margin-top: var(--space-lg);
+  font-size: 13px;
+  color: var(--color-dark);
+}
+
+.beyond__back a {
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: var(--color-dark);
+  transition: color var(--duration-base) var(--ease-out);
+}
+
+.beyond__back a:hover {
+  color: var(--color-accent);
+}
+
 .footer {
   background: var(--color-dark);
   color: var(--color-white);
@@ -2593,6 +2689,15 @@ body.modal-open {
 
   .footer__grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .beyond__card {
+    grid-template-columns: 1fr;
+  }
+
+  .beyond__media {
+    min-height: 0;
+    height: 220px;
   }
 }
 
@@ -2836,5 +2941,18 @@ body.modal-open {
   .newsletter__inputs input:first-child {
     border-right: none;
     border-bottom: 1px solid #e5e5e8;
+  }
+
+  .beyond__panel {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .beyond__media-badge {
+    top: var(--space-sm);
+    right: var(--space-sm);
+  }
+
+  .beyond__media-badge-title {
+    font-size: 16px;
   }
 }

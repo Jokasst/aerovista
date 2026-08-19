@@ -175,6 +175,12 @@ const translations = {
     'forgotModal.success': 'Check your email for a link to reset your password.',
     'forgotModal.notConfigured': 'Password reset isn’t connected to a backend yet. Add your Supabase project keys in supabase-config.js.',
     'forgotModal.errorGeneric': 'Something went wrong. Please try again.',
+    'beyond.badgeTitle': 'Beyond Business',
+    'beyond.badgeSub': 'By AeroVista',
+    'beyond.heading': 'Log in to your account',
+    'beyond.subtext': 'Your details will be automatically filled in for a faster, easier experience',
+    'beyond.backLabel': 'Not travelling for business?',
+    'beyond.backLink': 'Log in to Privilege Club',
   },
   ru: {
     'nav.explore': 'Куда лететь',
@@ -352,6 +358,12 @@ const translations = {
     'forgotModal.success': 'Проверьте почту — мы отправили ссылку для сброса пароля.',
     'forgotModal.notConfigured': 'Сброс пароля пока не подключён к бэкенду. Впишите ключи вашего проекта Supabase в supabase-config.js.',
     'forgotModal.errorGeneric': 'Что-то пошло не так. Попробуйте ещё раз.',
+    'beyond.badgeTitle': 'Beyond Business',
+    'beyond.badgeSub': 'От AeroVista',
+    'beyond.heading': 'Вход в аккаунт',
+    'beyond.subtext': 'Ваши данные будут заполнены автоматически для быстрого и удобного входа',
+    'beyond.backLabel': 'Не летите по делам бизнеса?',
+    'beyond.backLink': 'Войти в Privilege Club',
   },
 };
 
@@ -1492,6 +1504,7 @@ function wirePasswordToggle(toggleId, fieldId, inputId) {
 wirePasswordToggle('passwordToggle', 'passwordField', 'loginPassword');
 wirePasswordToggle('registerPasswordToggle', 'registerPasswordField', 'registerPassword');
 wirePasswordToggle('registerConfirmToggle', 'registerConfirmField', 'registerConfirm');
+wirePasswordToggle('beyondPasswordToggle', 'beyondPasswordField', 'beyondPassword');
 
 function setFieldError(fieldEl, hasError) {
   fieldEl.classList.toggle('auth__field--error', hasError);
@@ -1560,6 +1573,61 @@ if (loginForm && loginEmail && loginPassword) {
 
     if (error) {
       showBanner(authErrorBanner, t('login.invalidCredentials'), 'auth__error-banner--visible');
+      return;
+    }
+
+    window.location.href = 'index.html';
+  });
+}
+
+const beyondLoginForm = document.getElementById('beyondLoginForm');
+const beyondEmail = document.getElementById('beyondEmail');
+const beyondPassword = document.getElementById('beyondPassword');
+const beyondPasswordField = document.getElementById('beyondPasswordField');
+const beyondSubmit = document.getElementById('beyondSubmit');
+const beyondErrorBanner = document.getElementById('beyondErrorBanner');
+
+if (beyondLoginForm && beyondEmail && beyondPassword) {
+  const beyondEmailField = beyondEmail.closest('.auth__field');
+  const beyondEmailError = beyondEmailField.querySelector('.auth__field-error');
+  const beyondEmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  beyondEmail.addEventListener('input', () => { setFieldError(beyondEmailField, false); hideBanner(beyondErrorBanner, 'auth__error-banner--visible'); });
+  beyondPassword.addEventListener('input', () => { setFieldError(beyondPasswordField, false); hideBanner(beyondErrorBanner, 'auth__error-banner--visible'); });
+
+  beyondLoginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    hideBanner(beyondErrorBanner, 'auth__error-banner--visible');
+
+    const emailValue = beyondEmail.value.trim();
+    const emailEmpty = emailValue === '';
+    const emailInvalid = !emailEmpty && !beyondEmailPattern.test(emailValue);
+    const passwordEmpty = beyondPassword.value.trim() === '';
+
+    const emailErrorKey = emailEmpty ? 'login.emailRequired' : 'login.emailInvalid';
+    beyondEmailError.dataset.i18n = emailErrorKey;
+    beyondEmailError.textContent = t(emailErrorKey);
+    setFieldError(beyondEmailField, emailEmpty || emailInvalid);
+    setFieldError(beyondPasswordField, passwordEmpty);
+    if (emailEmpty || emailInvalid || passwordEmpty) {
+      (emailEmpty || emailInvalid ? beyondEmail : beyondPassword).focus();
+      return;
+    }
+
+    if (!supabaseClient) {
+      showBanner(beyondErrorBanner, t('login.notConfigured'), 'auth__error-banner--visible');
+      return;
+    }
+
+    beyondSubmit.disabled = true;
+    const { error } = await supabaseClient.auth.signInWithPassword({
+      email: beyondEmail.value.trim(),
+      password: beyondPassword.value,
+    });
+    beyondSubmit.disabled = false;
+
+    if (error) {
+      showBanner(beyondErrorBanner, t('login.invalidCredentials'), 'auth__error-banner--visible');
       return;
     }
 
