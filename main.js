@@ -1,6 +1,3 @@
-// ==========================================================================
-// i18n — словари переводов EN / RU
-// ==========================================================================
 const translations = {
   en: {
     'nav.explore': 'Explore',
@@ -429,7 +426,6 @@ function applyTranslations(lang) {
     el.textContent = t(el.dataset.i18n);
   });
 
-  // Текст вкладок сменил ширину вместе с языком — сдвигаем индикатор следом
   if (typeof updateAllTabIndicators === 'function') updateAllTabIndicators();
   if (typeof updateAllSubtabIndicators === 'function') updateAllSubtabIndicators();
 
@@ -501,9 +497,6 @@ function applyTranslations(lang) {
   });
 }
 
-// ==========================================================================
-// Переключатель языка (EN / RU) в header
-// ==========================================================================
 const langSwitcher = document.getElementById('langSwitcher');
 const langSwitcherTrigger = document.getElementById('langSwitcherTrigger');
 const langSwitcherMenu = document.getElementById('langSwitcherMenu');
@@ -530,9 +523,6 @@ if (langSwitcher && langSwitcherTrigger && langSwitcherMenu) {
   });
 }
 
-// ==========================================================================
-// Хедер — материализуется в полупрозрачную панель при скролле
-// ==========================================================================
 const header = document.querySelector('.header');
 if (header) {
   const updateHeaderState = () => {
@@ -542,12 +532,6 @@ if (header) {
   window.addEventListener('scroll', updateHeaderState, { passive: true });
 }
 
-// ==========================================================================
-// Переключение вкладок в форме поиска (Book a flight / Stopover / Manage / Status)
-// ==========================================================================
-
-// Двигает плавающий индикатор под активную вкладку (ширина + позиция).
-// Вызывается при клике, смене языка (меняется ширина текста) и ресайзе.
 function updateTabIndicator(tabsEl) {
   const indicator = tabsEl.querySelector('.search-card__tab-indicator');
   const active = tabsEl.querySelector('.search-card__tab--active');
@@ -563,11 +547,8 @@ document.querySelectorAll('.search-card__tabs').forEach((tabs) => {
     tabs.querySelectorAll('.search-card__tab').forEach((t) => t.classList.remove('search-card__tab--active'));
     btn.classList.add('search-card__tab--active');
     updateTabIndicator(tabs);
-    // На телефоне вкладки скроллятся горизонтально — подводим выбранную в кадр
     btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
 
-    // Показываем панель, привязанную к вкладке (data-panel), остальные скрываем.
-    // Book a flight / Stopover / Manage / Status — независимые блоки контента.
     const targetPanel = btn.dataset.panel;
     if (targetPanel) {
       document.querySelectorAll('.search-card > .search-card__panel').forEach((panel) => {
@@ -575,9 +556,6 @@ document.querySelectorAll('.search-card__tabs').forEach((tabs) => {
       });
     }
 
-    // Саб-вкладки (Vienna stopover / Flights + Hotel / Hotels) внутри только
-    // что показанной панели были высчитаны с шириной/позицией 0, пока их
-    // родитель был display:none — пересчитываем теперь, когда он виден.
     updateAllSubtabIndicators();
   });
 });
@@ -586,8 +564,6 @@ function updateAllTabIndicators() {
   document.querySelectorAll('.search-card__tabs').forEach(updateTabIndicator);
 }
 
-// Первая позиция индикатора — после загрузки шрифта, чтобы ширина текста
-// (а значит и ширина вкладки) уже была посчитана верно.
 if (document.fonts && document.fonts.ready) {
   document.fonts.ready.then(updateAllTabIndicators);
 }
@@ -595,12 +571,6 @@ window.addEventListener('load', updateAllTabIndicators);
 window.addEventListener('resize', updateAllTabIndicators);
 updateAllTabIndicators();
 
-// ==========================================================================
-// Саб-вкладки внутри Stopover / Packages (Vienna stopover / Flights + Hotel / Hotels)
-// ==========================================================================
-
-// Тот же плавающий индикатор, что и у верхних вкладок, только скользит под
-// подчёркиванием саб-вкладки, а не под пилюлей.
 function updateSubtabIndicator(subtabsEl) {
   const indicator = subtabsEl.querySelector('.search-card__subtab-indicator');
   const active = subtabsEl.querySelector('.search-card__subtab--active');
@@ -638,9 +608,6 @@ window.addEventListener('load', updateAllSubtabIndicators);
 window.addEventListener('resize', updateAllSubtabIndicators);
 updateAllSubtabIndicators();
 
-// ==========================================================================
-// Переключение вкладок Vienna Duty Free / Starlink Wi-Fi / Bsuite
-// ==========================================================================
 document.querySelectorAll('.feature-tabs__nav').forEach((nav) => {
   nav.addEventListener('click', (e) => {
     const btn = e.target.closest('.feature-tabs__link');
@@ -650,9 +617,6 @@ document.querySelectorAll('.feature-tabs__nav').forEach((nav) => {
   });
 });
 
-// ==========================================================================
-// Мобильное меню
-// ==========================================================================
 const navToggle = document.getElementById('navToggle');
 const nav = document.getElementById('nav');
 if (navToggle && nav) {
@@ -663,9 +627,6 @@ if (navToggle && nav) {
   });
 }
 
-// ==========================================================================
-// Swap From / To — работает и в основной строке, и в каждой строке Multi-city
-// ==========================================================================
 document.addEventListener('click', (e) => {
   const swapBtn = e.target.closest('.search-card__swap');
   if (!swapBtn) return;
@@ -677,9 +638,6 @@ document.addEventListener('click', (e) => {
   [from.value, to.value] = [to.value, from.value];
 });
 
-// ==========================================================================
-// Panel Passengers / Class (в форме поиска рейсов)
-// ==========================================================================
 const passTrigger = document.getElementById('passengersTrigger');
 const passPanel = document.getElementById('passengersPanel');
 const passValue = document.getElementById('passengersValue');
@@ -703,13 +661,13 @@ if (passTrigger && passPanel && passValue) {
 
   passPanel.querySelectorAll('.passengers-panel__btn').forEach((btn) => {
     btn.addEventListener('click', () => {
-      const target = btn.dataset.target; // 'adults' или 'children'
-      const action = btn.dataset.action; // 'increase' или 'decrease'
+      const target = btn.dataset.target;
+      const action = btn.dataset.action;
 
       if (action === 'increase') {
         counts[target]++;
       } else if (target === 'adults' && counts.adults > 1) {
-        counts.adults--; // минимум 1 взрослый
+        counts.adults--;
       } else if (target === 'children' && counts.children > 0) {
         counts.children--;
       }
@@ -742,11 +700,6 @@ if (passTrigger && passPanel && passValue) {
   });
 }
 
-// ==========================================================================
-// Passengers/Room панель и Class-дропдаун — переиспользуемая пара для любых
-// полей вида "Passengers / Room" + отдельное "Class" (Stopover, Flights +
-// Hotel, и т.д.). Возвращают функцию обновления подписи для applyTranslations.
-// ==========================================================================
 function setupPassengersRoomPanel(trigger, panel, valueEl, doneBtn) {
   if (!trigger || !panel || !valueEl) return null;
   const counts = { adults: 1, children: 0, rooms: 1 };
@@ -764,17 +717,17 @@ function setupPassengersRoomPanel(trigger, panel, valueEl, doneBtn) {
 
   panel.querySelectorAll('.passengers-panel__btn').forEach((btn) => {
     btn.addEventListener('click', () => {
-      const target = btn.dataset.target; // 'adults' / 'children' / 'rooms'
-      const action = btn.dataset.action; // 'increase' / 'decrease'
+      const target = btn.dataset.target;
+      const action = btn.dataset.action;
 
       if (action === 'increase') {
         counts[target]++;
       } else if (target === 'adults' && counts.adults > 1) {
-        counts.adults--; // минимум 1 взрослый
+        counts.adults--;
       } else if (target === 'children' && counts.children > 0) {
         counts.children--;
       } else if (target === 'rooms' && counts.rooms > 1) {
-        counts.rooms--; // минимум 1 номер
+        counts.rooms--;
       }
 
       const countEl = panel.querySelector(`[data-count-target="${target}"]`);
@@ -867,16 +820,10 @@ updateHotelsPassengersLabelRef = setupPassengersRoomPanel(
   document.getElementById('hotelsPassengersDone'),
 );
 
-// ==========================================================================
-// Flight status — дата выбирается не календарём, а простым выпадающим
-// списком: сегодня ± несколько дней (а не любая дата в году), как в макете.
-// ==========================================================================
 function formatStatusDate(dateObj, lang) {
   return `${dateObj.getDate()} ${monthNamesFull[lang][dateObj.getMonth()]}`;
 }
 
-// Диапазон дат для выпадающего списка: 2 дня назад — 5 дней вперёд от
-// сегодняшнего (то есть неделя с небольшим запасом в обе стороны)
 function buildStatusDateRange() {
   const today = startOfToday();
   const dates = [];
@@ -942,9 +889,6 @@ const updateStatusFlightDateRef = setupStatusDateDropdown(
   document.getElementById('statusFlightDateValue'),
 );
 
-// ==========================================================================
-// Destinations — Return / One way (переключает даты на карточках городов)
-// ==========================================================================
 document.querySelectorAll('.destinations__toggle').forEach((toggle) => {
   toggle.addEventListener('click', (e) => {
     const btn = e.target.closest('.destinations__toggle-btn');
@@ -957,9 +901,6 @@ document.querySelectorAll('.destinations__toggle').forEach((toggle) => {
   });
 });
 
-// ==========================================================================
-// Destinations — редактируемое поле "From"
-// ==========================================================================
 document.querySelectorAll('.destinations__edit-icon').forEach((icon) => {
   icon.addEventListener('click', () => {
     const input = icon.closest('.destinations__from').querySelector('.destinations__from-input');
@@ -969,9 +910,6 @@ document.querySelectorAll('.destinations__edit-icon').forEach((icon) => {
   });
 });
 
-// ==========================================================================
-// Destinations — Class dropdown (Economy / Business / First class)
-// ==========================================================================
 const classTrigger = document.getElementById('classDropdownTrigger');
 const classMenu = document.getElementById('classDropdownMenu');
 const classValue = document.getElementById('classDropdownValue');
@@ -988,20 +926,17 @@ if (classTrigger && classMenu && classValue) {
 
   classOptions.forEach((option) => {
     option.addEventListener('click', () => {
-      const selected = option.dataset.value; // "Economy" / "Business" / "First class"
+      const selected = option.dataset.value;
 
-      // обновляем видимый текст в dropdown
       classValue.textContent = t(classKeyMap[selected]);
 
       classOptions.forEach((o) => o.classList.remove('destinations__class-option--selected'));
       option.classList.add('destinations__class-option--selected');
 
-      // обновляем класс на всех карточках направлений
       document.querySelectorAll('.destination-card__class').forEach((classEl) => {
         classEl.textContent = t(classKeyMap[selected]);
       });
 
-      // закрываем меню
       classMenu.classList.remove('destinations__class-menu--open');
       classTrigger.setAttribute('aria-expanded', false);
     });
@@ -1015,12 +950,6 @@ if (classTrigger && classMenu && classValue) {
   });
 }
 
-// Переключение Return / One way / Multi-city — обобщено на любую панель
-// (Book a flight, Stopover, и будущие), а не завязано на конкретные id:
-// ищем ближайшее поле Return и блок Multi-city внутри той же панели/саб-панели.
-// Селектор ловит только "верхний" trip-type каждой панели — вложенный
-// .search-card__trip-type внутри .stopover-options__col (переиспользованный
-// класс для вопроса "когда добавить остановку") под него не попадает.
 document.querySelectorAll('.search-card__form > .search-card__trip-type, .search-card__subpanel > .search-card__trip-type').forEach((tripType) => {
   const scope = tripType.closest('.search-card__form, .search-card__subpanel');
   const returnFieldEl = scope.querySelector('.search-card__return-field');
@@ -1028,7 +957,7 @@ document.querySelectorAll('.search-card__form > .search-card__trip-type, .search
 
   tripType.querySelectorAll('input[type="radio"]').forEach((radio) => {
     radio.addEventListener('change', () => {
-      const value = radio.dataset.value; // "return" / "oneway" / "multicity"
+      const value = radio.dataset.value;
 
       if (value === 'oneway') {
         if (returnFieldEl) returnFieldEl.style.display = 'none';
@@ -1037,7 +966,6 @@ document.querySelectorAll('.search-card__form > .search-card__trip-type, .search
         if (returnFieldEl) returnFieldEl.style.display = 'none';
         if (multicityEl) multicityEl.classList.add('search-card__multicity--visible');
       } else {
-        // Return
         if (returnFieldEl) returnFieldEl.style.display = '';
         if (multicityEl) multicityEl.classList.remove('search-card__multicity--visible');
       }
@@ -1045,9 +973,6 @@ document.querySelectorAll('.search-card__form > .search-card__trip-type, .search
   });
 });
 
-// Кнопка "+ Add a flight" — добавляет ещё одну строку рейса (From / To / Departure)
-// в тот блок .search-card__multicity, где на неё нажали (делегирование вместо id,
-// чтобы одинаково работать и в Book a flight, и в Stopover)
 document.addEventListener('click', (e) => {
   const addBtn = e.target.closest('.search-card__add-city');
   if (!addBtn) return;
@@ -1089,7 +1014,6 @@ document.addEventListener('click', (e) => {
   refreshDateTriggers();
 });
 
-// Кнопка "×" — убирает рейс из списка Multi-city
 document.addEventListener('click', (e) => {
   const removeBtn = e.target.closest('.multicity-leg__remove');
   if (!removeBtn) return;
@@ -1097,11 +1021,11 @@ document.addEventListener('click', (e) => {
 });
 
 const todayForInit = new Date();
-let currentView = new Date(todayForInit.getFullYear(), todayForInit.getMonth(), 1); // месяц первой (левой) сетки, вторая сетка = currentView + 1
-let activeTriggerEl = null; // кнопка даты, которую редактируем в одиночном режиме (Multi-city / One way)
-let pickerMode = 'single'; // 'single' | 'range'
-let rangeStart = null; // Date | null — выбранная дата Departure в режиме диапазона
-let rangeEnd = null; // Date | null — выбранная дата Return в режиме диапазона
+let currentView = new Date(todayForInit.getFullYear(), todayForInit.getMonth(), 1);
+let activeTriggerEl = null;
+let pickerMode = 'single';
+let rangeStart = null;
+let rangeEnd = null;
 
 const calendarPopup = document.getElementById('calendarPopup');
 const calendarDays = document.getElementById('calendarDays');
@@ -1112,14 +1036,9 @@ const searchCard = document.querySelector('.search-card');
 const departureTrigger = document.getElementById('departureTrigger');
 const returnTrigger = document.getElementById('returnTrigger');
 
-// Триггер Departure/Return, к которому сейчас относится диапазон (rangeStart/rangeEnd).
-// Меняется на пару, привязанную к конкретной группе полей — Book a flight,
-// Stopover и любые будущие блоки с датами больше не завязаны на конкретные id.
 let activeDepartureTrigger = departureTrigger;
 let activeReturnTrigger = returnTrigger;
 
-// Даты-заглушки в разметке быстро устаревают. Если Departure/Return уже в прошлом
-// (или отсутствуют), подставляем ближайшие разумные даты в будущем от сегодняшней.
 function ensureFutureDefaultDates(depTrigger, retTrigger) {
   if (!depTrigger || !retTrigger) return;
   const today = startOfToday();
@@ -1182,7 +1101,6 @@ function buildMonthGrid(monthDate, container) {
   const firstDay = new Date(monthDate.getFullYear(), monthDate.getMonth(), 1);
   const daysInMonth = new Date(monthDate.getFullYear(), monthDate.getMonth() + 1, 0).getDate();
 
-  // День недели первого числа (0=вс, переводим на пн=0)
   let startOffset = firstDay.getDay() - 1;
   if (startOffset < 0) startOffset = 6;
 
@@ -1219,7 +1137,6 @@ function buildMonthGrid(monthDate, container) {
         btn.disabled = true;
         btn.className += ' calendar-popup__day--disabled';
       } else if ((isStart && isEnd) || isSingleSelected) {
-        // Начало и конец диапазона совпадают (или одиночный режим) — обычный сплошной кружок
         btn.className += ' calendar-popup__day--selected';
       } else if (isStart) {
         btn.className += ' calendar-popup__day--range-start';
@@ -1230,8 +1147,6 @@ function buildMonthGrid(monthDate, container) {
       }
 
       if (!isPast) btn.addEventListener('click', (e) => {
-        // Клик перерисовывает календарь и отсоединяет эту кнопку от DOM,
-        // поэтому глобальный "клик вне поповера" не должен увидеть это всплытие
         e.stopPropagation();
         selectDate(date);
       });
@@ -1270,7 +1185,6 @@ function selectDate(dateObj) {
     return;
   }
 
-  // Режим диапазона (Departure + Return, кто бы ими ни были в данный момент)
   if (!rangeStart || (rangeStart && rangeEnd)) {
     rangeStart = dateObj;
     rangeEnd = null;
@@ -1287,21 +1201,17 @@ function selectDate(dateObj) {
   renderCalendar();
 }
 
-// Ищет вторую кнопку даты в той же группе полей (.search-card__group), чтобы понять,
-// что перед нами пара Departure+Return, а не одиночная дата (Multi-city, One way).
-// Так один и тот же календарь одинаково работает и в Book a flight, и в Stopover,
-// и в любом будущем блоке с такой же разметкой — без привязки к конкретным id.
 function findDateTriggerPair(triggerEl) {
   const group = triggerEl.closest('.search-card__group');
   if (!group) return null;
 
   const triggers = Array.from(group.querySelectorAll('.search-card__date-trigger')).filter((t) => {
     const field = t.closest('.search-field');
-    return field && field.offsetParent !== null; // пропускаем скрытые (Return при One way)
+    return field && field.offsetParent !== null;
   });
 
   if (triggers.length !== 2) return null;
-  return triggers; // [Departure, Return] — в порядке появления в разметке
+  return triggers;
 }
 
 function openCalendar(triggerEl) {
@@ -1321,31 +1231,21 @@ function openCalendar(triggerEl) {
   }
 
   const cardRect = searchCard.getBoundingClientRect();
-  // В режиме диапазона встаём под группу Departure/Return целиком, иначе — под саму кнопку-триггер
   const anchorEl = pickerMode === 'range' ? triggerEl.closest('.search-card__group') : triggerEl;
   const anchorRect = anchorEl.getBoundingClientRect();
 
   calendarPopup.classList.add('calendar-popup--open');
   renderCalendar();
 
-  // Центрируем поповер под якорем (а не просто прижимаем к его левому краю),
-  // чтобы он визуально оказался прямо под полем, а не уезжал вправо.
-  // Не даём ему вылезти за пределы карточки поиска.
   const popupWidth = calendarPopup.offsetWidth;
   let leftOffset = anchorRect.left - cardRect.left + anchorRect.width / 2 - popupWidth / 2;
   leftOffset = Math.max(0, Math.min(leftOffset, cardRect.width - popupWidth));
   calendarPopup.style.left = `${leftOffset}px`;
 
-  // Вертикально ставим прямо под якорем, а не под всей карточкой (top: 100%
-  // из CSS относится к высоте всей .search-card — раз календарь общий на всю
-  // карточку, а не вложен в конкретную панель, это уводило его далеко вниз
-  // на панелях, где поля дат стоят не в самом низу, например в Stopover)
   const topOffset = anchorRect.bottom - cardRect.top + 12;
   calendarPopup.style.top = `${topOffset}px`;
 }
 
-// Делегирование клика — открывает календарь для любой кнопки даты
-// (Departure / Return открывают диапазон, каждый рейс Multi-city — одиночный выбор)
 if (calendarPopup) {
   document.addEventListener('click', (e) => {
     const trigger = e.target.closest('.search-card__date-trigger');
@@ -1401,7 +1301,7 @@ if (promoToggle && promoInput && promoSuccess) {
 
   promoInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && promoInput.value.trim() !== '') {
-      e.preventDefault(); // не даём форме случайно отправиться
+      e.preventDefault();
       promoInput.classList.remove('search-card__promo-input--visible');
       promoSuccess.classList.add('search-card__promo-success--visible');
     }
@@ -1458,7 +1358,6 @@ function setupAirportAutocomplete(input, suggestionsBox) {
     let filtered;
 
     if (!query) {
-      // Случайные 8 из полной базы (~28 000 аэропортов)
       filtered = getRandomAirports(8);
     } else {
       filtered = airportsData
@@ -1514,9 +1413,6 @@ function setupAirportAutocomplete(input, suggestionsBox) {
 function attachAirportField(fieldEl) {
   const input = fieldEl.querySelector('input');
   if (!input) return;
-  // Переиспользуем уже существующий div подсказок, если он есть в разметке —
-  // вставка нового между input и label сломала бы селектор `input + label`,
-  // на котором держится всплытие лейбла (floating label).
   let suggestionsBox = fieldEl.querySelector('.airport-suggestions');
   if (!suggestionsBox) {
     suggestionsBox = document.createElement('div');
@@ -1542,11 +1438,7 @@ setupAirportAutocomplete(document.getElementById('hotelsDestinationInput'), docu
 
 setupAirportAutocomplete(document.getElementById('statusFromInput'), document.getElementById('statusFromSuggestions'));
 setupAirportAutocomplete(document.getElementById('statusToInput'), document.getElementById('statusToSuggestions'));
-// statusFlightNumberInput — намеренно без автокомплита, это номер рейса, а не город
 
-// ==========================================================================
-// Stopover / Packages > Vienna stopover — счётчик "Сколько дней остаться" (мин. 1)
-// ==========================================================================
 const stopoverDaysEl = document.getElementById('stopoverDays');
 if (stopoverDaysEl) {
   document.querySelectorAll('.stopover-stepper__btn').forEach((btn) => {
@@ -1558,20 +1450,10 @@ if (stopoverDaysEl) {
   });
 }
 
-// ==========================================================================
-// Destinations — автокомплит города в поле "From". Та же база аэропортов и
-// тот же компонент, что и в форме поиска: пустое поле показывает случайную
-// подборку городов ("Explore destinations"), ввод — совпадения по названию
-// города. Карточки направлений ниже не трогаем — их 8, все статичные,
-// с реальными фото под каждую.
-// ==========================================================================
 const destFromInput = document.getElementById('destFromInput');
 const destFromSuggestions = document.getElementById('destFromSuggestions');
 setupAirportAutocomplete(destFromInput, destFromSuggestions);
 
-// ==========================================================================
-// Страницы входа/регистрации — общие хелперы (показать/скрыть пароль, поля с ошибкой, баннеры)
-// ==========================================================================
 function wirePasswordToggle(toggleId, fieldId, inputId) {
   const toggle = document.getElementById(toggleId);
   const field = document.getElementById(fieldId);
@@ -1608,9 +1490,6 @@ const supabaseClient = (window.supabase && window.SUPABASE_URL && window.SUPABAS
   ? window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY)
   : null;
 
-// ==========================================================================
-// Страница входа — отправка формы
-// ==========================================================================
 const loginForm = document.getElementById('loginForm');
 const loginEmail = document.getElementById('loginEmail');
 const loginPassword = document.getElementById('loginPassword');
@@ -1658,9 +1537,6 @@ if (loginForm && loginEmail && loginPassword) {
   });
 }
 
-// ==========================================================================
-// Страница регистрации — отправка формы
-// ==========================================================================
 const registerForm = document.getElementById('registerForm');
 const registerEmail = document.getElementById('registerEmail');
 const registerPassword = document.getElementById('registerPassword');
@@ -1728,8 +1604,5 @@ if (registerForm && registerEmail && registerPassword && registerConfirm) {
   });
 }
 
-// ==========================================================================
-// Первичное применение перевода при загрузке страницы (язык из localStorage)
-// ==========================================================================
 applyTranslations(currentLang);
 

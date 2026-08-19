@@ -1,21 +1,15 @@
-/* ==========================================================================
-   DESIGN TOKENS — бери точные значения из Figma (панель справа у объекта)
-   ========================================================================== */
 
 :root {
-  /* Цвета — замени HEX на те, что скопируешь из Figma */
   --color-bg: #EFEFEF;
   --color-dark: #0A1931;
   --color-white: #FDFCF8;
-  --color-accent: #6290c5;     /* акцентный, как бордовый у Qatar */
+  --color-accent: #6290c5;    
   --color-text-muted: #6b6b6f;
   --color-error: #d13438;
   --color-success: #1e7d3c;
 
-  /* Шрифт */
   --font-main: 'Roboto', sans-serif;
 
-  /* Отступы — переиспользуемая шкала, не придумывай новые значения на ходу */
   --space-xs: 8px;
   --space-sm: 16px;
   --space-md: 24px;
@@ -23,18 +17,15 @@
   --space-xl: 64px;
   --space-2xl: 96px;
 
-  /* Радиусы */
   --radius-sm: 12px;
   --radius-md: 20px;
   --radius-lg: 30px;
   --radius-pill: 999px;
 
-  /* Контейнер */
   --container-width: 1200px;
 
-  /* Апрелевские (Apple-style) кривые и длительности — форма важнее длительности */
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);       /* критически задемпфировано, без переброса */
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* лёгкий перелёт — только для "материализации" */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);      
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --duration-instant: 100ms;
   --duration-fast: 150ms;
   --duration-base: 200ms;
@@ -58,10 +49,6 @@ body {
   padding-inline: var(--space-md);
 }
 
-/* ==========================================================================
-   КНОПКИ — переиспользуемые классы, не дублируй стили в каждой секции
-   ========================================================================== */
-
 .btn {
   padding: var(--space-sm) var(--space-md);
   border-radius: var(--radius-pill);
@@ -81,10 +68,6 @@ body {
   color: var(--color-white);
 }
 
-/* ==========================================================================
-   HEADER
-   ========================================================================== */
-
 .header {
   color: var(--color-white);
   background: transparent;
@@ -101,7 +84,6 @@ body {
               color var(--duration-medium) var(--ease-out);
 }
 
-/* Материализуется в полупрозрачную панель, когда контент уходит под неё при скролле */
 .header--scrolled {
   background: rgba(253, 252, 248, 0.75);
   backdrop-filter: blur(20px) saturate(180%);
@@ -333,18 +315,13 @@ body {
   height: 18px;
 }
 
-/* ==========================================================================
-   HERO
-   ========================================================================== */
-
 .hero {
-  background-image: url('images/hero-bg.png'); /* заменишь на фото */
+  background-image: url('images/hero-bg.png');
   background-size: cover;
   min-height: 600px;
   color: var(--color-white);
   padding-block: var(--space-2xl) var(--space-xl);
-  padding-top: 120px; /* чтобы текст не прилипал к хедеру */
-  /* background-image добавишь позже, когда экспортируешь фото из Figma */
+  padding-top: 120px;
 }
 
 .btn--filled {
@@ -391,10 +368,6 @@ body {
 
 .search-card__tabs {
   position: relative;
-  /* Свой стекинг-контекст: иначе z-index:-1 индикатора всплывает до
-     ближайшего isolation:isolate (.search-card) и рисуется ПОД
-     собственным полупрозрачным фоном этого блока, а не только под
-     кнопками — из-за чего белая пилюля выглядела серой и тусклой. */
   z-index: 0;
   display: flex;
   justify-content: center;
@@ -406,18 +379,12 @@ body {
   font-size: 15px;
 }
 
-/* "Живой" плавающий индикатор активной вкладки — скользит и меняет
-   ширину под текущую вкладку вместо мгновенной подмены фона. Лежит
-   позади кнопок (z-index: -1 в контексте .search-card__tabs), поэтому
-   клики по вкладкам работают как обычно. */
 .search-card__tab-indicator {
   position: absolute;
   top: 4px;
   left: 0;
   height: calc(100% - 8px);
   border-radius: calc(var(--radius-lg) - 4px);
-  /* Чистый белый, а не --color-white (#FDFCF8) — тот почти не отличается
-     от полупрозрачно-серого фона .search-card__tabs и "тонет" в нём. */
   background: #ffffff;
   box-shadow: 0px 4px 14px rgba(10, 25, 49, 0.16);
   z-index: -1;
@@ -457,7 +424,6 @@ body {
 
 .search-card__form {
   padding: 0;
-  /* сюда — grid из инпутов From / To / Departure / Return */
 }
 
 .search-card__multicity {
@@ -646,10 +612,6 @@ body {
   color: var(--color-white);
 }
 
-/* Диапазон Departure → Return: подсвечены только дни строго между ними,
-   без выделения всей строки таблицы. Средние дни — сплошная светлая
-   полоса без зазоров (ширина 100% ячейки), крайние — тёмный кружок
-   со скруглением только с внешней стороны, чтобы полоса выглядела цельной. */
 .calendar-popup__day--range-middle {
   width: 100%;
   margin: 0;
@@ -1130,9 +1092,6 @@ body {
   cursor: pointer;
 }
 
-/* Своя отрисовка радиокнопки вместо нативной — чтобы у внутренней точки была
-   "живая" анимация появления (чуть больше нормы и обратно), а не мгновенная
-   подмена, как у браузерного accent-color */
 .radio input[type="radio"] {
   appearance: none;
   -webkit-appearance: none;
@@ -1154,10 +1113,6 @@ body {
   box-shadow: inset 0 0 0 5px var(--color-dark);
 }
 
-/* ==========================================================================
-   ПАНЕЛИ ВКЛАДОК ФОРМЫ ПОИСКА (Book a flight / Stopover / Manage / Status)
-   ========================================================================== */
-
 .search-card__panel {
   display: none;
 }
@@ -1173,8 +1128,6 @@ body {
   font-size: 15px;
 }
 
-/* Саб-вкладки внутри панели (Vienna stopover / Flights + Hotel / Hotels) —
-   подчёркивание снизу, без заливки фона, в отличие от главных вкладок-пилюль */
 .search-card__subtabs {
   position: relative;
   display: flex;
@@ -1183,9 +1136,6 @@ body {
   border-bottom: 1px solid rgba(10, 25, 49, 0.14);
 }
 
-/* Плавающая подчёркивающая линия активной саб-вкладки — тот же приём, что
-   и у .search-card__tab-indicator сверху: одна плавающая полоска скользит
-   между вкладками вместо мгновенной подмены border-bottom на новой кнопке */
 .search-card__subtab-indicator {
   position: absolute;
   left: 0;
@@ -1231,7 +1181,6 @@ body {
   white-space: nowrap;
 }
 
-/* Статичная (не кликабельная) версия стрелки-обмена — просто иконка между From/To */
 .search-card__swap-icon {
   color: rgba(10, 25, 49, 0.4);
   flex-shrink: 0;
@@ -1240,9 +1189,6 @@ body {
   justify-content: center;
 }
 
-/* Значения полей, которые пока не открывают собственный дропдаун
-   (Passengers / Room, Class в Stopover) — визуально как input, но кликабельно:
-   открывает свою панель/меню (см. ниже) */
 .search-card__static-value {
   font-family: 'Inter', sans-serif;
   font-weight: 500;
@@ -1265,9 +1211,6 @@ button.search-card__static-value {
   gap: 25px;
 }
 
-/* Поля-триггеры дропдаунов (Passengers/Room, Class) в Stopover-подвкладках
-   нуждаются в position:relative, чтобы их панель/меню открывались прямо под
-   ними, а не под всей группой полей */
 [data-subpanel="vienna"] .search-card__group--last .search-field,
 [data-subpanel="flights-hotel"] .search-card__group--last .search-field,
 [data-subpanel="hotels"] .search-card__group--last .search-field {
@@ -1286,7 +1229,6 @@ button.search-card__static-value {
   z-index: 30;
 }
 
-/* Блок из двух вопросов под полями: "когда добавить остановку" + "сколько дней" */
 .stopover-options {
   display: flex;
   gap: var(--space-2xl);
@@ -1304,8 +1246,6 @@ button.search-card__static-value {
   white-space: nowrap;
 }
 
-/* .search-card__trip-type переиспользован из Book a flight, но там его отступ
-   рассчитан на позицию сразу под вкладками — здесь он не нужен */
 .stopover-options__col .search-card__trip-type {
   padding: 0;
 }
@@ -1318,23 +1258,16 @@ button.search-card__static-value {
   font-weight: 600;
 }
 
-/* В Stopover-подвкладках разделитель над футером не нужен — убираем его,
-   не трогая общий .search-card__footer, который переиспользуется в Book a flight */
 [data-subpanel="vienna"] .search-card__footer,
 [data-subpanel="flights-hotel"] .search-card__footer,
 [data-subpanel="hotels"] .search-card__footer {
   border-top: none;
 }
 
-/* Flights + Hotel: футер там всего с одной кнопкой Search — прижимаем её вправо */
 .search-card__footer--end {
   justify-content: flex-end;
 }
 
-/* В полях "Vienna stopover" и "Flights + Hotel" последняя группа содержит
-   Passengers/Room и Class — разделительную черту нужно поставить между ними,
-   а не в самом конце блока, и придвинуть саму группу ближе к этой черте
-   (было слишком много отступа) */
 [data-subpanel="vienna"] .search-card__group--last,
 [data-subpanel="flights-hotel"] .search-card__fields:not(.search-card__fields--hotel) .search-card__group--last {
   border-right: none;
@@ -1348,9 +1281,6 @@ button.search-card__static-value {
   border-right: 1px solid #e5e5e8;
 }
 
-/* Flights + Hotel: строка "Hotel destination / Check-in / Check-out" — поле
-   направления должно растягиваться, а завершающая группа Check-in/Check-out
-   не нуждается в хвостовой черте после Check-out */
 .search-card__group--hotel-destination {
   flex: 1;
 }
@@ -1366,13 +1296,6 @@ button.search-card__static-value {
   margin-left: var(--space-xs);
 }
 
-/* Manage / Check-in: поле ввода + кнопка стоят в один ряд, а не в футере
-   с чертой сверху — кнопка снаружи блока полей, оба flex-элемента ряда.
-   Отступ такой же, как у остальных блоков полей (space-lg со всех сторон) —
-   доп. отступ снизу от карточки задаётся ниже через padding-bottom
-   на .search-card__subpanel, а не margin, потому что margin-bottom этого
-   последнего элемента схлопывается с нижним краем .search-card и уходит
-   ЗА пределы видимой карточки, а не остаётся внутри неё */
 .search-card__manage-row {
   display: flex;
   align-items: center;
@@ -1400,8 +1323,6 @@ button.search-card__static-value {
   margin-left: 0;
 }
 
-/* Flight status: дата — не календарь, а простой выпадающий список дат
-   (сегодня ± несколько дней), поэтому нужен свой якорь для позиционирования */
 [data-panel="status"] .search-card__group--last .search-field {
   position: relative;
 }
@@ -1410,8 +1331,6 @@ button.search-card__static-value {
   z-index: 30;
 }
 
-/* Flight status > By flight number: неизменяемый префикс авиакомпании
-   перед номером рейса, в одном поле с инпутом */
 .search-card__flight-number-field {
   display: flex;
   align-items: center;
@@ -1447,10 +1366,6 @@ button.search-card__static-value {
   background: var(--color-dark);
   color: var(--color-white);
 }
-
-/* ==========================================================================
-   PROMO CARDS (Explore Vienna и т.д.)
-   ========================================================================== */
 
 .promo-cards {
   padding-block: var(--space-xl);
@@ -1524,10 +1439,6 @@ button.search-card__static-value {
   left: 6px;
   top: 2.5px;
 }
-
-/* ==========================================================================
-   DESTINATIONS (Places we think, you'll love)
-   ========================================================================== */
 
 .destinations {
   padding-block: var(--space-xl);
@@ -1684,9 +1595,6 @@ button.search-card__static-value {
   background: rgba(10, 25, 49, 0.06);
 }
 
-/* Выбранный пункт — отдельным тёмным прямоугольником, а не просто галочкой,
-   чтобы явнее читалось во всех таких выпадающих списках (класс перелёта,
-   дата в Flight status и т.д.) */
 .destinations__class-option--selected {
   background: var(--color-dark);
   color: var(--color-white);
@@ -1708,15 +1616,15 @@ button.search-card__static-value {
   gap: var(--space-sm);
 }
 
-.destinations__grid > :nth-child(1) { grid-column: span 2; } /* Almaty — широкая */
-.destinations__grid > :nth-child(2) { grid-column: span 1; } /* Kyiv */
-.destinations__grid > :nth-child(3) { grid-column: span 1; } /* Vienna */
+.destinations__grid > :nth-child(1) { grid-column: span 2; }
+.destinations__grid > :nth-child(2) { grid-column: span 1; }
+.destinations__grid > :nth-child(3) { grid-column: span 1; }
 
-.destinations__grid > :nth-child(4) { grid-column: span 2; } /* London — широкая */
-.destinations__grid > :nth-child(5) { grid-column: span 2; } /* Batumi — широкая */
+.destinations__grid > :nth-child(4) { grid-column: span 2; }
+.destinations__grid > :nth-child(5) { grid-column: span 2; }
 
-.destinations__grid > :nth-child(6) { grid-column: span 1; } /* New York */
-.destinations__grid > :nth-child(7) { grid-column: span 1; } /* Dubai */
+.destinations__grid > :nth-child(6) { grid-column: span 1; }
+.destinations__grid > :nth-child(7) { grid-column: span 1; }
 .destinations__grid > :nth-child(8) { grid-column: span 2; }
 
 .destination-card {
@@ -1738,12 +1646,10 @@ button.search-card__static-value {
   transition: background var(--duration-slow) var(--ease-out);
 }
 
-/* При наведении на карточку — подложка темнеет */
 .destination-card:hover .destination-card__overlay {
   background: rgba(10, 25, 49, 0.55);
 }
 
-/* Кнопки изначально сдвинуты вниз и прозрачны */
 .destination-card__book,
 .destination-card__discover {
   opacity: 0;
@@ -1751,14 +1657,12 @@ button.search-card__static-value {
   transition: opacity var(--duration-slow) var(--ease-spring), transform var(--duration-slow) var(--ease-spring);
 }
 
-/* При наведении — кнопки "всплывают" на место */
 .destination-card:hover .destination-card__book,
 .destination-card:hover .destination-card__discover {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Небольшая задержка у второй кнопки — эффект последовательного появления */
 .destination-card__discover {
   transition-delay: 0.05s;
   text-decoration: underline;
@@ -1767,7 +1671,6 @@ button.search-card__static-value {
   color: var(--color-white)
 }
 
-/* Инфо снизу — постоянно видимое (название, даты, цена) */
 .destination-card__info {
   position: absolute;
   bottom: var(--space-sm);
@@ -1777,7 +1680,7 @@ button.search-card__static-value {
   align-items: flex-end;
   justify-content: space-between;
   transition: transform var(--duration-slow) var(--ease-spring);
-  z-index: 1; /* поверх фото, но за overlay при наведении можно скрыть */
+  z-index: 1;
 }
 
 .destination-card__left {
@@ -1879,10 +1782,6 @@ button.search-card__static-value {
   flex-shrink: 0;
 }
 
-/* ==========================================================================
-   FEATURE TABS (Vienna Duty Free)
-   ========================================================================== */
-
 .feature-tabs__nav {
   gap: var(--space-lg);
   background: var(--color-dark);
@@ -1981,10 +1880,6 @@ button.search-card__static-value {
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.25);
 }
 
-/* ==========================================================================
-   PACKAGES
-   ========================================================================== */
-
 .packages {
   padding-block: var(--space-xl);
 }
@@ -2073,10 +1968,6 @@ button.search-card__static-value {
   transform: translate(-50%, 0);
 }
 
-/* ==========================================================================
-   NEWSLETTER
-   ========================================================================== */
-
 .newsletter {
   padding-block: var(--space-xl);
 }
@@ -2150,10 +2041,6 @@ button.search-card__static-value {
   padding-right: 56px;
 }
 
-/* ==========================================================================
-   LOGO — вариант для страниц Privilege Club (AeroVista | PRIVILEGE CLUB)
-   ========================================================================== */
-
 .logo--privilege {
   display: flex;
   align-items: center;
@@ -2176,7 +2063,6 @@ button.search-card__static-value {
   text-transform: uppercase;
 }
 
-/* Хедер на страницах без hero-фото под ним — всегда в материализованном виде */
 .page-auth .header {
   background: rgba(253, 252, 248, 0.92);
   backdrop-filter: blur(20px) saturate(180%);
@@ -2191,10 +2077,6 @@ button.search-card__static-value {
 .page-auth .login-button {
   color: var(--color-dark);
 }
-
-/* ==========================================================================
-   AUTH — страница входа в аккаунт (Log in)
-   ========================================================================== */
 
 .auth {
   padding-top: calc(72px + var(--space-2xl));
@@ -2443,10 +2325,6 @@ button.search-card__static-value {
   color: var(--color-accent);
 }
 
-/* ==========================================================================
-   FOOTER
-   ========================================================================== */
-
 .footer {
   background: var(--color-dark);
   color: var(--color-white);
@@ -2510,10 +2388,6 @@ button.search-card__static-value {
   gap: var(--space-md);
 }
 
-/* ==========================================================================
-   RESPONSE — фидбек на pointer-down, а не только на release/hover
-   ========================================================================== */
-
 .btn,
 .search-card__submit,
 .destinations__toggle-btn,
@@ -2540,10 +2414,6 @@ button.search-card__static-value {
   transition: transform var(--duration-instant) var(--ease-out);
 }
 
-/* ==========================================================================
-   REDUCED MOTION / TRANSPARENCY — фидбек остаётся, движение убираем
-   ========================================================================== */
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -2554,10 +2424,6 @@ button.search-card__static-value {
     scroll-behavior: auto !important;
   }
 }
-
-/* ==========================================================================
-   АДАПТИВ — брейкпоинты добавим, когда дойдём до мобильной версии
-   ========================================================================== */
 
 @media (max-width: 900px) {
   .search-card__fields {
@@ -2581,9 +2447,6 @@ button.search-card__static-value {
     margin-left: 0;
     padding: var(--space-md);
     background: var(--color-dark);
-    /* Ссылки наследуют color от .header, который темнеет после скролла
-       (.header--scrolled) — на тёмном фоне выпадающего меню текст становится
-       невидимым. Фиксируем белый цвет явно, вне зависимости от скролла. */
     color: var(--color-white);
   }
 
@@ -2624,17 +2487,7 @@ button.search-card__static-value {
   }
 }
 
-/* ==========================================================================
-   ТЕЛЕФОНЫ (≤640px) — карточка поиска изначально версталась только под
-   десктоп (поля/вкладки в один ряд, календарь на 2 месяца), поэтому здесь
-   почти всё собирается в один столбец, а верхние/саб-вкладки, которые не
-   помещаются по ширине, скроллятся горизонтально вместо переноса — так
-   работающий "живой" индикатор (translateX) не пришлось переделывать под грид.
-   ========================================================================== */
-
 @media (max-width: 640px) {
-  /* Страховка: если где-то всё же останется непредусмотренный элемент шире
-     экрана, он не потянет за собой горизонтальный скролл всей страницы */
   html, body {
     overflow-x: hidden;
   }
@@ -2649,15 +2502,11 @@ button.search-card__static-value {
     font-size: 34px;
   }
 
-  /* Меньше "наезда" карточки поиска на heroсекцию, чем на десктопе —
-     иначе верхние вкладки перекрывают кнопку "Start planning" */
   .search-card {
     margin-top: -36px;
     border-radius: 20px;
   }
 
-  /* Верхние вкладки (Book a flight / Stopover / Manage / Flight status) —
-     горизонтальный скролл вместо переноса на 2 строки */
   .search-card__tabs {
     justify-content: flex-start;
     overflow-x: auto;
@@ -2677,8 +2526,6 @@ button.search-card__static-value {
     white-space: nowrap;
   }
 
-  /* Саб-вкладки (Vienna stopover / Manage booking / By route и т.д.) —
-     тот же приём */
   .search-card__subtabs {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -2695,16 +2542,11 @@ button.search-card__static-value {
     white-space: nowrap;
   }
 
-  /* Текст, который на десктопе намеренно в одну строку (по просьбе
-     пользователя), на телефоне обратно оборачивается — иначе вылезает
-     за пределы экрана */
   .search-card__intro,
   .stopover-options__question {
     white-space: normal;
   }
 
-  /* Поля поиска — один столбец вместо ряда групп, вертикальные разделители
-     между группами становятся горизонтальными */
   .search-card__fields {
     flex-direction: column;
     align-items: stretch;
@@ -2732,8 +2574,6 @@ button.search-card__static-value {
     padding-top: 0;
   }
 
-  /* Группы, где вручную сдвинута черта между двумя полями (Passengers/Room
-     + Class в Stopover/Flights+Hotel) — на телефоне тоже в столбец */
   [data-subpanel="vienna"] .search-card__group--last,
   [data-subpanel="flights-hotel"] .search-card__fields:not(.search-card__fields--hotel) .search-card__group--last {
     flex-direction: column;
@@ -2754,7 +2594,6 @@ button.search-card__static-value {
     row-gap: var(--space-md);
   }
 
-  /* Multi-city: строка рейса тоже в столбец */
   .multicity-leg {
     position: relative;
     flex-wrap: wrap;
@@ -2776,14 +2615,11 @@ button.search-card__static-value {
     right: var(--space-sm);
   }
 
-  /* Stopover: два вопроса под полями — в столбец */
   .stopover-options {
     flex-direction: column;
     gap: var(--space-lg);
   }
 
-  /* Manage / Check-in и Flight status: поле + кнопка тоже в столбец,
-     кнопка на всю ширину */
   .search-card__manage-row {
     flex-direction: column;
     align-items: stretch;
@@ -2793,8 +2629,6 @@ button.search-card__static-value {
     width: 100%;
   }
 
-  /* Нижний ряд формы (Avios / промокод / Search flights) — в столбец,
-     иначе подписи переносятся на несколько строк и выглядят криво */
   .search-card__footer {
     flex-direction: column;
     align-items: stretch;
@@ -2825,8 +2659,6 @@ button.search-card__static-value {
     width: 100%;
   }
 
-  /* Календарь — один месяц вместо двух, иначе не влезает по ширине;
-     плюс сжимаем внутренние отступы, иначе дни схлопываются друг в друга */
   .calendar-popup {
     width: calc(100vw - 32px);
     max-width: 360px;
@@ -2842,8 +2674,6 @@ button.search-card__static-value {
     font-size: 18px;
   }
 
-  /* Vienna Duty Free баннер — гигантский десктопный заголовок/паддинги
-     иначе вылезают за пределы карточки и наезжают на вкладки над ней */
   .feature-tabs__content {
     padding: var(--space-lg) var(--space-md);
   }
@@ -2871,14 +2701,11 @@ button.search-card__static-value {
     display: none;
   }
 
-  /* Выпадающие панели (Passengers/Room, Class, дата) не должны вылезать
-     за экран, если поле-триггер стоит близко к правому краю карточки */
   .passengers-panel,
   .destinations__class-menu {
     max-width: calc(100vw - 48px);
   }
 
-  /* Блок From / Return-One way / Class над карточками направлений */
   .destinations__filters {
     flex-wrap: wrap;
     gap: var(--space-md);
@@ -2888,13 +2715,11 @@ button.search-card__static-value {
     margin-left: 0;
   }
 
-  /* Футер: нижняя строка с копирайтом и юридическими ссылками */
   .footer__bottom {
     flex-wrap: wrap;
     gap: var(--space-sm);
   }
 
-  /* Newsletter: два поля в форме — в столбец */
   .newsletter__inputs {
     flex-direction: column;
   }

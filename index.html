@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AeroVista — Fly further, travel better</title>
 
-  <!-- Шрифт: Inter, как обсуждали -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,7 +14,6 @@
 </head>
 <body>
 
-  <!-- ============ HEADER ============ -->
   <header class="header">
     <div class="container header__inner">
       <a href="#hero" class="logo">AeroVista</a>
@@ -69,7 +67,6 @@
     </div>
   </header>
 
-  <!-- ============ HERO ============ -->
   <section class="hero" id="hero">
     <div class="container">
       <h1 class="hero__title" data-i18n="hero.title">Fly further, travel better</h1>
@@ -77,7 +74,6 @@
     </div>
   </section>
 
-      <!-- Форма поиска рейсов -->
   <div class="container">     
     <div class="search-card">
       <div class="search-card__tabs">
@@ -113,10 +109,6 @@
         </button>
       </div>
 
-      <!-- Один общий календарь на всю карточку поиска: живёт вне панелей вкладок
-           (Book a flight / Stopover / ...), иначе при переключении вкладки его
-           скрывало бы вместе с display:none родительской панели. Открывается для
-           любой кнопки .search-card__date-trigger на странице — см. main.js -->
       <div class="calendar-popup" id="calendarPopup">
         <div class="calendar-popup__body">
           <button type="button" class="calendar-popup__nav calendar-popup__nav--prev" id="calendarPrev" aria-label="Previous month">‹</button>
@@ -300,7 +292,6 @@
         </div>
       </div>
 
-      <!-- ============ STOPOVER / PACKAGES ============ -->
       <div class="search-card__panel" data-panel="stopover">
         <div class="search-card__subtabs">
           <span class="search-card__subtab-indicator" id="subtabIndicator" aria-hidden="true"></span>
@@ -315,7 +306,6 @@
           </button>
         </div>
 
-        <!-- Vienna stopover -->
         <div class="search-card__subpanel search-card__subpanel--active" data-subpanel="vienna">
           <div class="search-card__trip-type search-card__trip-type--stopover">
             <label class="radio">
@@ -511,7 +501,6 @@
           </div>
         </div>
 
-        <!-- Flights + Hotel -->
         <div class="search-card__subpanel" data-subpanel="flights-hotel">
           <div class="search-card__trip-type search-card__trip-type--stopover">
             <label class="radio">
@@ -694,7 +683,6 @@
           </div>
         </div>
 
-        <!-- Hotels -->
         <div class="search-card__subpanel" data-subpanel="hotels">
           <p class="search-card__intro" data-i18n="stopover.hotelsIntro">Choose from 200,000 hotels from over 500 global destinations</p>
 
@@ -778,7 +766,6 @@
         </div>
       </div>
 
-      <!-- ============ MANAGE / CHECK-IN ============ -->
       <div class="search-card__panel" data-panel="manage">
         <div class="search-card__subtabs">
           <span class="search-card__subtab-indicator" id="manageSubtabIndicator" aria-hidden="true"></span>
@@ -903,7 +890,6 @@
     </div>
   </div>
 
-  <!-- ============ 4 КАРТОЧКИ (Explore Vienna и т.д.) ============ -->
   <section class="promo-cards">
     <div class="container promo-cards__grid">
       <article class="promo-card" style="background-image: url('images/Vienna(explore).png')">
@@ -945,7 +931,6 @@
     </div>
   </section>
 
-  <!-- ============ PLACES WE THINK YOU'LL LOVE ============ -->
   <section class="destinations">
     <div class="container">
       <h2 data-i18n="destinations.heading">Places we think, you'll love</h2>
@@ -1152,7 +1137,6 @@
     </div>
   </section>
 
-  <!-- ============ VIENNA DUTY FREE ============ -->
   <section class="feature-tabs">
   <div class="feature-tabs__nav">
     <div class="container feature-tabs__nav-inner">
@@ -1170,7 +1154,6 @@
     </div>
   </div>
 </section>
-  <!-- ============ TRAVEL PACKAGE ============ -->
   <section class="packages">
     <div class="container">
       <h2 data-i18n="packages.heading">Looking for a travel package?</h2>
@@ -1195,7 +1178,6 @@
     </div>
   </section>
 
-  <!-- ============ NEWSLETTER ============ -->
   <section class="newsletter">
     <div class="container newsletter__card" style="background-image: url('images/newsletter-bg.jpg')">
       <div class="newsletter__content">
@@ -1219,7 +1201,6 @@
     </div>
   </section>
 
-  <!-- ============ FOOTER ============ -->
   <footer class="footer">
     <div class="container footer__grid">
       <div class="footer__col">
